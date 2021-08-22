@@ -28,7 +28,7 @@ class R_assembler {
         std::string funct7_OR;
         std::string funct7_AND;
         std::string funct7_SLL;
-        std::string funct7_SLR;
+        std::string funct7_SRL;
 
         std::string funct3_ADD;
         std::string funct3_SUB;
@@ -36,7 +36,7 @@ class R_assembler {
         std::string funct3_OR;
         std::string funct3_AND;
         std::string funct3_SLL;
-        std::string funct3_SLR;
+        std::string funct3_SRL;
 
     public: R_assembler(){
         this -> opcode_R.assign("0110011");
@@ -47,7 +47,7 @@ class R_assembler {
         this -> funct7_OR.assign ("0000000");
         this -> funct7_AND.assign("0000000");
         this -> funct7_SLL.assign("0000000");
-        this -> funct7_SLR.assign("0000000");
+        this -> funct7_SRL.assign("0000000");
 
         this -> funct3_ADD.assign("000");
         this -> funct3_SUB.assign("000");
@@ -55,7 +55,7 @@ class R_assembler {
         this -> funct3_OR.assign ("110");
         this -> funct3_AND.assign("111");
         this -> funct3_SLL.assign("001");
-        this -> funct3_SLR.assign("101");
+        this -> funct3_SRL.assign("101");
     }
 
     public: void ADD(std::string& string){
@@ -88,10 +88,10 @@ class R_assembler {
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        this -> output_file << funct7_ADD;
+        this -> output_file << funct7_SUB;
         this -> output_file << parameter_register2;
         this -> output_file << parameter_register1;
-        this -> output_file << funct3_ADD;
+        this -> output_file << funct3_SUB;
         this -> output_file << destination_register;
         this -> output_file << opcode_R;
         this -> output_file << std::endl;
@@ -108,10 +108,10 @@ class R_assembler {
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        this -> output_file << funct7_ADD;
+        this -> output_file << funct7_AND;
         this -> output_file << parameter_register2;
         this -> output_file << parameter_register1;
-        this -> output_file << funct3_ADD;
+        this -> output_file << funct3_AND;
         this -> output_file << destination_register;
         this -> output_file << opcode_R;
         this -> output_file << std::endl;
@@ -128,10 +128,10 @@ class R_assembler {
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        this -> output_file << funct7_ADD;
+        this -> output_file << funct7_OR;
         this -> output_file << parameter_register2;
         this -> output_file << parameter_register1;
-        this -> output_file << funct3_ADD;
+        this -> output_file << funct3_OR;
         this -> output_file << destination_register;
         this -> output_file << opcode_R;
         this -> output_file << std::endl;
@@ -148,10 +148,10 @@ class R_assembler {
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        this -> output_file << funct7_ADD;
+        this -> output_file << funct7_XOR;
         this -> output_file << parameter_register2;
         this -> output_file << parameter_register1;
-        this -> output_file << funct3_ADD;
+        this -> output_file << funct3_XOR;
         this -> output_file << destination_register;
         this -> output_file << opcode_R;
         this -> output_file << std::endl;
@@ -168,10 +168,10 @@ class R_assembler {
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        this -> output_file << funct7_ADD;
+        this -> output_file << funct7_SLL;
         this -> output_file << parameter_register2;
         this -> output_file << parameter_register1;
-        this -> output_file << funct3_ADD;
+        this -> output_file << funct3_SLL;
         this -> output_file << destination_register;
         this -> output_file << opcode_R;
         this -> output_file << std::endl;
@@ -188,10 +188,10 @@ class R_assembler {
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        this -> output_file << funct7_ADD;
+        this -> output_file << funct7_SRL;
         this -> output_file << parameter_register2;
         this -> output_file << parameter_register1;
-        this -> output_file << funct3_ADD;
+        this -> output_file << funct3_SRL;
         this -> output_file << destination_register;
         this -> output_file << opcode_R;
         this -> output_file << std::endl;
@@ -234,17 +234,17 @@ class R_assembler {
 
             /* caso o registrador tenha mais de 3 digitos, diferente de xAA */
             if (reg.length() > 3){
-                throw("assembler error: invalid register name");
+                throw std::invalid_argument("assembler error: invalid register address | max: x31");
             }
 
             /* caso o registrador não comece com x */
             if (reg.substr(0, 1) != "x"){
-                throw("assembler error: invalid register name");
+                throw std::invalid_argument("assembler error: invalid register name");
             }
 
             /* caso o numero do registrador for maior que 31 */
             if (stoi(reg.substr(1, reg.length())) > 31 ){
-                throw ("assembler error: invalid register name");
+                throw std::invalid_argument("assembler error: invalid register address | max: x31");
             }
 
             std::string aux = reg.substr(1, reg.size());
@@ -253,11 +253,9 @@ class R_assembler {
             return binary_string;
 
         }
-        catch(...){
-            throw;
+        catch (const std::invalid_argument& error){
+            std::cerr << error.what() << std::endl;
             return "";
         }
-        
-        
     }
 };

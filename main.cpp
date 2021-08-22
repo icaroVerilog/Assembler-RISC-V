@@ -24,8 +24,9 @@ int error_message(){
 
 int main(int argc, char *argv[]){
 
+
     std::fstream file;
-    file.open("teste.txt", std::fstream::in);
+    file.open("teste.asm", std::fstream::in);
 
     R_assembler *assembler_R = new R_assembler();
     I_assembler *assembler_I = new I_assembler();
@@ -33,8 +34,21 @@ int main(int argc, char *argv[]){
     std::string file_line;
 
     while (getline(file, file_line)){
+        std::cout << file_line << std::endl;
+        
+        if (file_line.find("addi") == 0 && file_line.find("i") == 3){
+            assembler_I -> ADDI(file_line);
+        }
 
-        if (file_line.find("add") == 0){
+        else if (file_line.find("ori") == 0 && file_line.find("i") == 3){
+            assembler_I -> ORI(file_line);
+        }
+
+        else if (file_line.find("andi") == 0 && file_line.find("i") == 3){
+            assembler_I -> ANDI(file_line);
+        }
+        
+        else if (file_line.find("add") == 0){
             assembler_R -> ADD(file_line);
         }
 
@@ -61,16 +75,9 @@ int main(int argc, char *argv[]){
         else if (file_line.find("srl") == 0){
             assembler_R -> SRL(file_line);
         }
-
-        else if (file_line.find("addi") == 0 && file_line.find("i") == 3){
-            assembler_I -> ADDI(file_line);
-        }
-
-        else if (file_line.find("ori") == 0 && file_line.find("i") == 3){
-            assembler_I -> ORI(file_line);
-        }
-
     }
+
+    return 0;
 }
 
 
