@@ -19,15 +19,19 @@ struct I_instruction {
 
 class I_assembler {
 
+    private: std::string opcode_I;
+    private: std::fstream output_file;
+    private: std::string output_filename;
+
     private:
         std::string funct3_ADDI;
         std::string funct3_ANDI;
         std::string funct3_ORI;
 
-    private: std::string opcode_I;
-    private: std::fstream output_file;
+    public: I_assembler(std::string& output_filename){
 
-    public: I_assembler(){
+        this -> output_filename = output_filename;
+
         this -> opcode_I.assign("0010011");
 
         this -> funct3_ADDI.assign("000");
@@ -35,9 +39,7 @@ class I_assembler {
         this -> funct3_ORI.assign("110");
     }
 
-    public: void ADDI(std::string& string){
-
-        this -> output_file.open("output.txt", std::fstream::app);
+    public: void ADDI(std::string& string, bool print_flag){
 
         I_instruction instruction = I_type_split(string);
 
@@ -45,18 +47,34 @@ class I_assembler {
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
 
-        this -> output_file << binary_immediate;
-        this -> output_file << parameter_register1;
-        this -> output_file << this -> funct3_ADDI;
-        this -> output_file << destination_register;
-        this -> output_file << this -> opcode_I;
-        this -> output_file << std::endl;
+        if (print_flag == false){
+            
+            this -> output_file.open(output_filename, std::fstream::app);
 
-        this -> output_file.close();
+            this -> output_file << binary_immediate;
+            this -> output_file << parameter_register1;
+            this -> output_file << this -> funct3_ADDI;
+            this -> output_file << destination_register;
+            this -> output_file << this -> opcode_I;
+            this -> output_file << std::endl;
+
+            this -> output_file.close();
+        }
+
+        if (print_flag == true){
+
+            std::string output;
+
+            output.append(binary_immediate);
+            output.append(parameter_register1);
+            output.append(this -> funct3_ADDI);
+            output.append(destination_register);
+            output.append(this -> opcode_I);
+
+            std::cout << output << std::endl;
+        }
     }
-    public: void ANDI(std::string& string){
-
-        this -> output_file.open("output.txt", std::fstream::app);
+    public: void ANDI(std::string& string, bool print_flag){
 
         I_instruction instruction = I_type_split(string);
 
@@ -64,19 +82,34 @@ class I_assembler {
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
 
-        this -> output_file << binary_immediate;
-        this -> output_file << parameter_register1;
-        this -> output_file << this -> funct3_ANDI;
-        this -> output_file << destination_register;
-        this -> output_file << this -> opcode_I;
-        this -> output_file << std::endl;
+        if (print_flag == false){
 
-        this -> output_file.close();
+            this -> output_file.open(output_filename, std::fstream::app);
 
+            this -> output_file << binary_immediate;
+            this -> output_file << parameter_register1;
+            this -> output_file << this -> funct3_ANDI;
+            this -> output_file << destination_register;
+            this -> output_file << this -> opcode_I;
+            this -> output_file << std::endl;
+
+            this -> output_file.close();
+        }
+
+        if (print_flag == true){
+
+            std::string output;
+
+            output.append(binary_immediate);
+            output.append(parameter_register1);
+            output.append(this -> funct3_ANDI);
+            output.append(destination_register);
+            output.append(this -> opcode_I);
+
+            std::cout << output << std::endl;
+        }
     }
-    public: void ORI(std::string& string){
-
-        this -> output_file.open("output.txt", std::fstream::app);
+    public: void ORI(std::string& string, bool print_flag){
 
         I_instruction instruction = I_type_split(string);
 
@@ -84,14 +117,32 @@ class I_assembler {
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
 
-        this -> output_file << binary_immediate;
-        this -> output_file << parameter_register1;
-        this -> output_file << this -> funct3_ORI;
-        this -> output_file << destination_register;
-        this -> output_file << this -> opcode_I;
-        this -> output_file << std::endl;
+        if (print_flag == false){
 
-        this -> output_file.close();
+            this -> output_file.open(output_filename, std::fstream::app);
+
+            this -> output_file << binary_immediate;
+            this -> output_file << parameter_register1;
+            this -> output_file << this -> funct3_ORI;
+            this -> output_file << destination_register;
+            this -> output_file << this -> opcode_I;
+            this -> output_file << std::endl;
+
+            this -> output_file.close();
+        }
+
+        if (print_flag == true){
+
+            std::string output;
+
+            output.append(binary_immediate);
+            output.append(parameter_register1);
+            output.append(this -> funct3_ORI);
+            output.append(destination_register);
+            output.append(this -> opcode_I);
+
+            std::cout << output << std::endl;
+        }
     }
 
     private: std::string register_to_binary(std::string& reg){
