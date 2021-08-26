@@ -2,8 +2,10 @@
 #include <fstream>
 #include <string>
 #include <cstddef>
-#include "instructionsI/instructionsI.cpp"
-#include "instructionsR/instructionsR.cpp"
+#include <map>
+#include "instructions/instructionsI/instructionsI.cpp"
+#include "instructions/instructionsR/instructionsR.cpp"
+#include "instruction_accumulator/instruction_accumulator.cpp"
 
 // ADD(R), SUB(R), AND(R), OR(R), XOR(R), ADDI(I), ANDI(I), ORI(I), SLL(R), SRL(R)
 
@@ -59,7 +61,7 @@ int main(int argc, char *argv[]){
             throw std::runtime_error("assembler error: invalid parameters");
         }
     }
-    catch(const std::runtime_error &error){
+    catch (const std::runtime_error &error){
         error_message();
         std::cerr << error.what() << std::endl;
         return 0;
@@ -74,64 +76,74 @@ int main(int argc, char *argv[]){
             throw std::runtime_error("assembler error: cannot open the file");
         }
     }
-    catch(const std::runtime_error &error){
+    catch (const std::runtime_error &error){
         std::cerr << error.what() << std::endl;
         return 0;
     }
 
+    std::string instruction;
     std::string file_line;
     std::string filepath = "../" + output_filename;
 
     R_assembler *assembler_R = new R_assembler(filepath);
     I_assembler *assembler_I = new I_assembler(filepath);
 
-    //TODO: PENSAR SE VALE APENA UTILIZAR SWITCH CASE
-
-    int line = 0;
-
+    Instruction_accumulator *instruction_accumulator = new Instruction_accumulator();
+    
     while (getline(file, file_line)){
-        
-        if (file_line.find("addi") == 0 && file_line.find("i") == 3){
-            assembler_I -> ADDI(file_line, print_flag);
+
+        std::string substring = file_line.substr(file_line.length() - 1, file_line.length());
+        std::cout << substring << std::endl;
+
+        if (substring == ":"){
+            continue; /* terminar isso */
         }
 
-        else if (file_line.find("ori") == 0 && file_line.find("i") == 3){
-            assembler_I -> ORI(file_line, print_flag);
-        }
-
-        else if (file_line.find("andi") == 0 && file_line.find("i") == 3){
-            assembler_I -> ANDI(file_line, print_flag);
-        }
-        
-        else if (file_line.find("add") == 0){
-            assembler_R -> ADD(file_line, print_flag);
-        }
-
-        else if (file_line.find("sub") == 0){
-            assembler_R -> SUB(file_line, print_flag);
-        }
-
-        else if (file_line.find("and") == 0){
-            assembler_R -> AND(file_line, print_flag);
-        }
-
-        else if (file_line.find("or") == 0){
-            assembler_R -> OR(file_line, print_flag);
-        }
-
-        else if (file_line.find("xor") == 0){
-            assembler_R -> XOR(file_line, print_flag);
-        }
-
-        else if (file_line.find("sll") == 0){
-            assembler_R -> SLL(file_line, print_flag);
-        }
-
-        else if (file_line.find("srl") == 0){
-            assembler_R -> SRL(file_line, print_flag);
-        }
+        instruction_accumulator -> set_instruction(file_line);
     }
 
+    while (instruction_accumulator -> get_instruction(&instruction)){
+
+        if (instruction.find("addi") == 0 && instruction.find("i") == 3){
+            assembler_I -> ADDI(instruction, print_flag);
+        }
+
+        else if (instruction.find("ori") == 0 && instruction.find("i") == 3){
+            assembler_I -> ORI(instruction, print_flag);
+        }
+
+        else if (instruction.find("andi") == 0 && instruction.find("i") == 3){
+            assembler_I -> ANDI(instruction, print_flag);
+        }
+        
+        else if (instruction.find("add") == 0){
+            assembler_R -> ADD(instruction, print_flag);
+        }
+
+        else if (instruction.find("sub") == 0){
+            assembler_R -> SUB(instruction, print_flag);
+        }
+
+        else if (instruction.find("and") == 0){
+            assembler_R -> AND(instruction, print_flag);
+        }
+
+        else if (instruction.find("or") == 0){
+            assembler_R -> OR(instruction, print_flag);
+        }
+
+        else if (instruction.find("xor") == 0){
+            assembler_R -> XOR(instruction, print_flag);
+        }
+
+        else if (instruction.find("sll") == 0){
+            assembler_R -> SLL(instruction, print_flag);
+        }
+
+        else if (instruction.find("srl") == 0){
+            assembler_R -> SRL(instruction, print_flag);
+        }
+    }
     return 0;
 }
 

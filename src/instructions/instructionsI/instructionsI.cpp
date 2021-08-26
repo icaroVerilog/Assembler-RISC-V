@@ -4,7 +4,7 @@
 #include <cstddef>
 #include <boost/convert.hpp>
 #include <bitset>
-#include <array>
+// #include <array>
 
 typedef struct I_instruction I_instruction;
 
@@ -46,7 +46,7 @@ class I_assembler {
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
-        std::cout << "aaaa" << std::endl;
+        
         if (print_flag == false){
             
             this -> output_file.open(output_filename, std::fstream::app);

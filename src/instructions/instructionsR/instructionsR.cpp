@@ -256,7 +256,6 @@ class R_assembler {
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
         if (print_flag == false){
-
             this -> output_file.open(output_filename, std::fstream::app);
 
             this -> output_file << this -> funct7_SLL;
@@ -378,8 +377,7 @@ class R_assembler {
         }
         catch (const std::invalid_argument& error){
             std::cerr << error.what() << std::endl;
-            std::abort();
-            return "";
+            std::exit(0);
         }
     }
 };
