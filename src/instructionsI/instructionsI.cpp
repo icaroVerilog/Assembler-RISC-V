@@ -46,7 +46,7 @@ class I_assembler {
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
-
+        std::cout << "aaaa" << std::endl;
         if (print_flag == false){
             
             this -> output_file.open(output_filename, std::fstream::app);
@@ -151,17 +151,17 @@ class I_assembler {
 
             /* caso o registrador tenha mais de 3 digitos, diferente de xAA */
             if (reg.length() > 3){
-                throw std::invalid_argument("");
+                throw std::invalid_argument("assembler error: invalid register");
             }
 
             /* caso o registrador não comece com x */
             if (reg.substr(0, 1) != "x"){
-                throw std::invalid_argument("");
+                throw std::invalid_argument("assembler error: invalid register");
             }
 
             /* caso o numero do registrador for maior que 31 */
             if (stoi(reg.substr(1, reg.length())) > 31 ){
-                throw std::invalid_argument("");
+                throw std::invalid_argument("assembler error: invalid register");
             }
 
             std::string aux = reg.substr(1, reg.size());
@@ -170,8 +170,8 @@ class I_assembler {
             return binary_string;
         }
         catch (const std::invalid_argument& error){
-            std::cerr << "assembler error: invalid register" << std::endl;
-            return "";
+            std::cerr << error.what() << std::endl;
+            std::exit(0);
         }   
     }
 
@@ -190,39 +190,36 @@ class I_assembler {
                 aux >> hex_value;
 
                 int integer_value = static_cast<int>(hex_value);
-                std::cout << hex_value << std::endl;
-                std::cout << integer_value << std::endl;
+                
                 /*
-
-                    nao ta funfando segurar o erro
-
                     TRATA CASO O VALOR PASSADO COMO PARÂMETRO PARA A FUNÇÃO NÃO SEJA UM HEXADECIMAL DE VERDADE
 
                     POIS SE N FOR UM HEXADECIMAL integer_value IRÁ TER O VALOR 0
                     SE FOR REALMENTE UM HEXADECIMAL COM O VALOR 0, EM TODA A STRING TERÁ 0, ENTÃO A CONDIÇÃO DO IF SERA FALSA
                 
                 */
-                if (integer_value == 0 && (hex.substr(2, hex.length())) != "0"){
-                    throw std::invalid_argument("");
+                if (integer_value == 0){
+
+                    for (int index = 0; index < hex.length(); index++){
+                        if (hex.at(index) != '0'){
+                            throw std::invalid_argument("assembler error: invalid hexadecimal value in immediate field");
+                        }
+                    }
                 }
                 
-                else {
-
-                    std::string binary_string = std::bitset<12>(integer_value).to_string();
-                    return binary_string;
-                }
+                std::string binary_string = std::bitset<12>(integer_value).to_string();
+                return binary_string;
                 
             }
             catch (const std::invalid_argument& error){
-                std::cerr << "assembler error: invalid hexadecimal value in immediate field" << std::endl;
-                return "";
+                std::cerr << error.what() << std::endl;
+                std::exit(0);
             }
         }
 
         else if (number.substr(0, 2) == "0b"){
 
             std::string binary = number.substr(2, number.length());
-            std::cout << binary.length() << std::endl;
 
             try {
 
@@ -267,7 +264,7 @@ class I_assembler {
             }
             catch (const std::invalid_argument& error){
                 std::cerr << error.what() << std::endl;
-                return "";
+                std::exit(0);
             }
         }
 
@@ -282,7 +279,7 @@ class I_assembler {
             }
             catch (const std::invalid_argument& error){
                 std::cerr << "assembler error: invalid decimal on immediate field" << std::endl;
-                return "";
+                std::exit(0);
             }
         }
     }

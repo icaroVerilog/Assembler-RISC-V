@@ -378,6 +378,7 @@ class R_assembler {
         }
         catch (const std::invalid_argument& error){
             std::cerr << error.what() << std::endl;
+            std::abort();
             return "";
         }
     }

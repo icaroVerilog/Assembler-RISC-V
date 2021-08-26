@@ -85,6 +85,10 @@ int main(int argc, char *argv[]){
     R_assembler *assembler_R = new R_assembler(filepath);
     I_assembler *assembler_I = new I_assembler(filepath);
 
+    //TODO: PENSAR SE VALE APENA UTILIZAR SWITCH CASE
+
+    int line = 0;
+
     while (getline(file, file_line)){
         
         if (file_line.find("addi") == 0 && file_line.find("i") == 3){
