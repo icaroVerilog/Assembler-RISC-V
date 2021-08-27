@@ -5,12 +5,11 @@
 #include <map>
 #include "instructions/instructionsI/instructionsI.cpp"
 #include "instructions/instructionsR/instructionsR.cpp"
-#include "instruction_accumulator/instruction_accumulator.cpp"
+#include "accumulators/instruction_accumulator.cpp"
 
 // ADD(R), SUB(R), AND(R), OR(R), XOR(R), ADDI(I), ANDI(I), ORI(I), SLL(R), SRL(R)
 
 int error_message(){
-
     std::cout << std::endl;
     std::cout << "Parameters must be follow this format:" << std::endl;
     std::cout << "filename.asm output_param filename or filename.asm output_param filename" << std::endl;
@@ -22,7 +21,6 @@ int error_message(){
     return 0;
 }
 
-
 int main(int argc, char *argv[]){
 
     bool print_flag;
@@ -30,6 +28,10 @@ int main(int argc, char *argv[]){
     std::string input_filename;
     std::string open_parameter;
     std::string output_filename;
+    std::string instruction;
+    std::string file_line;
+
+    std::fstream file;
 
     try {
 
@@ -67,8 +69,7 @@ int main(int argc, char *argv[]){
         return 0;
     }
 
-    std::fstream file;
-    
+  
     try {
         file.open("../" + input_filename, std::fstream::in);
 
@@ -81,8 +82,6 @@ int main(int argc, char *argv[]){
         return 0;
     }
 
-    std::string instruction;
-    std::string file_line;
     std::string filepath = "../" + output_filename;
 
     R_assembler *assembler_R = new R_assembler(filepath);
@@ -146,5 +145,3 @@ int main(int argc, char *argv[]){
     }
     return 0;
 }
-
-
