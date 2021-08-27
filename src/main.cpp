@@ -3,9 +3,11 @@
 #include <string>
 #include <cstddef>
 #include <map>
+
 #include "instructions/instructionsI/instructionsI.cpp"
 #include "instructions/instructionsR/instructionsR.cpp"
 #include "accumulators/instruction_accumulator.cpp"
+#include "accumulators/label_accumulator.cpp"
 
 // ADD(R), SUB(R), AND(R), OR(R), XOR(R), ADDI(I), ANDI(I), ORI(I), SLL(R), SRL(R)
 
@@ -22,6 +24,8 @@ int error_message(){
 }
 
 int main(int argc, char *argv[]){
+
+    Label_accumulator_controller *controller = new Label_accumulator_controller();
 
     bool print_flag;
 
@@ -91,11 +95,19 @@ int main(int argc, char *argv[]){
     
     while (getline(file, file_line)){
 
+        std::string label_name = file_line.substr(0, file_line.length());
         std::string substring = file_line.substr(file_line.length() - 1, file_line.length());
         std::cout << substring << std::endl;
 
         if (substring == ":"){
-            continue; /* terminar isso */
+            
+            controller -> new_accumulator(label_name);
+            // getline()
+
+
+            // while (){
+
+            // }
         }
 
         instruction_accumulator -> set_instruction(file_line);
