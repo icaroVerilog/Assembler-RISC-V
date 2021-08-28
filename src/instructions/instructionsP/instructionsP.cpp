@@ -8,7 +8,6 @@
 
 /* P instruction means Pseudo instruction */
 
-
 class P_assembler: public Convert_operations {
 
     private: std::string opcode_I; /* for ADDI */

@@ -6,17 +6,17 @@ std::string Convert_operations::register_to_binary(std::string& reg){
         
         /* caso o registrador tenha mais de 3 digitos, diferente de xAA */
         if (reg.length() > 3){
-            throw std::invalid_argument("assembler error: invalid register 1231212");
+            throw std::invalid_argument("assembler error: invalid register");
         }
 
         /* caso o registrador não comece com x */
         if (reg.substr(0, 1) != "x"){
-            throw std::invalid_argument("assembler error: invalid register 2");
+            throw std::invalid_argument("assembler error: invalid register");
         }
 
         /* caso o numero do registrador for maior que 31 */
         if (stoi(reg.substr(1, reg.length())) > 31 ){
-            throw std::invalid_argument("assembler error: invalid register 3");
+            throw std::invalid_argument("assembler error: invalid register");
         }
 
         std::string aux = reg.substr(1, reg.size());
@@ -34,7 +34,7 @@ std::string Convert_operations::immediate_to_binary(std::string& number){
 
     /* Caso se trate de um valor haxadecimal */
     if (number.substr(0, 2) == "0x"){
-
+    
         try {
 
             std::string hex = number.substr(2, number.length());
@@ -48,7 +48,7 @@ std::string Convert_operations::immediate_to_binary(std::string& number){
             
             /*
                 TRATA CASO O VALOR PASSADO COMO PARÂMETRO PARA A FUNÇÃO NÃO SEJA UM HEXADECIMAL DE VERDADE
-
+                
                 POIS SE N FOR UM HEXADECIMAL integer_value IRÁ TER O VALOR 0
                 SE FOR REALMENTE UM HEXADECIMAL COM O VALOR 0, EM TODA A STRING TERÁ 0, ENTÃO A CONDIÇÃO DO IF SERA FALSA
             

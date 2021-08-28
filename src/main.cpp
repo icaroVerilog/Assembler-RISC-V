@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
             if (input_filename.find(".asm", input_filename.size() - 4) == -1){
                 throw std::runtime_error("assembler error: invalid input file");
             }
-
+            
             if (open_parameter != "-o" && open_parameter != "--output"){
                 throw std::runtime_error("assembler error: invalid parameters");
             }
@@ -52,6 +52,11 @@ int main(int argc, char *argv[]){
         else if (argc == 2){
 
             input_filename = argv[1];
+
+            if (input_filename.find(".asm", input_filename.size() - 4) == -1){
+                throw std::runtime_error("assembler error: invalid input file");
+            }
+
             print_flag = true;
         }
 
@@ -86,10 +91,6 @@ int main(int argc, char *argv[]){
     R_assembler *assembler_R = new R_assembler(filepath);
     I_assembler *assembler_I = new I_assembler(filepath);
     P_assembler *assembler_P = new P_assembler(filepath);
-
-    //TODO: PENSAR SE VALE APENA UTILIZAR SWITCH CASE
-
-    int line = 0;
 
     while (getline(file, file_line)){
         
