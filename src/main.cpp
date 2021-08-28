@@ -2,8 +2,9 @@
 #include <fstream>
 #include <string>
 #include <cstddef>
-#include "instructionsI/instructionsI.cpp"
-#include "instructionsR/instructionsR.cpp"
+#include "instructions/instructionsI/instructionsI.cpp"
+#include "instructions/instructionsR/instructionsR.cpp"
+#include "instructions/instructionsP/instructionsP.cpp"
 
 // ADD(R), SUB(R), AND(R), OR(R), XOR(R), ADDI(I), ANDI(I), ORI(I), SLL(R), SRL(R)
 
@@ -84,6 +85,7 @@ int main(int argc, char *argv[]){
 
     R_assembler *assembler_R = new R_assembler(filepath);
     I_assembler *assembler_I = new I_assembler(filepath);
+    P_assembler *assembler_P = new P_assembler(filepath);
 
     //TODO: PENSAR SE VALE APENA UTILIZAR SWITCH CASE
 
@@ -130,8 +132,16 @@ int main(int argc, char *argv[]){
         else if (file_line.find("srl") == 0){
             assembler_R -> SRL(file_line, print_flag);
         }
-    }
 
+        else if (file_line.find("mv") == 0){
+            assembler_P -> MV(file_line, print_flag);
+        }
+
+        else if (file_line.find("li") == 0){
+            assembler_P -> LI(file_line, print_flag);
+        }
+
+    }
     return 0;
 }
 
