@@ -13,7 +13,7 @@ class Label_accumulator: public Instruction_accumulator {
     }
 };
 
-/* Controlador responsável por armazenar todos os rótulos e suas respectivas instruções*/
+/* Controlador  responsável por armazenar todos os rótulos e suas respectivas instruções*/
 class Label_accumulator_controller {
 
     private: std::vector<Label_accumulator> controller;
@@ -35,6 +35,8 @@ class Label_accumulator_controller {
                 return index;
             }
         }
+        
+        return 0;
     }
 
     public: int set_label_instruction(std::string& label_name, std::string instruction){
@@ -56,12 +58,11 @@ class Label_accumulator_controller {
         for (int index = 0; index < controller.size(); index++){
             if (this -> controller[index].label_name == label_name){
                 
-                while (this -> controller[index].get_instruction(&current_instruction)){
-                    *instruction = current_instruction;
-                }
-
-                return 0;
+                this -> controller[index].get_instruction(&current_instruction);
+                *instruction = current_instruction;
+    
             }
         }
+        return 0;
     }
 };

@@ -1,12 +1,11 @@
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <cstddef>
+#include <string>
 #include <map>
 
 #include "instructions/instructionsI/instructionsI.cpp"
 #include "instructions/instructionsR/instructionsR.cpp"
-#include "accumulators/instruction_accumulator.cpp"
 #include "accumulators/label_accumulator.cpp"
 
 // ADD(R), SUB(R), AND(R), OR(R), XOR(R), ADDI(I), ANDI(I), ORI(I), SLL(R), SRL(R)
@@ -38,7 +37,6 @@ int main(int argc, char *argv[]){
     std::fstream file;
 
     try {
-
         if (argc == 4){
 
             input_filename = argv[1];
@@ -73,12 +71,11 @@ int main(int argc, char *argv[]){
         return 0;
     }
 
-  
     try {
         file.open("../" + input_filename, std::fstream::in);
 
         if (file.is_open() == 0){
-            throw std::runtime_error("assembler error: cannot open the file");
+            throw std::runtime_error("file error: cannot open the file");
         }
     }
     catch (const std::runtime_error &error){
@@ -95,6 +92,7 @@ int main(int argc, char *argv[]){
     
     while (getline(file, file_line)){
 
+        std::streampos new_label_start;
         std::string label_name = file_line.substr(0, file_line.length());
         std::string substring = file_line.substr(file_line.length() - 1, file_line.length());
         std::cout << substring << std::endl;
@@ -102,15 +100,20 @@ int main(int argc, char *argv[]){
         if (substring == ":"){
             
             controller -> new_accumulator(label_name);
-            // getline()
 
+            do {
 
-            // while (){
+                getline(file, file_line);
+                new_label_start = file.tellg();
+                std::cout << new_label_start << std::endl;
+                std::cout << file_line << std::endl;
 
-            // }
+            } while ((file_line.substr(file_line.length() - 1, file_line.length()) != ":") && (file.eof() == false));
         }
 
-        instruction_accumulator -> set_instruction(file_line);
+        else {
+            instruction_accumulator -> set_instruction(file_line);
+        }
     }
 
     while (instruction_accumulator -> get_instruction(&instruction)){

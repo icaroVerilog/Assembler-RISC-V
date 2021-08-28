@@ -4,7 +4,6 @@
 #include <cstddef>
 #include <boost/convert.hpp>
 #include <bitset>
-// #include <array>
 
 typedef struct I_instruction I_instruction;
 
