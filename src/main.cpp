@@ -6,11 +6,12 @@
 
 #include "instructions/instructionsI/instructionsI.cpp"
 #include "instructions/instructionsR/instructionsR.cpp"
+#include "instructions/instructionsP/instructionsP.cpp"
 #include "accumulators/label_accumulator.cpp"
 
 // ADD(R), SUB(R), AND(R), OR(R), XOR(R), ADDI(I), ANDI(I), ORI(I), SLL(R), SRL(R)
 
-int error_message(){
+void error_message(){
     std::cout << std::endl;
     std::cout << "Parameters must be follow this format:" << std::endl;
     std::cout << "filename.asm output_param filename or filename.asm output_param filename" << std::endl;
@@ -18,8 +19,39 @@ int error_message(){
     std::cout << "suported params:" << std::endl;
     std::cout << "output: --output, -o" << std::endl;
     std::cout << std::endl;
+}
 
-    return 0;
+int get_label(std::string file_line, std::fstream file, Label_accumulator_controller *controller){
+    
+    std::string label_name = file_line.substr(0, file_line.length());
+    std::string substring = file_line.substr(file_line.length() - 1, file_line.length());
+    std::string current_line;
+    std::string previous_line;
+
+    controller -> new_accumulator(label_name);
+    getline(file, current_line);
+
+    while(file.eof() == false){
+
+        /* Caso a proxima linha for o inicio de outra label */
+        if (current_line.substr(current_line.length() - 1, current_line.length()) == ":"){
+            
+            break;
+        }
+
+        /* Caso a label esteja vazia */
+        if (current_line == ""){
+            break;
+        }
+
+        else {
+            controller -> set_label_instruction(label_name, current_line);
+            getline(file, current_line);
+        }
+
+
+    }
+
 }
 
 int main(int argc, char *argv[]){
@@ -87,33 +119,25 @@ int main(int argc, char *argv[]){
 
     R_assembler *assembler_R = new R_assembler(filepath);
     I_assembler *assembler_I = new I_assembler(filepath);
+    P_assembler *assembler_P = new P_assembler(filepath);
 
     Instruction_accumulator *instruction_accumulator = new Instruction_accumulator();
     
     while (getline(file, file_line)){
 
-        std::streampos new_label_start;
         std::string label_name = file_line.substr(0, file_line.length());
         std::string substring = file_line.substr(file_line.length() - 1, file_line.length());
-        std::cout << substring << std::endl;
 
         if (substring == ":"){
             
-            controller -> new_accumulator(label_name);
 
-            do {
 
-                getline(file, file_line);
-                new_label_start = file.tellg();
-                std::cout << new_label_start << std::endl;
-                std::cout << file_line << std::endl;
-
-            } while ((file_line.substr(file_line.length() - 1, file_line.length()) != ":") && (file.eof() == false));
         }
 
-        else {
-            instruction_accumulator -> set_instruction(file_line);
-        }
+        
+        std::cout << "entrou" << std::endl;
+        instruction_accumulator -> set_instruction(file_line);
+        
     }
 
     while (instruction_accumulator -> get_instruction(&instruction)){
@@ -156,6 +180,14 @@ int main(int argc, char *argv[]){
 
         else if (instruction.find("srl") == 0){
             assembler_R -> SRL(instruction, print_flag);
+        }
+
+        else if (instruction.find("mv") == 0){
+            assembler_P -> MV(instruction, print_flag);
+        }
+
+        else if (instruction.find("li") == 0){
+            assembler_P -> LI(instruction, print_flag);
         }
     }
     return 0;

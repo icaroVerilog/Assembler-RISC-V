@@ -1,2 +1,2 @@
-compile: src/main.cpp src/instructions/instructionsI/instructionsI.cpp src/instructions/instructionsR/instructionsR.cpp src/accumulators/instruction_accumulator.cpp src/accumulators/label_accumulator.cpp
-	g++ src/main.cpp src/instructions/instructionsI/instructionsI.cpp src/instructions/instructionsR/instructionsR.cpp src/accumulators/instruction_accumulator.cpp src/accumulators/label_accumulator.cpp -o compiled/assembler
+compile: src/main.cpp src/instructions/convert_operations.cpp src/instructions/instructionsI/instructionsI.cpp src/instructions/instructionsR/instructionsR.cpp src/accumulators/instruction_accumulator.cpp src/accumulators/label_accumulator.cpp
+	g++ src/main.cpp src/instructions/convert_operations.cpp src/instructions/instructionsI/instructionsI.cpp src/instructions/instructionsR/instructionsR.cpp src/accumulators/instruction_accumulator.cpp src/accumulators/label_accumulator.cpp -o compiled/assembler

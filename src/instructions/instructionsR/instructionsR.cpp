@@ -4,19 +4,10 @@
 #include <cstddef>
 #include <boost/convert.hpp>
 #include <bitset>
+#include "../convert_operations.hpp"
 
-typedef struct R_instruction R_instruction;
 
-struct R_instruction {
-
-    std::string operation;
-    std::string destination_register;
-    std::string parameter_register1;
-    std::string parameter_register2;
-
-};
-
-class R_assembler {
+class R_assembler: public Convert_operations {
 
     private: std::fstream output_file;
     private: std::string opcode_R;
@@ -256,6 +247,7 @@ class R_assembler {
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
         if (print_flag == false){
+
             this -> output_file.open(output_filename, std::fstream::app);
 
             this -> output_file << this -> funct7_SLL;
@@ -318,66 +310,6 @@ class R_assembler {
             output.append(this -> opcode_R);
 
             std::cout << output << std::endl;
-        }
-    }
-    
-    private: R_instruction R_type_split (std::string& string1){
-
-        std::size_t found1 = string1.find_first_of(" ");
-        std::string operation = string1.substr(0,found1);
-        std::string string2 = string1.substr(found1 + 1);
-        
-        std::size_t found2 = string2.find_first_of(" ");
-        std::string destination = string2.substr(0,found2);
-        std::string string3 = string2.substr(found2 + 1);
-
-        std::size_t found3 = string3.find_first_of(" ");
-        std::string parameter1 = string3.substr(0,found3);
-        std::string string4 = string3.substr(found3 + 1);
-
-        std::size_t found4 = string4.find_first_of(" ");
-        std::string parameter2 =string4.substr(0,found4);
-
-        destination.erase (destination.begin() + 2);
-        parameter1.erase (parameter1.begin() + 2);
-        
-        R_instruction new_instruction;
-        new_instruction.operation = operation;
-        new_instruction.destination_register = destination;
-        new_instruction.parameter_register1 = parameter1;
-        new_instruction.parameter_register2 = parameter2;
-
-        return new_instruction;
-    }
-
-    private: std::string register_to_binary(std::string& reg){
-
-        try {
-
-            /* caso o registrador tenha mais de 3 digitos, diferente de xAA */
-            if (reg.length() > 3){
-                throw std::invalid_argument("assembler error: invalid register address | max: x31");
-            }
-
-            /* caso o registrador não comece com x */
-            if (reg.substr(0, 1) != "x"){
-                throw std::invalid_argument("assembler error: invalid register name");
-            }
-
-            /* caso o numero do registrador for maior que 31 */
-            if (stoi(reg.substr(1, reg.length())) > 31 ){
-                throw std::invalid_argument("assembler error: invalid register address | max: x31");
-            }
-
-            std::string aux = reg.substr(1, reg.size());
-            std::string binary_string = std::bitset<5>(std::stoi(aux)).to_string();
-
-            return binary_string;
-
-        }
-        catch (const std::invalid_argument& error){
-            std::cerr << error.what() << std::endl;
-            std::exit(0);
         }
     }
 };
