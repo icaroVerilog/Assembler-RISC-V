@@ -3,7 +3,7 @@
 </h1>
 
 
-### RISC-V is a open source instruction set architecture (ISA), developed by the university of california. This project consists in the development of an assembler for the RISC-V 32 bits ISA, made in c++, allows the conversion of the assembly language into machine language
+### RISC-V is a open source instruction set architecture (ISA), developed by the university of California. This project consists in the development of an assembler for the RISC-V 32 bits ISA, made in c++, allows the conversion of the assembly language into machine language
 
 <br>
 <br>
