@@ -3,7 +3,7 @@
 </h1>
 
 <h1 align=center>
-  RISC-V is a open source instruction set architecture (ISA), developed by the university of california.
+RISC-V is a open source instruction set architecture (ISA), developed by the university of california.
 </h1>
 
 
