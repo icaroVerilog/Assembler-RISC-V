@@ -10,7 +10,7 @@
 <br>
 <br>
 
-## The assembler
+## 🛠 The assembler
 The assembler are developed in c++ 14, using boost library. The assembler supports some of RISC-V instructions
 
 <br>
@@ -23,7 +23,7 @@ actually, the assembler supports a small number of instructions: ADD(R), SUB(R),
 <br>
 <br>
 
-## ::man_technologist:: Getting started
+## :man_technologist: Getting started
 
 First, we need to install boost lib for c++. the Installation depends of the operating system in use.
 
