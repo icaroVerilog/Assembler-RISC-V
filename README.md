@@ -3,7 +3,7 @@
 </h1>
 
 <div align=center>
-RISC-V is a open source instruction set architecture (ISA), developed by the university of california.
+RISC-V is a open source instruction set architecture (ISA), developed by the university of california. This project consists in the development of an assembler for the ISA, made in c++, allows the conversion of the assembly language into machine language
 </div>
 
 ## The assembler
