@@ -1,5 +1,5 @@
 <h1 align=center>
-<img height="140em" src="https://github.com/IcaroM-CdC/Password-generator/blob/master/web/src/assets/Bitwarden.png" />
+<img height="140em" src="https://github.com/IcaroM-CdC/Assembler-RISC-V/blob/stable/imgs/riscv.png" />
 </h1>
 
 
