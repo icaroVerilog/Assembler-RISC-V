@@ -15,6 +15,6 @@ The assembler are developed in c++ 14, using boost library. The assembler suppor
 
 ### Supported instructions
 
-actually. 
+actually, the assembler supports a small number of instructions.
 
 
