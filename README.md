@@ -26,17 +26,17 @@ git clone https://github.com/IcaroM-CdC/Assembler-RISC-V.git
 ```
 
 ``` bash
-  # compiling the binaries
-  make compile
+# compiling the binaries
+make compile
 
-  # executing
-  cd compiled
-  ./assembler input_file.asm -o output_file.txt
+# executing
+cd compiled
+./assembler input_file.asm -o output_file.txt
 ```
 if you want to print the assembled instructions in terminal run the command
 
 ``` bash
-  ./assembler input_file.asm
+./assembler input_file.asm
 ```
 
 
