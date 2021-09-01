@@ -25,6 +25,8 @@ actually, the assembler supports a small number of instructions: ADD(R), SUB(R),
 
 ## getting started
 
+First, we need to install boost lib for c++. the Installation depends of the operating system in use.
+
 ``` bash
 
 # cloning the repository
