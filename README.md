@@ -35,7 +35,7 @@ make compile
 ./assembler input_file.asm -o output_file.txt
 
 ```
-if you want to print the assembled instructions in terminal run the command, suppressing output file and this flag
+if you want to print the assembled instructions, in terminal run the command
 
 ``` bash
 
