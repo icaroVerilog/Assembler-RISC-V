@@ -19,7 +19,21 @@ actually, the assembler supports a small number of instructions.
 
 ## getting started
 
+``` bash
+# cloning the repository
 
+git clone https://github.com/IcaroM-CdC/Assembler-RISC-V.git
+```
 
+``` bash
+# compiling the binaries
+make compile
+
+# executing
+cd compiled
+./assembler input_file.asm -o output_file.txt
+# or
+./assembler input_file.asm
+```
 
 
