@@ -234,7 +234,8 @@ will provide them.
   </tr>
 </tbody>
 </table>
-<br>
+
+
 _Registers of the RV32I. Based on RISC-V documentation and Patterson and
 Waterman "The RISC-V Reader" (2017)_
 
