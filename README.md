@@ -229,7 +229,7 @@ will provide them.
   <tr>
     <td align=center>PC</td>
     <td align=center>(none)</td>
-    <tdprogram counter</td>
+    <td> program counter</td>
     <td align=center>N/A</td>
   </tr>
 </tbody>
