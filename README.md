@@ -95,13 +95,13 @@ actually, the assembler supports a small number of instructions: ADD(R), SUB(R),
 <tbody>
   <tr>
     <td></td>
-    <td>R</td>
-    <td>I</td>
-    <td>S</td>
-    <td>B</td>
-    <td>U</td>
-    <td>J</td>
-    <td>P</td>
+    <td align=center>R</td>
+    <td align=center>I</td>
+    <td align=center>S</td>
+    <td align=center>B</td>
+    <td align=center>U</td>
+    <td align=center>J</td>
+    <td align=center>P</td>
   </tr>
   <tr>
     <td>1.1</td>
@@ -125,7 +125,7 @@ actually, the assembler supports a small number of instructions: ADD(R), SUB(R),
   </tr>
 </tbody>
 </table>
-A
+
 <br>
 
 ## :man_technologist: Getting started
