@@ -74,7 +74,7 @@ detail.
 <br>
 
 ## 🛠 The assembler
-The assembler are developed in c++ 14, using boost library. The assembler supports some of RISC-V instructions
+The assembler are developed in c++ 14, using boost library. The assembler supports some of RISC-V RV32LI instructions
 
 <br>
 <br>
@@ -84,6 +84,48 @@ The assembler are developed in c++ 14, using boost library. The assembler suppor
 actually, the assembler supports a small number of instructions: ADD(R), SUB(R), AND(R), OR(R), XOR(R), ADDI(I), ANDI(I), ORI(I), SLL(R), SRL(R)
 
 <br>
+
+<table>
+<thead>
+  <tr>
+    <th>Version</th>
+    <th colspan="7">Suported instructions</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td>R</td>
+    <td>I</td>
+    <td>S</td>
+    <td>B</td>
+    <td>U</td>
+    <td>J</td>
+    <td>P</td>
+  </tr>
+  <tr>
+    <td>1.1</td>
+    <td>ADD, SUB, AND<br>OR, XOR, SLL, SRL<br></td>
+    <td>ADDI, ANDI, ORI</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td>1.1</td>
+    <td>ADD, SUB, AND<br>OR, XOR, SLL, SRL<br></td>
+    <td>ADDI, ANDI, ORI<br>XORI, SLLI, SRLI<br>LB, LH, LW<br></td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+</tbody>
+</table>
+
 <br>
 
 ## :man_technologist: Getting started
@@ -113,31 +155,3 @@ if you want to print the assembled instructions, in terminal run the command
 ./assembler input_file.asm
 
 ```
-<table>
-<thead>
-  <tr>
-    <th>Version</th>
-    <th colspan="6">Suported instructions</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td></td>
-    <td>R</td>
-    <td>I</td>
-    <td>S</td>
-    <td>B</td>
-    <td>U</td>
-    <td>J</td>
-  </tr>
-  <tr>
-    <td>1.1</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</tbody>
-</table>
