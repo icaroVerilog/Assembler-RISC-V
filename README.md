@@ -23,7 +23,7 @@ assembler, they are given standardized names as part of the RISC-V **application
 binary interface** (ABI). This is what you will usually see in code listings. If
 you really want to see the numeric register names, the `-M` argument to objdump
 will provide them.
-
+<br>
 <table>
 <thead>
   <tr>
@@ -234,7 +234,7 @@ will provide them.
   </tr>
 </tbody>
 </table>
-
+<br>
 _Registers of the RV32I. Based on RISC-V documentation and Patterson and
 Waterman "The RISC-V Reader" (2017)_
 
