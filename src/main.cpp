@@ -5,8 +5,9 @@
 #include "instructions/instructionsI/instructionsI.cpp"
 #include "instructions/instructionsR/instructionsR.cpp"
 #include "instructions/instructionsP/instructionsP.cpp"
+#include "instructions/instructionsI/instructionsI_load.cpp"
 
-// ADD(R), SUB(R), AND(R), OR(R), XOR(R), ADDI(I), ANDI(I), ORI(I), SLL(R), SRL(R)
+// RVI 32bits
 
 int error_message(){
 
@@ -88,12 +89,15 @@ int main(int argc, char *argv[]){
     std::string file_line;
     std::string filepath = "../" + output_filename;
 
-    R_assembler *assembler_R = new R_assembler(filepath);
-    I_assembler *assembler_I = new I_assembler(filepath);
-    P_assembler *assembler_P = new P_assembler(filepath);
+    R_assembler  *assembler_R  = new R_assembler(filepath);
+    I_assembler  *assembler_I  = new I_assembler(filepath);
+    IL_assembler *assembler_IL = new IL_assembler(filepath);
+    P_assembler  *assembler_P  = new P_assembler(filepath);
 
     while (getline(file, file_line)){
         
+        /* ::::::::::::::::::::: I FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
         if (file_line.find("addi") == 0 && file_line.find("i") == 3){
             assembler_I -> ADDI(file_line, print_flag);
         }
@@ -106,6 +110,24 @@ int main(int argc, char *argv[]){
             assembler_I -> ANDI(file_line, print_flag);
         }
         
+        if (file_line.find("xori") == 0 && file_line.find("i") == 3){
+            assembler_I -> XORI(file_line, print_flag);
+        }
+
+        if (file_line.find("slli") == 0 && file_line.find("i") == 3){
+            assembler_I -> SLLI(file_line, print_flag);
+        }
+
+        if (file_line.find("srli") == 0 && file_line.find("i") == 3){
+            assembler_I -> SRLI(file_line, print_flag);
+        }
+
+        if (file_line.find("srli") == 0 && file_line.find("i") == 3){
+            assembler_I -> SRLI(file_line, print_flag);
+        }
+
+        /* ::::::::::::::::::::: R FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
         else if (file_line.find("add") == 0){
             assembler_R -> ADD(file_line, print_flag);
         }
@@ -133,6 +155,8 @@ int main(int argc, char *argv[]){
         else if (file_line.find("srl") == 0){
             assembler_R -> SRL(file_line, print_flag);
         }
+
+        /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
         else if (file_line.find("mv") == 0){
             assembler_P -> MV(file_line, print_flag);

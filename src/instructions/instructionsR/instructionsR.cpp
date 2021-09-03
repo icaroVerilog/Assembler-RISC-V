@@ -33,7 +33,6 @@ class R_assembler: public Convert_operations {
     public: R_assembler(std::string& output_filename){
 
         this -> output_filename = output_filename;
-
         this -> opcode_R.assign("0110011");
         
         this -> funct7_ADD.assign("0000000");

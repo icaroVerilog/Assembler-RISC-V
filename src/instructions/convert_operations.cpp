@@ -145,19 +145,19 @@ I_instruction Convert_operations::I_type_split (std::string& string1){
     std::string operation = string1.substr(0,found1);
     std::string string2 = string1.substr(found1 + 1);
     
-    std::size_t found2 = string2.find_first_of(" ");
+    string2.erase(remove_if(string2.begin(), string2.end(), isspace), string2.end());
+
+    std::size_t found2 = string2.find_first_of(',');
     std::string destination = string2.substr(0,found2);
     std::string string3 = string2.substr(found2 + 1);
 
-    std::size_t found3 = string3.find_first_of(" ");
+    std::size_t found3 = string3.find_first_of(',');
     std::string parameter1 = string3.substr(0,found3);
     std::string string4 = string3.substr(found3 + 1);
 
-    std::size_t found4 = string4.find_first_of(" ");
+    std::size_t found4 = string4.find_first_of(',');
     std::string immediate = string4.substr(0,found4);
 
-    destination.erase (destination.begin() + 2);
-    parameter1.erase (parameter1.begin() + 2);
 
     I_instruction new_instruction;
     new_instruction.operation = operation;
@@ -170,25 +170,33 @@ I_instruction Convert_operations::I_type_split (std::string& string1){
 
 R_instruction Convert_operations::R_type_split (std::string& string1){
 
+
     std::size_t found1 = string1.find_first_of(" ");
     std::string operation = string1.substr(0,found1);
     std::string string2 = string1.substr(found1 + 1);
-    
-    std::size_t found2 = string2.find_first_of(" ");
+
+    /*  
+        remove_if() can't change the string length(only modify the values) 
+        we have called string::erase to actually modify the length of the string
+    */
+
+    string2.erase(remove_if(string2.begin(), string2.end(), isspace), string2.end());
+
+    std::size_t found2 = string2.find_first_of(',');
     std::string destination = string2.substr(0,found2);
     std::string string3 = string2.substr(found2 + 1);
 
-    std::size_t found3 = string3.find_first_of(" ");
+    std::size_t found3 = string3.find_first_of(',');
     std::string parameter1 = string3.substr(0,found3);
     std::string string4 = string3.substr(found3 + 1);
 
-    std::size_t found4 = string4.find_first_of(" ");
+    std::size_t found4 = string4.find_first_of(',');
     std::string parameter2 =string4.substr(0,found4);
 
-    destination.erase(destination.begin() + 2);
-    parameter1.erase(parameter1.begin() + 2);
-    
     R_instruction new_instruction;
+
+    std::cout << operation << destination << parameter1 << parameter2 << std::endl;
+
     new_instruction.operation = operation;
     new_instruction.destination_register = destination;
     new_instruction.parameter_register1 = parameter1;
