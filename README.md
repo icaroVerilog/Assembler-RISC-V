@@ -175,31 +175,31 @@ will provide them.
   <tr>
     <td align=center>x23</td>
     <td align=center>s7</td>
-    <td align=center>saved register 7</td>
+    <td>saved register 7</td>
     <td align=center>YES</td>
   </tr>
   <tr>
     <td align=center>x24</td>
     <td align=center>s8</td>
-    <td align=center>saved register 8</td>
+    <td>saved register 8</td>
     <td align=center>YES</td>
   </tr>
   <tr>
     <td align=center>x25</td>
     <td align=center>s9</td>
-    <td align=center>saved register 9</td>
+    <td>saved register 9</td>
     <td align=center>YES</td>
   </tr>
   <tr>
     <td align=center>x26</td>
     <td align=center>s10</td>
-    <td align=center>saved register 10</td>
+    <td>saved register 10</td>
     <td align=center>YES</td>
   </tr>
   <tr>
     <td align=center>x27</td>
     <td align=center>s11</td>
-    <td align=center>saved register 11</td>
+    <td>saved register 11</td>
     <td align=center>YES</td>
   </tr>
   <tr>
