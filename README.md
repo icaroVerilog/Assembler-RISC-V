@@ -125,7 +125,7 @@ actually, the assembler supports a small number of instructions: ADD(R), SUB(R),
   </tr>
 </tbody>
 </table>
-
+A
 <br>
 
 ## :man_technologist: Getting started
