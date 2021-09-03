@@ -98,24 +98,24 @@ The assembler are developed in c++ 14, using boost library. The assembler suppor
     <td align=center>P</td>
   </tr>
   <tr>
-    <td align=center>R>1.1</td>
-    <td align=center>R>ADD, SUB, AND<br>OR, XOR, SLL, SRL<br></td>
-    <td align=center>R>ADDI, ANDI, ORI</td>
-    <td align=center>R>N/A</td>
-    <td align=center>R>N/A</td>
-    <td align=center>R>N/A</td>
-    <td align=center>R>N/A</td>
-    <td align=center>R>N/A</td>
+    <td align=center>1.1</td>
+    <td align=center>ADD, SUB, AND<br>OR, XOR, SLL, SRL<br></td>
+    <td align=center>ADDI, ANDI, ORI</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
   </tr>
   <tr>
-    <td align=center>R>1.1</td>
-    <td align=center>R>ADD, SUB, AND<br>OR, XOR, SLL, SRL<br></td>
-    <td align=center>R>ADDI, ANDI, ORI<br>XORI, SLLI, SRLI<br>LB, LH, LW<br></td>
-    <td align=center>R>N/A</td>
-    <td align=center>R>N/A</td>
-    <td align=center>R>N/A</td>
-    <td align=center>R>N/A</td>
-    <td align=center>R>N/A</td>
+    <td align=center>1.1</td>
+    <td align=center>ADD, SUB, AND<br>OR, XOR, SLL, SRL<br></td>
+    <td align=center>ADDI, ANDI, ORI<br>XORI, SLLI, SRLI<br>LB, LH, LW<br></td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
   </tr>
 </tbody>
 </table>
