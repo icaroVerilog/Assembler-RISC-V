@@ -24,41 +24,216 @@ binary interface** (ABI). This is what you will usually see in code listings. If
 you really want to see the numeric register names, the `-M` argument to objdump
 will provide them.
 
-Register  | ABI         | Use by convention                     | Preserved?
-:-------- | :---------- | :---------------                      | ------
-x0        | zero        | hardwired to 0, ignores writes        | _n/a_
-x1        | ra          | return address for jumps              | no
-x2        | sp          | stack pointer                         | yes
-x3        | gp          | global pointer                        | _n/a_
-x4        | tp          | thread pointer                        | _n/a_
-x5        | t0          | temporary register 0                  | no
-x6        | t1          | temporary register 1                  | no
-x7        | t2          | temporary register 2                  | no
-x8        | s0 _or_ fp  | saved register 0 _or_ frame pointer   | yes
-x9        | s1          | saved register 1                      | yes
-x10       | a0          | return value _or_ function argument 0 | no
-x11       | a1          | return value _or_ function argument 1 | no
-x12       | a2          | function argument 2                   | no
-x13       | a3          | function argument 3                   | no
-x14       | a4          | function argument 4                   | no
-x15       | a5          | function argument 5                   | no
-x16       | a6          | function argument 6                   | no
-x17       | a7          | function argument 7                   | no
-x18       | s2          | saved register 2                      | yes
-x19       | s3          | saved register 3                      | yes
-x20       | s4          | saved register 4                      | yes
-x21       | s5          | saved register 5                      | yes
-x22       | s6          | saved register 6                      | yes
-x23       | s7          | saved register 7                      | yes
-x24       | s8          | saved register 8                      | yes
-x25       | s9          | saved register 9                      | yes
-x26       | s10         | saved register 10                     | yes
-x27       | s11         | saved register 11                     | yes
-x28       | t3          | temporary register 3                  | no
-x29       | t4          | temporary register 4                  | no
-x30       | t5          | temporary register 5                  | no
-x31       | t6          | temporary register 6                  | no
-pc        | _(none)_    | program counter                       | _n/a_
+<table>
+<thead>
+  <tr>
+    <th align=center>Register</th>
+    <th align=center>ABI</th>
+    <th align=center>Use by convention</th>
+    <th align=center>Preserved</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td align=center>x0</td>
+    <td align=center>zero</td>
+    <td align=center>hardwired to 0, ignores writes</td>
+    <td align=center>N/A</td>
+  </tr>
+  <tr>
+    <td align=center>x1</td>
+    <td align=center>ra</td>
+    <td align=center>return address for jumps</td>
+    <td align=center>NO<br></td>
+  </tr>
+  <tr>
+    <td align=center>x2</td>
+    <td align=center>sp</td>
+    <td align=center>stack pointer</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x3</td>
+    <td align=center>gp</td>
+    <td align=center>global pointer</td>
+    <td align=center>N/A<br></td>
+  </tr>
+  <tr>
+    <td align=center>x4</td>
+    <td align=center>tp</td>
+    <td align=center>thread pointer</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x5</td>
+    <td align=center>t0</td>
+    <td align=center>temporary register 0</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x6</td>
+    <td align=center>t1</td>
+    <td align=center>temporary register 1</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x7</td>
+    <td align=center>t2</td>
+    <td align=center>temporary register 2</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x8</td>
+    <td align=center>s0 or fp</td>
+    <td align=center>saved register 0 or frame pointer</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x9</td>
+    <td align=center>s1</td>
+    <td align=center>saved register 1</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x10</td>
+    <td align=center>a0</td>
+    <td align=center>return value or function argument 0</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x11</td>
+    <td align=center>a1</td>
+    <td align=center>return value or function argument 1</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x12</td>
+    <td align=center>a2</td>
+    <td align=center>function argument 2</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x13</td>
+    <td align=center>a3</td>
+    <td align=center>function argument 3</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x14</td>
+    <td align=center>a4</td>
+    <td align=center>function argument 4</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x15</td>
+    <td align=center>a5</td>
+    <td align=center>function argument 5</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x16</td>
+    <td align=center>a6</td>
+    <td align=center>function argument 6</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x17</td>
+    <td align=center>a7</td>
+    <td align=center>function argument 7</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x18</td>
+    <td align=center>s2</td>
+    <td align=center>saved register 2</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x19</td>
+    <td align=center>s3</td>
+    <td align=center>saved register 3</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x20</td>
+    <td align=center>s4</td>
+    <td align=center>saved register 4</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x21</td>
+    <td align=center>s5</td>
+    <td align=center>saved register 5</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x22</td>
+    <td align=center>s6</td>
+    <td align=center>saved register 6</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x23</td>
+    <td align=center>s7</td>
+    <td align=center>saved register 7</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x24</td>
+    <td align=center>s8</td>
+    <td align=center>saved register 8</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x25</td>
+    <td align=center>s9</td>
+    <td align=center>saved register 9</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x26</td>
+    <td align=center>s10</td>
+    <td align=center>saved register 10</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x27</td>
+    <td align=center>s11</td>
+    <td align=center>saved register 11</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x28</td>
+    <td align=center>t3</td>
+    <td align=center>temporary register 3</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x29</td>
+    <td align=center>t4</td>
+    <td align=center>temporary register 4</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x30</td>
+    <td align=center>t5</td>
+    <td align=center>temporary register 5</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x31</td>
+    <td align=center>t6</td>
+    <td align=center>temporary register 6</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>PC</td>
+    <td align=center>(none)</td>
+    <td align=center>program counter</td>
+    <td align=center>N/A</td>
+  </tr>
+</tbody>
+</table>
 
 _Registers of the RV32I. Based on RISC-V documentation and Patterson and
 Waterman "The RISC-V Reader" (2017)_
