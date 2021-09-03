@@ -230,7 +230,7 @@ will provide them.
     <td align=center>PC</td>
     <td align=center>(none)</td>
     <td> program counter</td>
-    <td align=center>N/A</td>
+    <td style="color:green" align=center>N/A</td>
   </tr>
 </tbody>
 </table>
