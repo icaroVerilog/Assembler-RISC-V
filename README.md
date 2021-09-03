@@ -25,19 +25,10 @@ you really want to see the numeric register names, the `-M` argument to objdump
 will provide them.
 <br>
 
-<style type="text/css">
-  table          {border:ridge 5px red;}
-  table td       {border:inset 1px #000;}
-  table tr#ROW1  {background-color:red; color:white;}
-  table tr#ROW2  {background-color:white;}
-  table tr#ROW3  {background-color:blue; color:white;}
-  table td#CELL9 {border:inset 4px red; background-color:navy;}
-</style>
-
-
+<p>Some Markdown text with <span style="color:blue">some <em>blue</em> text</span>.</p>
 <table>
 <thead>
-  <tr id="ROW1">
+  <tr>
     <th align=center>Register</th>
     <th align=center>ABI</th>
     <th align=center>Use by convention</th>
