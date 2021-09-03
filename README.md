@@ -79,12 +79,6 @@ The assembler are developed in c++ 14, using boost library. The assembler suppor
 <br>
 <br>
 
-## Supported instructions
-
-actually, the assembler supports a small number of instructions
-
-<br>
-
 <table>
 <thead>
   <tr>
