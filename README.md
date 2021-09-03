@@ -25,7 +25,6 @@ you really want to see the numeric register names, the `-M` argument to objdump
 will provide them.
 <br>
 
-<p>Some Markdown text with <span style="color:blue">some <em>blue</em> text</span>.</p>
 <table>
 <thead>
   <tr>
