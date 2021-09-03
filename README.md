@@ -24,9 +24,20 @@ binary interface** (ABI). This is what you will usually see in code listings. If
 you really want to see the numeric register names, the `-M` argument to objdump
 will provide them.
 <br>
+
+<style type="text/css">
+  table          {border:ridge 5px red;}
+  table td       {border:inset 1px #000;}
+  table tr#ROW1  {background-color:red; color:white;}
+  table tr#ROW2  {background-color:white;}
+  table tr#ROW3  {background-color:blue; color:white;}
+  table td#CELL9 {border:inset 4px red; background-color:navy;}
+</style>
+
+
 <table>
 <thead>
-  <tr>
+  <tr id="ROW1">
     <th align=center>Register</th>
     <th align=center>ABI</th>
     <th align=center>Use by convention</th>
@@ -230,7 +241,7 @@ will provide them.
     <td align=center>PC</td>
     <td align=center>(none)</td>
     <td> program counter</td>
-    <td align=center style=background-color: #04aa6d;>N/A</td>
+    <td align=center>N/A</td>
   </tr>
 </tbody>
 </table>
