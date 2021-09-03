@@ -81,7 +81,7 @@ The assembler are developed in c++ 14, using boost library. The assembler suppor
 
 ## Supported instructions
 
-actually, the assembler supports a small number of instructions: ADD(R), SUB(R), AND(R), OR(R), XOR(R), ADDI(I), ANDI(I), ORI(I), SLL(R), SRL(R)
+actually, the assembler supports a small number of instructions
 
 <br>
 
