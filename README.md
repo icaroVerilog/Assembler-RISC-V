@@ -37,139 +37,139 @@ will provide them.
   <tr>
     <td align=center>x0</td>
     <td align=center>zero</td>
-    <td align=center>hardwired to 0, ignores writes</td>
+    <td>hardwired to 0, ignores writes</td>
     <td align=center>N/A</td>
   </tr>
   <tr>
     <td align=center>x1</td>
     <td align=center>ra</td>
-    <td align=center>return address for jumps</td>
+    <td>return address for jumps</td>
     <td align=center>NO<br></td>
   </tr>
   <tr>
     <td align=center>x2</td>
     <td align=center>sp</td>
-    <td align=center>stack pointer</td>
+    <td>stack pointer</td>
     <td align=center>YES</td>
   </tr>
   <tr>
     <td align=center>x3</td>
     <td align=center>gp</td>
-    <td align=center>global pointer</td>
+    <td>global pointer</td>
     <td align=center>N/A<br></td>
   </tr>
   <tr>
     <td align=center>x4</td>
     <td align=center>tp</td>
-    <td align=center>thread pointer</td>
+    <td>thread pointer</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x5</td>
     <td align=center>t0</td>
-    <td align=center>temporary register 0</td>
+    <td>temporary register 0</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x6</td>
     <td align=center>t1</td>
-    <td align=center>temporary register 1</td>
+    <td >temporary register 1</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x7</td>
     <td align=center>t2</td>
-    <td align=center>temporary register 2</td>
+    <td>temporary register 2</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x8</td>
     <td align=center>s0 or fp</td>
-    <td align=center>saved register 0 or frame pointer</td>
+    <td>saved register 0 or frame pointer</td>
     <td align=center>YES</td>
   </tr>
   <tr>
     <td align=center>x9</td>
     <td align=center>s1</td>
-    <td align=center>saved register 1</td>
+    <td>saved register 1</td>
     <td align=center>YES</td>
   </tr>
   <tr>
     <td align=center>x10</td>
     <td align=center>a0</td>
-    <td align=center>return value or function argument 0</td>
+    <td>return value or function argument 0</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x11</td>
     <td align=center>a1</td>
-    <td align=center>return value or function argument 1</td>
+    <td>return value or function argument 1</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x12</td>
     <td align=center>a2</td>
-    <td align=center>function argument 2</td>
+    <td>function argument 2</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x13</td>
     <td align=center>a3</td>
-    <td align=center>function argument 3</td>
+    <td>function argument 3</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x14</td>
     <td align=center>a4</td>
-    <td align=center>function argument 4</td>
+    <td>function argument 4</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x15</td>
     <td align=center>a5</td>
-    <td align=center>function argument 5</td>
+    <td>function argument 5</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x16</td>
     <td align=center>a6</td>
-    <td align=center>function argument 6</td>
+    <td>function argument 6</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x17</td>
     <td align=center>a7</td>
-    <td align=center>function argument 7</td>
+    <td>function argument 7</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x18</td>
     <td align=center>s2</td>
-    <td align=center>saved register 2</td>
+    <td>saved register 2</td>
     <td align=center>YES</td>
   </tr>
   <tr>
     <td align=center>x19</td>
     <td align=center>s3</td>
-    <td align=center>saved register 3</td>
+    <td>saved register 3</td>
     <td align=center>YES</td>
   </tr>
   <tr>
     <td align=center>x20</td>
     <td align=center>s4</td>
-    <td align=center>saved register 4</td>
+    <td>saved register 4</td>
     <td align=center>YES</td>
   </tr>
   <tr>
     <td align=center>x21</td>
     <td align=center>s5</td>
-    <td align=center>saved register 5</td>
+    <td>saved register 5</td>
     <td align=center>YES</td>
   </tr>
   <tr>
     <td align=center>x22</td>
     <td align=center>s6</td>
-    <td align=center>saved register 6</td>
+    <td>saved register 6</td>
     <td align=center>YES</td>
   </tr>
   <tr>
