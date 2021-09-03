@@ -205,31 +205,31 @@ will provide them.
   <tr>
     <td align=center>x28</td>
     <td align=center>t3</td>
-    <td align=center>temporary register 3</td>
+    <td>temporary register 3</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x29</td>
     <td align=center>t4</td>
-    <td align=center>temporary register 4</td>
+    <td>temporary register 4</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x30</td>
     <td align=center>t5</td>
-    <td align=center>temporary register 5</td>
+    <td>temporary register 5</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>x31</td>
     <td align=center>t6</td>
-    <td align=center>temporary register 6</td>
+    <td>temporary register 6</td>
     <td align=center>NO</td>
   </tr>
   <tr>
     <td align=center>PC</td>
     <td align=center>(none)</td>
-    <td align=center>program counter</td>
+    <tdprogram counter</td>
     <td align=center>N/A</td>
   </tr>
 </tbody>
