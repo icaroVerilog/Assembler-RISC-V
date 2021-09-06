@@ -3,7 +3,7 @@
 </h1>
 
 
-### RISC-V is a open source instruction set architecture (ISA), developed by the university of California. This project consists in the development of an assembler for the RISC-V 32 bits ISA, made in c++, allows the conversion of the assembly language into machine language
+### RISC-V is a open source instruction set architecture (ISA), developed by the university of California. This project consists in the development of an assembler for the RISC-V RV32I ISA, made in c++, allows the conversion of the assembly language into machine language
 
 <br>
 <br>
@@ -23,42 +23,219 @@ assembler, they are given standardized names as part of the RISC-V **application
 binary interface** (ABI). This is what you will usually see in code listings. If
 you really want to see the numeric register names, the `-M` argument to objdump
 will provide them.
+<br>
 
-Register  | ABI         | Use by convention                     | Preserved?
-:-------- | :---------- | :---------------                      | ------
-x0        | zero        | hardwired to 0, ignores writes        | _n/a_
-x1        | ra          | return address for jumps              | no
-x2        | sp          | stack pointer                         | yes
-x3        | gp          | global pointer                        | _n/a_
-x4        | tp          | thread pointer                        | _n/a_
-x5        | t0          | temporary register 0                  | no
-x6        | t1          | temporary register 1                  | no
-x7        | t2          | temporary register 2                  | no
-x8        | s0 _or_ fp  | saved register 0 _or_ frame pointer   | yes
-x9        | s1          | saved register 1                      | yes
-x10       | a0          | return value _or_ function argument 0 | no
-x11       | a1          | return value _or_ function argument 1 | no
-x12       | a2          | function argument 2                   | no
-x13       | a3          | function argument 3                   | no
-x14       | a4          | function argument 4                   | no
-x15       | a5          | function argument 5                   | no
-x16       | a6          | function argument 6                   | no
-x17       | a7          | function argument 7                   | no
-x18       | s2          | saved register 2                      | yes
-x19       | s3          | saved register 3                      | yes
-x20       | s4          | saved register 4                      | yes
-x21       | s5          | saved register 5                      | yes
-x22       | s6          | saved register 6                      | yes
-x23       | s7          | saved register 7                      | yes
-x24       | s8          | saved register 8                      | yes
-x25       | s9          | saved register 9                      | yes
-x26       | s10         | saved register 10                     | yes
-x27       | s11         | saved register 11                     | yes
-x28       | t3          | temporary register 3                  | no
-x29       | t4          | temporary register 4                  | no
-x30       | t5          | temporary register 5                  | no
-x31       | t6          | temporary register 6                  | no
-pc        | _(none)_    | program counter                       | _n/a_
+<table>
+<thead>
+  <tr>
+    <th align=center>Register</th>
+    <th align=center>ABI</th>
+    <th align=center>Use by convention</th>
+    <th align=center>Preserved</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td align=center>x0</td>
+    <td align=center>zero</td>
+    <td>hardwired to 0, ignores writes</td>
+    <td align=center>N/A</td>
+  </tr>
+  <tr>
+    <td align=center>x1</td>
+    <td align=center>ra</td>
+    <td>return address for jumps</td>
+    <td align=center>NO<br></td>
+  </tr>
+  <tr>
+    <td align=center>x2</td>
+    <td align=center>sp</td>
+    <td>stack pointer</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x3</td>
+    <td align=center>gp</td>
+    <td>global pointer</td>
+    <td align=center>N/A<br></td>
+  </tr>
+  <tr>
+    <td align=center>x4</td>
+    <td align=center>tp</td>
+    <td>thread pointer</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x5</td>
+    <td align=center>t0</td>
+    <td>temporary register 0</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x6</td>
+    <td align=center>t1</td>
+    <td >temporary register 1</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x7</td>
+    <td align=center>t2</td>
+    <td>temporary register 2</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x8</td>
+    <td align=center>s0 or fp</td>
+    <td>saved register 0 or frame pointer</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x9</td>
+    <td align=center>s1</td>
+    <td>saved register 1</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x10</td>
+    <td align=center>a0</td>
+    <td>return value or function argument 0</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x11</td>
+    <td align=center>a1</td>
+    <td>return value or function argument 1</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x12</td>
+    <td align=center>a2</td>
+    <td>function argument 2</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x13</td>
+    <td align=center>a3</td>
+    <td>function argument 3</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x14</td>
+    <td align=center>a4</td>
+    <td>function argument 4</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x15</td>
+    <td align=center>a5</td>
+    <td>function argument 5</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x16</td>
+    <td align=center>a6</td>
+    <td>function argument 6</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x17</td>
+    <td align=center>a7</td>
+    <td>function argument 7</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x18</td>
+    <td align=center>s2</td>
+    <td>saved register 2</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x19</td>
+    <td align=center>s3</td>
+    <td>saved register 3</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x20</td>
+    <td align=center>s4</td>
+    <td>saved register 4</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x21</td>
+    <td align=center>s5</td>
+    <td>saved register 5</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x22</td>
+    <td align=center>s6</td>
+    <td>saved register 6</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x23</td>
+    <td align=center>s7</td>
+    <td>saved register 7</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x24</td>
+    <td align=center>s8</td>
+    <td>saved register 8</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x25</td>
+    <td align=center>s9</td>
+    <td>saved register 9</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x26</td>
+    <td align=center>s10</td>
+    <td>saved register 10</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x27</td>
+    <td align=center>s11</td>
+    <td>saved register 11</td>
+    <td align=center>YES</td>
+  </tr>
+  <tr>
+    <td align=center>x28</td>
+    <td align=center>t3</td>
+    <td>temporary register 3</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x29</td>
+    <td align=center>t4</td>
+    <td>temporary register 4</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x30</td>
+    <td align=center>t5</td>
+    <td>temporary register 5</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>x31</td>
+    <td align=center>t6</td>
+    <td>temporary register 6</td>
+    <td align=center>NO</td>
+  </tr>
+  <tr>
+    <td align=center>PC</td>
+    <td align=center>(none)</td>
+    <td> program counter</td>
+    <td align=center>N/A</td>
+  </tr>
+</tbody>
+</table>
+
 
 _Registers of the RV32I. Based on RISC-V documentation and Patterson and
 Waterman "The RISC-V Reader" (2017)_
@@ -74,16 +251,52 @@ detail.
 <br>
 
 ## 🛠 The assembler
-The assembler are developed in c++ 14, using boost library. The assembler supports some of RISC-V instructions
+The assembler are developed in c++ 14, using boost library. The assembler supports some of RISC-V RV32LI instructions
 
 <br>
 <br>
 
-## Supported instructions
+<table>
+<thead>
+  <tr>
+    <th>Version</th>
+    <th colspan="7">Suported instructions</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td align=center>R</td>
+    <td align=center>I</td>
+    <td align=center>S</td>
+    <td align=center>B</td>
+    <td align=center>U</td>
+    <td align=center>J</td>
+    <td align=center>P</td>
+  </tr>
+  <tr>
+    <td align=center>1.1</td>
+    <td align=center>ADD, SUB, AND<br>OR, XOR, SLL, SRL<br></td>
+    <td align=center>ADDI, ANDI, ORI</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+  </tr>
+  <tr>
+    <td align=center>1.1</td>
+    <td align=center>ADD, SUB, AND<br>OR, XOR, SLL, SRL<br></td>
+    <td align=center>ADDI, ANDI, ORI<br>XORI, SLLI, SRLI<br>LB, LH, LW<br></td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+  </tr>
+</tbody>
+</table>
 
-actually, the assembler supports a small number of instructions: ADD(R), SUB(R), AND(R), OR(R), XOR(R), ADDI(I), ANDI(I), ORI(I), SLL(R), SRL(R)
-
-<br>
 <br>
 
 ## :man_technologist: Getting started
@@ -113,5 +326,3 @@ if you want to print the assembled instructions, in terminal run the command
 ./assembler input_file.asm
 
 ```
-
-
