@@ -61,17 +61,30 @@ class Label_Accumulator_Controller {
     public: int get_label_instruction(std::string& label_name, std::string *instruction){
 
         std::string current_instruction;
+        int control_flag;
 
         for (int index = 0; index < controller.size(); index++){
             if (this -> controller[index].label_name == label_name){
                 
-                this -> controller[index].get_instruction(&current_instruction);
+                control_flag = this -> controller[index].get_instruction(&current_instruction);
 
-                /* envia as instruções para o parametro passdo por refência*/
-                *instruction = current_instruction;
-    
+                if (control_flag == 0){
+                    return 0;
+                }
+
+                else {
+                    /* envia as instruções para o parametro passdo por refência*/
+                    *instruction = current_instruction;
+
+                    return 1;
+                }
+            }
+
+            else {
+                return 0;
             }
         }
-        return 0;
     }
 };
+
+std::vector<Label_Accumulator> Label_Accumulator_Controller::controller;
