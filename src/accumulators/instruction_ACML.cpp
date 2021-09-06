@@ -16,6 +16,7 @@ class Instruction_accumulator {
         this -> instructions_vector.push_back(instruction);
     }
 
+
     public: int get_instruction(std::string *instruction){
 
         std::string current_instruction;
