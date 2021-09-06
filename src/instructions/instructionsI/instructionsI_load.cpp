@@ -100,7 +100,7 @@ class IL_assembler: public Convert_operations {
         }
     }
     
-    public: void LH(std::string& string, bool print_flag){
+    public: void LW(std::string& string, bool print_flag){
 
         I_instruction instruction = I_type_split(string);
 
