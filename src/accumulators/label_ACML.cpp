@@ -16,7 +16,7 @@ class Label_Accumulator: public Instruction_accumulator {
     }
 };
 
-class Label_Accumulator_Controller {
+class Label_Accumulator_Controller { /* MONOSTATE PATTERN CLASS*/
 
     /* 
         deixando o campo estático para criarmo um monostate
@@ -61,7 +61,7 @@ class Label_Accumulator_Controller {
     public: int get_label_instruction(std::string& label_name, std::string *instruction){
 
         std::string current_instruction;
-        int control_flag;
+        int control_flag = 1;
 
         for (int index = 0; index < controller.size(); index++){
             if (this -> controller[index].label_name == label_name){
@@ -79,11 +79,8 @@ class Label_Accumulator_Controller {
                     return 1;
                 }
             }
-
-            else {
-                return 0;
-            }
         }
+        return 0;
     }
 };
 

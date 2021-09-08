@@ -181,10 +181,6 @@ int main(int argc, char *argv[]){
         }
     }
 
-    /*
-        Problema: na linha 172 consta que a instrução do rotulo 2 está sendo enviada corretamente
-        porem na hora de exibilas não exibe corretamentes
-    */
 
 
 
@@ -197,7 +193,7 @@ int main(int argc, char *argv[]){
     // }
 
     std::string instruction3;
-    std::string b = "label3";
+    std::string b = "label2";
     
     while(controller -> get_label_instruction(b , &instruction3)){
         std::cout << instruction3 << std::endl;

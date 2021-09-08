@@ -38,7 +38,7 @@ class Instruction_accumulator {
 
         else {
             
-            counter = 0;
+            this -> counter = 0;
             return 0;
         }
     }
