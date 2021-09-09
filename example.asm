@@ -1,4 +1,4 @@
-add x2, x0, x1
+andi x2, x1, 16
 label1:
 add x2, x0, x3
 add x2, x0, x4

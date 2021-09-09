@@ -39,7 +39,6 @@ bool find_label(std::string file_line){
     }
 }
 
-
 int error_message(){
 
     std::cout << std::endl;
@@ -53,7 +52,6 @@ int error_message(){
     return 0;
 }
 
-
 int main(int argc, char *argv[]){
 
     bool print_flag;
@@ -61,6 +59,11 @@ int main(int argc, char *argv[]){
     std::string input_filename;
     std::string open_parameter;
     std::string output_filename;
+
+    std::string file_line;
+    std::string filepath;
+
+    std::fstream file;
 
     try {
 
@@ -78,6 +81,7 @@ int main(int argc, char *argv[]){
                 throw std::runtime_error("assembler error: invalid parameters");
             }
 
+            filepath = "../" + output_filename;
             print_flag = false;
         }
 
@@ -100,11 +104,11 @@ int main(int argc, char *argv[]){
     catch(const std::runtime_error &error){
         error_message();
         std::cerr << error.what() << std::endl;
+
         return 0;
     }
 
-    std::fstream file;
-
+    /* code block responsible for opening the input file  */
     try {
         file.open("../" + input_filename, std::fstream::in);
 
@@ -114,24 +118,21 @@ int main(int argc, char *argv[]){
     }
     catch(const std::runtime_error &error){
         std::cerr << error.what() << std::endl;
+
         return 0;
     }
 
-    std::string file_line;
-    std::string filepath = "../" + output_filename;
 
-    R_assembler  *assembler_R  = new R_assembler(filepath);
-    I_assembler  *assembler_I  = new I_assembler(filepath);
-    IL_assembler *assembler_IL = new IL_assembler(filepath);
-    P_assembler  *assembler_P  = new P_assembler(filepath);
+    R_assembler  *assembler_R   = new R_assembler(filepath);
+    I_assembler  *assembler_I   = new I_assembler(filepath);
+    IL_assembler *assembler_IL  = new IL_assembler(filepath);
+    P_assembler  *assembler_P   = new P_assembler(filepath);
 
     Instruction_accumulator *accumulator = new Instruction_accumulator();
-    Label_Accumulator_Controller *controller = new Label_Accumulator_Controller;
+    Label_Accumulator_Controller *controller = new Label_Accumulator_Controller();
+
 
     while (getline(file, file_line)){
-
-        /* retirando os espaços da string */
-        // file_line.erase(remove_if(file_line.begin(), file_line.end(), isspace), file_line.end());
 
         /* caso a string for vazia */
         if (is_empty(file_line)){
@@ -145,7 +146,6 @@ int main(int argc, char *argv[]){
 
             std::string label_name = file_line.substr(0, file_line.size() - 1); 
             controller -> new_accumulator(label_name);
-            // std::cout <<  label_name << std::endl;
             
             /*
                 o while le o arquivo até que encoontre outra label, salvando em
@@ -162,13 +162,13 @@ int main(int argc, char *argv[]){
                 getline(file, label_line);
 
                 if (find_label(label_line)){
+
                     file.seekg(oldpos);
                     break;
                 }
 
                 else {
 
-                    // std::cout << label_line << std::endl;
                     controller -> set_label_instruction(label_name, label_line);
                     oldpos = file.tellg();
                 }
@@ -181,98 +181,81 @@ int main(int argc, char *argv[]){
         }
     }
 
+    std::string instruction;
 
+    while (accumulator -> get_instruction(&instruction)){
 
+        /* ::::::::::::::::::::: I FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
+        if (instruction.find("addi") == 0 && instruction.find("i") == 3){
+            assembler_I -> ADDI(instruction, print_flag);
+        }
 
-    // std::string instruction;
-    // while(accumulator -> get_instruction(&instruction)){
+        else if (instruction.find("ori") == 0 && instruction.find("i") == 3){
+            assembler_I -> ORI(instruction, print_flag);
+        }
 
-    //     std::cout << instruction << std::endl;
+        else if (instruction.find("andi") == 0 && instruction.find("i") == 3){
+            assembler_I -> ANDI(instruction, print_flag);
+        }
 
-    // }
+        else if (instruction.find("xori") == 0 && instruction.find("i") == 3){
+            assembler_I -> XORI(instruction, print_flag);
+        }
 
-    std::string instruction3;
-    std::string b = "label2";
-    
-    while(controller -> get_label_instruction(b , &instruction3)){
-        std::cout << instruction3 << std::endl;
+        else if (instruction.find("slli") == 0 && instruction.find("i") == 3){
+            assembler_I -> SLLI(instruction, print_flag);
+        }
+
+        else if (instruction.find("srli") == 0 && instruction.find("i") == 3){
+            assembler_I -> SRLI(instruction, print_flag);
+        }
+
+        else if (instruction.find("srli") == 0 && instruction.find("i") == 3){
+            assembler_I -> SRLI(instruction, print_flag);
+        }
+
+        /* ::::::::::::::::::::: R FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
+        else if (instruction.find("add") == 0){
+            assembler_R -> ADD(instruction, print_flag);
+        }
+
+        else if (instruction.find("sub") == 0){
+            assembler_R -> SUB(instruction, print_flag);
+        }
+
+        else if (instruction.find("and") == 0){
+            std::cout << "entrou" << std::endl;
+            assembler_R -> AND(instruction, print_flag);
+        }
+
+        else if (instruction.find("or") == 0){
+            assembler_R -> OR(instruction, print_flag);
+        }
+
+        else if (instruction.find("xor") == 0){
+            assembler_R -> XOR(instruction, print_flag);
+        }
+
+        else if (instruction.find("sll") == 0){
+            assembler_R -> SLL(instruction, print_flag);
+        }
+
+        else if (instruction.find("srl") == 0){
+            assembler_R -> SRL(instruction, print_flag);
+        }
+
+        /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
+        else if (instruction.find("mv") == 0){
+            assembler_P -> MV(instruction, print_flag);
+        }
+
+        else if (instruction.find("li") == 0){
+            assembler_P -> LI(instruction, print_flag);
+        }
+
     }
-
-    // while (getline(file, file_line)){
-
-    //     /* ::::::::::::::::::::: I FORMAT INSTRUCTIONS ::::::::::::::::::::: */
-
-    //     if (file_line.find("addi") == 0 && file_line.find("i") == 3){
-    //         assembler_I -> ADDI(file_line, print_flag);
-    //     }
-
-    //     else if (file_line.find("ori") == 0 && file_line.find("i") == 3){
-    //         assembler_I -> ORI(file_line, print_flag);
-    //     }
-
-    //     else if (file_line.find("andi") == 0 && file_line.find("i") == 3){
-    //         assembler_I -> ANDI(file_line, print_flag);
-    //     }
-
-    //     if (file_line.find("xori") == 0 && file_line.find("i") == 3){
-    //         assembler_I -> XORI(file_line, print_flag);
-    //     }
-
-    //     if (file_line.find("slli") == 0 && file_line.find("i") == 3){
-    //         assembler_I -> SLLI(file_line, print_flag);
-    //     }
-
-    //     if (file_line.find("srli") == 0 && file_line.find("i") == 3){
-    //         assembler_I -> SRLI(file_line, print_flag);
-    //     }
-
-    //     if (file_line.find("srli") == 0 && file_line.find("i") == 3){
-    //         assembler_I -> SRLI(file_line, print_flag);
-    //     }
-
-    //     /* ::::::::::::::::::::: R FORMAT INSTRUCTIONS ::::::::::::::::::::: */
-
-    //     else if (file_line.find("add") == 0){
-    //         assembler_R -> ADD(file_line, print_flag);
-    //     }
-
-    //     else if (file_line.find("sub") == 0){
-    //         assembler_R -> SUB(file_line, print_flag);
-    //     }
-
-    //     else if (file_line.find("and") == 0){
-    //         assembler_R -> AND(file_line, print_flag);
-    //     }
-
-    //     else if (file_line.find("or") == 0){
-    //         assembler_R -> OR(file_line, print_flag);
-    //     }
-
-    //     else if (file_line.find("xor") == 0){
-    //         assembler_R -> XOR(file_line, print_flag);
-    //     }
-
-    //     else if (file_line.find("sll") == 0){
-    //         assembler_R -> SLL(file_line, print_flag);
-    //     }
-
-    //     else if (file_line.find("srl") == 0){
-    //         assembler_R -> SRL(file_line, print_flag);
-    //     }
-
-    //     /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
-
-    //     else if (file_line.find("mv") == 0){
-    //         assembler_P -> MV(file_line, print_flag);
-    //     }
-
-    //     else if (file_line.find("li") == 0){
-    //         assembler_P -> LI(file_line, print_flag);
-    //     }
-
-    // }
-    // return 0;
+    return 0;
 }
-
-

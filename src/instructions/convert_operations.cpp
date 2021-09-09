@@ -145,6 +145,7 @@ I_instruction Convert_operations::I_type_split (std::string& string1){
     std::string operation = string1.substr(0,found1);
     std::string string2 = string1.substr(found1 + 1);
     
+    /* Removendo espaços */
     string2.erase(remove_if(string2.begin(), string2.end(), isspace), string2.end());
 
     std::size_t found2 = string2.find_first_of(',');
@@ -158,8 +159,8 @@ I_instruction Convert_operations::I_type_split (std::string& string1){
     std::size_t found4 = string4.find_first_of(',');
     std::string immediate = string4.substr(0,found4);
 
-
     I_instruction new_instruction;
+
     new_instruction.operation = operation;
     new_instruction.destination_register = destination;
     new_instruction.parameter_register1 = parameter1;
@@ -195,8 +196,6 @@ R_instruction Convert_operations::R_type_split (std::string& string1){
 
     R_instruction new_instruction;
 
-    std::cout << operation << destination << parameter1 << parameter2 << std::endl;
-
     new_instruction.operation = operation;
     new_instruction.destination_register = destination;
     new_instruction.parameter_register1 = parameter1;
@@ -211,16 +210,17 @@ P_instruction Convert_operations::P_type_split (std::string& string1){
     std::string operation = string1.substr(0,found1);
     std::string string2 = string1.substr(found1 + 1);
 
-    std::size_t found2 = string2.find_first_of(" ");
+    string2.erase(remove_if(string2.begin(), string2.end(), isspace), string2.end());
+
+    std::size_t found2 = string2.find_first_of(',');
     std::string destination = string2.substr(0,found2);
     std::string string3 = string2.substr(found2 + 1);
 
-    std::size_t found3 = string3.find_first_of(" ");
+    std::size_t found3 = string3.find_first_of(',');
     std::string parameter = string3.substr(0,found3);
 
-    destination.erase(destination.begin() + 2);
-
     P_instruction new_instruction;
+    
     new_instruction.operation = operation;
     new_instruction.destination_register = destination;
     new_instruction.parameter = parameter;

@@ -26,6 +26,10 @@ class Label_Accumulator_Controller { /* MONOSTATE PATTERN CLASS*/
     private: static std::vector<Label_Accumulator> controller;
     private: unsigned int counter;
 
+    public: Label_Accumulator_Controller(){
+        ;;
+    }
+    
     public: void new_accumulator(std::string& label_name){
 
         counter = 0;
