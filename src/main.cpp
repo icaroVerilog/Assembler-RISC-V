@@ -6,10 +6,28 @@
 #include "instructions/instructionsR/instructionsR.cpp"
 #include "instructions/instructionsP/instructionsP.cpp"
 #include "instructions/instructionsI/instructionsI_load.cpp"
-// #include "accumulators/instruction_ACML.cpp"
 #include "accumulators/label_ACML.cpp"
 
 // RVI 32bits
+
+bool remove_space(std::string& string){
+
+    int counter = 0;
+
+    for (int index = 0; index < string.size(); index++){
+        
+        if (string[index] == (char) 32){
+            counter++;
+        }
+
+        if (string[index] != (char) 32){
+            break;
+        }
+    }
+    string.erase(0, counter);
+
+    return true;
+}
 
 bool is_empty(std::string file_line){
 
@@ -146,6 +164,7 @@ int main(int argc, char *argv[]){
 
             std::string label_name = file_line.substr(0, file_line.size() - 1); 
             controller -> new_accumulator(label_name);
+            std::cout << label_name << std::endl;
             
             /*
                 o while le o arquivo até que encoontre outra label, salvando em
@@ -169,6 +188,8 @@ int main(int argc, char *argv[]){
 
                 else {
 
+                    remove_space(label_line);
+                    std::cout << label_line << std::endl;
                     controller -> set_label_instruction(label_name, label_line);
                     oldpos = file.tellg();
                 }
