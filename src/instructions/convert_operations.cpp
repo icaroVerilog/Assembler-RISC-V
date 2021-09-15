@@ -169,8 +169,39 @@ I_instruction Convert_operations::I_type_split (std::string& string1){
     return new_instruction;
 }
 
-R_instruction Convert_operations::R_type_split (std::string& string1){
+L_instruction Convert_operations::L_type_split (std::string& string1){
 
+    try {
+
+        std::regex L_format_regex("([0-9]{1,2})+([(][a-z][0-9]{1,2}[)])");
+
+        std::size_t found1 = string1.find_first_of(" ");
+        std::string operation = string1.substr(0,found1);
+        std::string string2 = string1.substr(found1 + 1);
+
+        string2.erase(remove_if(string2.begin(), string2.end(), isspace), string2.end());
+
+        std::size_t found2 = string2.find_first_of(',');
+        std::string destination = string2.substr(0,found2);
+        std::string string3 = string2.substr(found2 + 1);
+
+        std::cout << string3 << std::endl;
+
+        /* verifica por meio da RegEx se a instrução está no formato certo */
+        if (std::regex_match(string3, L_format_regex) == false){
+            throw std::invalid_argument("assembler error: invalid load struction format");
+        }    
+        std::cout << "string literal matched\n";
+
+    }
+    catch (const std::invalid_argument& error){
+        std::cerr << error.what() << std::endl;
+        std::exit(0);
+    }
+
+}
+
+R_instruction Convert_operations::R_type_split (std::string& string1){
 
     std::size_t found1 = string1.find_first_of(" ");
     std::string operation = string1.substr(0,found1);

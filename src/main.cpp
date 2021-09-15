@@ -141,10 +141,10 @@ int main(int argc, char *argv[]){
     }
 
 
-    R_assembler  *assembler_R   = new R_assembler(filepath);
-    I_assembler  *assembler_I   = new I_assembler(filepath);
-    IL_assembler *assembler_IL  = new IL_assembler(filepath);
-    P_assembler  *assembler_P   = new P_assembler(filepath);
+    R_assembler *assembler_R = new R_assembler(filepath);
+    I_assembler *assembler_I = new I_assembler(filepath);
+    L_assembler *assembler_L = new L_assembler(filepath);
+    P_assembler *assembler_P = new P_assembler(filepath);
 
     Instruction_accumulator *accumulator = new Instruction_accumulator();
     Label_Accumulator_Controller *controller = new Label_Accumulator_Controller();
@@ -208,63 +208,64 @@ int main(int argc, char *argv[]){
 
         /* ::::::::::::::::::::: I FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        if (instruction.find("addi") == 0 && instruction.find("i") == 3){
+        if (instruction.substr(0, 4).compare("addi") == 0){
             assembler_I -> ADDI(instruction, print_flag);
         }
 
-        else if (instruction.find("ori") == 0 && instruction.find("i") == 3){
+        else if (instruction.substr(0, 4).compare("ori") == 0){
             assembler_I -> ORI(instruction, print_flag);
         }
 
-        else if (instruction.find("andi") == 0 && instruction.find("i") == 3){
+        else if (instruction.substr(0, 4).compare("andi") == 0){
             assembler_I -> ANDI(instruction, print_flag);
         }
 
-        else if (instruction.find("xori") == 0 && instruction.find("i") == 3){
+        else if (instruction.substr(0, 4).compare("xori") == 0){
             assembler_I -> XORI(instruction, print_flag);
         }
 
-        else if (instruction.find("slli") == 0 && instruction.find("i") == 3){
+        else if (instruction.substr(0, 4).compare("alli") == 0){
             assembler_I -> SLLI(instruction, print_flag);
         }
 
-        else if (instruction.find("srli") == 0 && instruction.find("i") == 3){
-            assembler_I -> SRLI(instruction, print_flag);
-        }
-
-        else if (instruction.find("srli") == 0 && instruction.find("i") == 3){
+        else if (instruction.substr(0, 4).compare("srli") == 0){
             assembler_I -> SRLI(instruction, print_flag);
         }
 
         /* ::::::::::::::::::::: R FORMAT INSTRUCTIONS ::::::::::::::::::::: */
-
-        else if (instruction.find("add") == 0){
+        else if (instruction.substr(0, 3).compare("add") == 0){
             assembler_R -> ADD(instruction, print_flag);
         }
 
-        else if (instruction.find("sub") == 0){
+        else if (instruction.substr(0, 3).compare("sub") == 0){
             assembler_R -> SUB(instruction, print_flag);
         }
 
-        else if (instruction.find("and") == 0){
-            std::cout << "entrou" << std::endl;
+        else if (instruction.substr(0, 3).compare("and") == 0){
             assembler_R -> AND(instruction, print_flag);
         }
 
-        else if (instruction.find("or") == 0){
+        else if (instruction.substr(0, 3).compare("or") == 0){
             assembler_R -> OR(instruction, print_flag);
         }
 
-        else if (instruction.find("xor") == 0){
+        else if (instruction.substr(0, 3).compare("xor") == 0){
             assembler_R -> XOR(instruction, print_flag);
         }
 
-        else if (instruction.find("sll") == 0){
+        else if (instruction.substr(0, 3).compare("sll") == 0){
             assembler_R -> SLL(instruction, print_flag);
         }
 
-        else if (instruction.find("srl") == 0){
+        else if (instruction.substr(0, 3).compare("srl") == 0){
             assembler_R -> SRL(instruction, print_flag);
+        }
+
+        /* ::::::::::::::::::::: L FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
+        else if (instruction.substr(0, 2).compare("lw") == 0){
+            std::cout << "entrou" << std::endl;
+            assembler_L -> LW(instruction, print_flag);
         }
 
         /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */

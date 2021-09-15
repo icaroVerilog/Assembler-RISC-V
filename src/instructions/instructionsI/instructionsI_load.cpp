@@ -6,8 +6,9 @@
 #include <bitset>
 #include "../convert_operations.hpp"
 
+/* REFATORAR TUDO, O FORMATO CORRETO DAS INSTRUÇÕES DE LOAD E STORE É lb x1, endereço(ponteiro)*/
 
-class IL_assembler: public Convert_operations {
+class L_assembler: public Convert_operations {
 
     private: std::string opcode_I_load;
     private: std::fstream output_file;
@@ -18,7 +19,7 @@ class IL_assembler: public Convert_operations {
         std::string funct3_LH;
         std::string funct3_LW;
 
-    public: IL_assembler(std::string& output_filename){
+    public: L_assembler(std::string& output_filename){
 
         this -> output_filename = output_filename;
         this -> opcode_I_load.assign("0000011");
@@ -102,11 +103,11 @@ class IL_assembler: public Convert_operations {
     
     public: void LW(std::string& string, bool print_flag){
 
-        I_instruction instruction = I_type_split(string);
+        L_instruction instruction = L_type_split(string);
 
-        std::string binary_immediate = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
-        std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
+        std::string parameter_register1 = register_to_binary(instruction.pointer_register);
+        std::string binary_immediate = immediate_to_binary(instruction.jump_immediate);
 
         if (print_flag == false){
 
@@ -135,5 +136,4 @@ class IL_assembler: public Convert_operations {
             std::cout << output << std::endl;
         }
     }
-
 };

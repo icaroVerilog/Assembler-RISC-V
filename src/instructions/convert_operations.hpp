@@ -7,10 +7,20 @@
 #include <cstddef>
 #include <boost/convert.hpp>
 #include <bitset>
+#include <regex>
 
 typedef struct I_instruction I_instruction;
 typedef struct R_instruction R_instruction;
 typedef struct P_instruction P_instruction;
+
+struct L_instruction {
+
+    std::string operation;
+    std::string destination_register;
+    std::string pointer_register;
+    std::string jump_immediate;
+
+};
 
 struct I_instruction {
 
@@ -42,6 +52,7 @@ class Convert_operations {
     protected: std::string register_to_binary(std::string& reg);
     protected: std::string immediate_to_binary(std::string& number);
     protected: I_instruction I_type_split (std::string& string1);
+    protected: L_instruction L_type_split (std::string& string1);
     protected: R_instruction R_type_split (std::string& string1);
     protected: P_instruction P_type_split (std::string& string1);
 };
