@@ -171,9 +171,9 @@ I_instruction Convert_operations::I_type_split (std::string& string1){
 
 L_instruction Convert_operations::L_type_split (std::string& string1){
 
-    try {
+    std::regex L_format_regex("([0-9]{1,2})+[(]([a-z][0-9]{1,2})[)]");
 
-        std::regex L_format_regex("([0-9]{1,2})+([(][a-z][0-9]{1,2}[)])");
+    try {
 
         std::size_t found1 = string1.find_first_of(" ");
         std::string operation = string1.substr(0,found1);
@@ -185,76 +185,108 @@ L_instruction Convert_operations::L_type_split (std::string& string1){
         std::string destination = string2.substr(0,found2);
         std::string string3 = string2.substr(found2 + 1);
 
-        std::cout << string3 << std::endl;
+        std::smatch regex_result;
 
         /* verifica por meio da RegEx se a instrução está no formato certo */
-        if (std::regex_match(string3, L_format_regex) == false){
-            throw std::invalid_argument("assembler error: invalid load struction format");
+        if (std::regex_match(string3, regex_result, L_format_regex) == false){
+            throw std::runtime_error("assembler error: invalid load struction format");
         }    
-        std::cout << "string literal matched\n";
+
+        L_instruction new_instruction;
+
+        new_instruction.operation = operation;
+        new_instruction.destination_register = destination;
+        new_instruction.jump_immediate = regex_result[1];
+        new_instruction.pointer_register = regex_result[2];
+
+        return new_instruction;
 
     }
+
     catch (const std::invalid_argument& error){
         std::cerr << error.what() << std::endl;
         std::exit(0);
     }
-
 }
 
 R_instruction Convert_operations::R_type_split (std::string& string1){
 
-    std::size_t found1 = string1.find_first_of(" ");
-    std::string operation = string1.substr(0,found1);
-    std::string string2 = string1.substr(found1 + 1);
+    std::regex R_format_regex("(([a-z][0-9]{1,2})+([,][a-z][0-9]{1,2})+([,][a-z][0-9]{1,2}))");
 
-    /*  
-        remove_if() can't change the string length(only modify the values) 
-        we have called string::erase to actually modify the length of the string
-    */
+    try {
 
-    string2.erase(remove_if(string2.begin(), string2.end(), isspace), string2.end());
+        std::size_t found1 = string1.find_first_of(" ");
+        std::string operation = string1.substr(0,found1);
+        std::string string2 = string1.substr(found1 + 1);
 
-    std::size_t found2 = string2.find_first_of(',');
-    std::string destination = string2.substr(0,found2);
-    std::string string3 = string2.substr(found2 + 1);
+        /*  
+            remove_if() can't change the string length(only modify the values) 
+            we have called string::erase to actually modify the length of the string
+        */
 
-    std::size_t found3 = string3.find_first_of(',');
-    std::string parameter1 = string3.substr(0,found3);
-    std::string string4 = string3.substr(found3 + 1);
+        string2.erase(remove_if(string2.begin(), string2.end(), isspace), string2.end());
 
-    std::size_t found4 = string4.find_first_of(',');
-    std::string parameter2 =string4.substr(0,found4);
+        /* verifica por meio da RegEx se a instrução está no formato certo */
+        if (std::regex_match(string2, R_format_regex) == false){
+            throw std::runtime_error("assembler error: invalid type R struction format");
+        } 
 
-    R_instruction new_instruction;
+        std::size_t found2 = string2.find_first_of(',');
+        std::string destination = string2.substr(0,found2);
+        std::string string3 = string2.substr(found2 + 1);
 
-    new_instruction.operation = operation;
-    new_instruction.destination_register = destination;
-    new_instruction.parameter_register1 = parameter1;
-    new_instruction.parameter_register2 = parameter2;
+        std::size_t found3 = string3.find_first_of(',');
+        std::string parameter1 = string3.substr(0,found3);
+        std::string string4 = string3.substr(found3 + 1);
 
-    return new_instruction;
+        std::size_t found4 = string4.find_first_of(',');
+        std::string parameter2 =string4.substr(0,found4);
+
+        R_instruction new_instruction;
+
+        new_instruction.operation = operation;
+        new_instruction.destination_register = destination;
+        new_instruction.parameter_register1 = parameter1;
+        new_instruction.parameter_register2 = parameter2;
+
+        return new_instruction;
+
+    }
+
+    catch (const std::invalid_argument& error){
+        std::cerr << error.what() << std::endl;
+        std::exit(0);
+    }
 }
 
 P_instruction Convert_operations::P_type_split (std::string& string1){
 
-    std::size_t found1 = string1.find_first_of(" ");
-    std::string operation = string1.substr(0,found1);
-    std::string string2 = string1.substr(found1 + 1);
-
-    string2.erase(remove_if(string2.begin(), string2.end(), isspace), string2.end());
-
-    std::size_t found2 = string2.find_first_of(',');
-    std::string destination = string2.substr(0,found2);
-    std::string string3 = string2.substr(found2 + 1);
-
-    std::size_t found3 = string3.find_first_of(',');
-    std::string parameter = string3.substr(0,found3);
-
-    P_instruction new_instruction;
+    try {
     
-    new_instruction.operation = operation;
-    new_instruction.destination_register = destination;
-    new_instruction.parameter = parameter;
+        std::size_t found1 = string1.find_first_of(" ");
+        std::string operation = string1.substr(0,found1);
+        std::string string2 = string1.substr(found1 + 1);
 
-    return new_instruction;
+        string2.erase(remove_if(string2.begin(), string2.end(), isspace), string2.end());
+
+        std::size_t found2 = string2.find_first_of(',');
+        std::string destination = string2.substr(0,found2);
+        std::string string3 = string2.substr(found2 + 1);
+
+        std::size_t found3 = string3.find_first_of(',');
+        std::string parameter = string3.substr(0,found3);
+
+        P_instruction new_instruction;
+        
+        new_instruction.operation = operation;
+        new_instruction.destination_register = destination;
+        new_instruction.parameter = parameter;
+   
+        return new_instruction;
+    }
+
+    catch (const std::invalid_argument& error){
+        std::cerr << error.what() << std::endl;
+        std::exit(0);
+    }
 }

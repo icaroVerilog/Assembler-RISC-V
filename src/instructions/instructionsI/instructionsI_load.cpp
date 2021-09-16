@@ -102,7 +102,7 @@ class L_assembler: public Convert_operations {
     }
     
     public: void LW(std::string& string, bool print_flag){
-
+        
         L_instruction instruction = L_type_split(string);
 
         std::string destination_register = register_to_binary(instruction.destination_register);

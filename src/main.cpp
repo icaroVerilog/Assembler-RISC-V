@@ -233,6 +233,7 @@ int main(int argc, char *argv[]){
         }
 
         /* ::::::::::::::::::::: R FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
         else if (instruction.substr(0, 3).compare("add") == 0){
             assembler_R -> ADD(instruction, print_flag);
         }
@@ -264,7 +265,6 @@ int main(int argc, char *argv[]){
         /* ::::::::::::::::::::: L FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
         else if (instruction.substr(0, 2).compare("lw") == 0){
-            std::cout << "entrou" << std::endl;
             assembler_L -> LW(instruction, print_flag);
         }
 
