@@ -171,7 +171,7 @@ I_instruction Convert_operations::I_type_split (std::string& string1){
 
 L_instruction Convert_operations::L_type_split (std::string& string1){
 
-    std::regex L_format_regex("([0-9]{1,2})+[(]([a-z][0-9]{1,2})[)]");
+    std::regex L_format_regex("([x][0-9]{1,2})[,]([0-9]{1,3})[(]([x][0-9]{1,2})[)]");
 
     try {
 
@@ -181,23 +181,19 @@ L_instruction Convert_operations::L_type_split (std::string& string1){
 
         string2.erase(remove_if(string2.begin(), string2.end(), isspace), string2.end());
 
-        std::size_t found2 = string2.find_first_of(',');
-        std::string destination = string2.substr(0,found2);
-        std::string string3 = string2.substr(found2 + 1);
-
         std::smatch regex_result;
 
         /* verifica por meio da RegEx se a instrução está no formato certo */
-        if (std::regex_match(string3, regex_result, L_format_regex) == false){
+        if (std::regex_match(string2, regex_result, L_format_regex) == false){
             throw std::runtime_error("assembler error: invalid load struction format");
         }    
 
         L_instruction new_instruction;
 
         new_instruction.operation = operation;
-        new_instruction.destination_register = destination;
-        new_instruction.jump_immediate = regex_result[1];
-        new_instruction.pointer_register = regex_result[2];
+        new_instruction.destination_register = regex_result[1];
+        new_instruction.jump_immediate = regex_result[2];
+        new_instruction.pointer_register = regex_result[3];
 
         return new_instruction;
 

@@ -6,9 +6,9 @@
 #include "instructions/instructionsR/instructionsR.cpp"
 #include "instructions/instructionsP/instructionsP.cpp"
 #include "instructions/instructionsI/instructionsI_load.cpp"
-#include "accumulators/label_ACML.cpp"
+#include "accumulators/instruction_ACML.cpp"
 
-// RVI 32bits
+// RVI 64bits
 
 bool remove_space(std::string& string){
 
@@ -147,8 +147,6 @@ int main(int argc, char *argv[]){
     P_assembler *assembler_P = new P_assembler(filepath);
 
     Instruction_accumulator *accumulator = new Instruction_accumulator();
-    Label_Accumulator_Controller *controller = new Label_Accumulator_Controller();
-
 
     while (getline(file, file_line)){
 
@@ -157,49 +155,7 @@ int main(int argc, char *argv[]){
             continue;
         }
 
-        if (find_label(file_line)){
-
-            std::string label_line;
-            std::streampos oldpos;
-
-            std::string label_name = file_line.substr(0, file_line.size() - 1); 
-            controller -> new_accumulator(label_name);
-            std::cout << label_name << std::endl;
-            
-            /*
-                o while le o arquivo até que encoontre outra label, salvando em
-                oldpos a posição do ponteiro de leitura e caso encontre um novo
-                rótulo, faz o arquivo retroceder uma linha e encerrando o laço
-                de repetição.
-
-                Ao encerrar a repetição, o ponteiro estára apontando para uma
-                linha antes do novo rotulo, repetindo o processo
-            */
-
-            while (file.eof() == false){
-
-                getline(file, label_line);
-
-                if (find_label(label_line)){
-
-                    file.seekg(oldpos);
-                    break;
-                }
-
-                else {
-
-                    remove_space(label_line);
-                    std::cout << label_line << std::endl;
-                    controller -> set_label_instruction(label_name, label_line);
-                    oldpos = file.tellg();
-                }
-            }
-        }
-
-        else {
-            /* Insere as instruções no acumulador main, ou seja, fora de um rótulo */
-            accumulator -> set_instruction(file_line);
-        }
+        accumulator -> set_instruction(file_line);
     }
 
     std::string instruction;
@@ -264,8 +220,20 @@ int main(int argc, char *argv[]){
 
         /* ::::::::::::::::::::: L FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
+        else if (instruction.substr(0, 2).compare("lb") == 0){
+            assembler_L -> LB(instruction, print_flag);
+        }
+
+        else if (instruction.substr(0, 2).compare("lh") == 0){
+            assembler_L -> LH(instruction, print_flag);
+        }
+
         else if (instruction.substr(0, 2).compare("lw") == 0){
             assembler_L -> LW(instruction, print_flag);
+        }
+
+        else if (instruction.substr(0, 2).compare("ld") == 0){
+            assembler_L -> LD(instruction, print_flag);
         }
 
         /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
