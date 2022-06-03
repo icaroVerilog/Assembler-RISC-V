@@ -4,9 +4,9 @@
 #include <cstddef>
 #include <boost/convert.hpp>
 #include <bitset>
-#include "../convert_operations.hpp"
+#include "../convert_methods/convert_methods.hpp"
 
-class S_assembler: public Convert_operations {
+class S_assembler: public Convert_methods {
 
     private: std::string opcode_I_load;
     private: std::string output_filename;

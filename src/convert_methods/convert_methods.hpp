@@ -1,5 +1,5 @@
-#ifndef convert_operations
-#define convert_operations
+#ifndef conversion_methods
+#define conversion_methods
 
 #include <iostream>
 #include <fstream>
@@ -47,14 +47,9 @@ struct P_instruction {
     std::string parameter;
 };
 
-class Convert_operations {
-
+class Conversion_methods {
     protected: std::string register_to_binary(std::string& reg);
     protected: std::string immediate_to_binary(std::string& number);
-    protected: I_instruction I_type_split (std::string& string1);
-    protected: L_instruction L_type_split (std::string& string1);
-    protected: R_instruction R_type_split (std::string& string1);
-    protected: P_instruction P_type_split (std::string& string1);
 };
 
-#endif /* convert_operations */
+#endif /* conversion_methods */

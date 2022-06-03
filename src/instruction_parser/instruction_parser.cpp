@@ -1,4 +1,4 @@
-I_instruction Instruction_parser::I_type_split (std::string& instruction){
+I_instruction Instruction_parser::I_type_parse (std::string& instruction){
 
     std::size_t found1 = instruction.find_first_of(" ");
     std::string operation = instruction.substr(0,found1);
@@ -28,7 +28,7 @@ I_instruction Instruction_parser::I_type_split (std::string& instruction){
     return new_instruction;
 }
 
-L_instruction Instruction_parser::L_type_split (std::string& instruction){
+L_instruction Instruction_parser::L_type_parse (std::string& instruction){
 
     std::regex L_format_regex("([x][0-9]{1,2})[,]([0-9]{1,3})[(]([x][0-9]{1,2})[)]");
 
@@ -64,7 +64,7 @@ L_instruction Instruction_parser::L_type_split (std::string& instruction){
     }
 }
 
-R_instruction Instruction_parser::R_type_split (std::string& instruction){
+R_instruction Instruction_parser::R_type_parse (std::string& instruction){
 
     std::regex R_format_regex("(([a-z][0-9]{1,2})+([,][a-z][0-9]{1,2})+([,][a-z][0-9]{1,2}))");
 
@@ -114,7 +114,7 @@ R_instruction Instruction_parser::R_type_split (std::string& instruction){
     }
 }
 
-P_instruction Instruction_parser::P_type_split (std::string& instruction){
+P_instruction Instruction_parser::P_type_parse (std::string& instruction){
 
     try {
     

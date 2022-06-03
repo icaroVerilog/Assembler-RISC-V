@@ -1,0 +1,140 @@
+#include "conversion_methods.hpp"
+
+std::string Conversion_methods::register_to_binary(std::string& reg){
+
+    try {
+        
+        /* caso o registrador tenha mais de 3 digitos, diferente de xAA */
+        if (reg.length() > 3){
+            throw std::invalid_argument("assembler error: invalid register");
+        }
+
+        /* caso o registrador não comece com x */
+        if (reg.substr(0, 1) != "x"){
+            throw std::invalid_argument("assembler error: invalid register");
+        }
+
+        /* caso o numero do registrador for maior que 31 */
+        if (stoi(reg.substr(1, reg.length())) > 31 ){
+            throw std::invalid_argument("assembler error: invalid register");
+        }
+
+        std::string aux = reg.substr(1, reg.size());
+        std::string binary_string = std::bitset<5>(std::stoi(aux)).to_string();
+
+        return binary_string;
+    }
+    catch (const std::invalid_argument& error){
+        std::cerr << error.what() << std::endl;
+        std::exit(0);
+    }   
+}
+
+std::string Conversion_methods::immediate_to_binary(std::string& immediate){
+
+    /* Caso se trate de um valor haxadecimal */
+    if (immediate.substr(0, 2) == "0x"){
+    
+        try {
+
+            std::string hex = immediate.substr(2, immediate.length());
+            unsigned int hex_value;
+
+            std::stringstream aux;
+            aux << std::hex << hex;
+            aux >> hex_value;
+
+            int integer_value = static_cast<int>(hex_value);
+            
+            /*
+                TRATA CASO O VALOR PASSADO COMO PARÂMETRO PARA A FUNÇÃO NÃO SEJA UM HEXADECIMAL DE VERDADE
+                
+                POIS SE N FOR UM HEXADECIMAL integer_value IRÁ TER O VALOR 0
+                SE FOR REALMENTE UM HEXADECIMAL COM O VALOR 0, EM TODA A STRING TERÁ 0, ENTÃO A CONDIÇÃO DO IF SERA FALSA
+            
+            */
+            if (integer_value == 0){
+
+                for (int index = 0; index < hex.length(); index++){
+                    if (hex.at(index) != '0'){
+                        throw std::invalid_argument("assembler error: invalid hexadecimal value in immediate field");
+                    }
+                }
+            }
+            
+            std::string binary_string = std::bitset<12>(integer_value).to_string();
+            return binary_string;
+            
+        }
+        catch (const std::invalid_argument& error){
+            std::cerr << error.what() << std::endl;
+            std::exit(0);
+        }
+    }
+
+    else if (immediate.substr(0, 2) == "0b"){
+
+        std::string binary = immediate.substr(2, immediate.length());
+
+        try {
+
+            if (binary.length() > 12){
+                throw std::invalid_argument("assembler error: binary overflow");
+            }
+
+            else {
+
+                if (binary.length() < 12){
+
+                    int missing_values = 12 - binary.length();
+
+                    std::string binary_treated;
+                    binary_treated.resize(12);
+                    
+
+                    for (int index = 0; index < missing_values; index++){
+                        binary_treated.at(index) = '0';
+                    }
+
+                    for (int index = missing_values; index < 12; index++){
+                        binary_treated.at(index) = binary.at(index - missing_values);
+                    }
+
+                    binary.erase();
+                    binary.resize(12);
+                    binary = binary_treated;
+                }
+
+                for (int index = 0; index < binary.length(); index++){
+
+                    char current_char = binary.at(index);
+
+                    if (current_char != '1' && current_char != '0'){
+                        throw std::invalid_argument("assembler error: invalid binary value on immediate field");
+                    }
+                }
+
+                return binary;
+            }
+        }
+        catch (const std::invalid_argument& error){
+            std::cerr << error.what() << std::endl;
+            std::exit(0);
+        }
+    }
+
+    /*  caso se trate de um valor decimal  */
+    else {
+
+        /*  bloco try trata caso for passado um valor diferente de um decimal para algum campo immediate  */
+        try {
+            std::string binary_string = std::bitset<12>(stoi(immediate)).to_string();
+
+            return binary_string;
+        }
+        catch (const std::invalid_argument& error){
+            std::cerr << "assembler error: invalid decimal on immediate field" << std::endl;
+            std::exit(0);
+        }
+    }
+}

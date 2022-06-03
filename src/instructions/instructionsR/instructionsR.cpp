@@ -4,10 +4,9 @@
 #include <cstddef>
 #include <boost/convert.hpp>
 #include <bitset>
-#include "../convert_operations.hpp"
+#include "../convert_methods/convert_methods.hpp"
 
-
-class R_assembler: public Convert_operations {
+class R_assembler: public Convert_methods {
 
     private: std::fstream output_file;
     private: std::string opcode_R;
