@@ -5,6 +5,7 @@
 #include <boost/convert.hpp>
 #include <bitset>
 #include "../convert_methods/convert_methods.hpp"
+#include "../instruction_parser/instruction_parser.hpp"
 
 class R_assembler: public Convert_methods {
 
