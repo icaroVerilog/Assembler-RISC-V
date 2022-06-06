@@ -5,8 +5,8 @@
 
 class Instruction_accumulator {
 
-    private: static std::vector<std::string> instructions_vector;
-    private: static unsigned int counter;
+    private: std::vector<std::string> instructions_vector;
+    private: unsigned int counter;
 
     public: Instruction_accumulator() {
         counter = 0;

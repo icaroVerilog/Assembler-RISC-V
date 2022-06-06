@@ -4,13 +4,15 @@
 #include <cstddef>
 #include <boost/convert.hpp>
 #include <bitset>
-#include "../convert_methods/convert_methods.hpp"
-#include "../instruction_parser/instruction_parser.hpp"
+#include "../../instructions_structures/type_R.hpp"
+#include "../../../convert_methods/convert_methods.hpp"
+#include "../../../instruction_parser/instruction_parser.hpp"
 
-class R_assembler: public Convert_methods, Instruction_parser {
+class R_assembler: public Convert_methods, public Instruction_parser {
 
-    private: std::fstream output_file;
+// class R_assembler {
     private: std::string opcode_R;
+    private: std::fstream output_file;
     private: std::string output_filename;
 
     private:
@@ -54,261 +56,149 @@ class R_assembler: public Convert_methods, Instruction_parser {
 
     public: void ADD(std::string& string, bool print_flag){
 
-        R_instruction instruction = R_type_split(string);
+        R_instruction instruction = R_type_parse(string);
 
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        if (print_flag == false){
 
-            this -> output_file.open(output_filename, std::fstream::app);
+        this -> output_file.open(output_filename, std::fstream::app);
 
-            this -> output_file << this -> funct7_ADD;
-            this -> output_file << parameter_register2;
-            this -> output_file << parameter_register1;
-            this -> output_file << this -> funct3_ADD;
-            this -> output_file << destination_register;
-            this -> output_file << this -> opcode_R;
-            this -> output_file << std::endl;
+        this -> output_file << this -> funct7_ADD;
+        this -> output_file << parameter_register2;
+        this -> output_file << parameter_register1;
+        this -> output_file << this -> funct3_ADD;
+        this -> output_file << destination_register;
+        this -> output_file << this -> opcode_R;
+        this -> output_file << std::endl;
 
-            this -> output_file.close();
-        }
-
-        if (print_flag == true){
-
-            std::string output;
-
-            output.append(this -> funct7_ADD);
-            output.append(parameter_register2);
-            output.append(parameter_register1);
-            output.append(this -> funct3_ADD);
-            output.append(destination_register);
-            output.append(this -> opcode_R);
-
-            std::cout << output << std::endl;
-        }
+        this -> output_file.close();
     }
     public: void SUB(std::string& string, bool print_flag){
 
-        R_instruction instruction = R_type_split(string);
+        R_instruction instruction = R_type_parse(string);
 
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        if (print_flag == false){
+        this -> output_file.open(output_filename, std::fstream::app);
 
-            this -> output_file.open(output_filename, std::fstream::app);
+        this -> output_file << this -> funct7_SUB;
+        this -> output_file << parameter_register2;
+        this -> output_file << parameter_register1;
+        this -> output_file << this -> funct3_SUB;
+        this -> output_file << destination_register;
+        this -> output_file << this -> opcode_R;
+        this -> output_file << std::endl;
 
-            this -> output_file << this -> funct7_SUB;
-            this -> output_file << parameter_register2;
-            this -> output_file << parameter_register1;
-            this -> output_file << this -> funct3_SUB;
-            this -> output_file << destination_register;
-            this -> output_file << this -> opcode_R;
-            this -> output_file << std::endl;
-
-            this -> output_file.close();
-        }
-
-        if (print_flag == true){
-
-            std::string output;
-
-            output.append(this -> funct7_SUB);
-            output.append(parameter_register2);
-            output.append(parameter_register1);
-            output.append(this -> funct3_SUB);
-            output.append(destination_register);
-            output.append(this -> opcode_R);
-
-            std::cout << output << std::endl;
-        }
+        this -> output_file.close();
     }
     public: void AND(std::string& string, bool print_flag){
 
-        R_instruction instruction = R_type_split(string);
+        R_instruction instruction = R_type_parse(string);
 
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        if (print_flag == false){
+        this -> output_file.open(output_filename, std::fstream::app);
 
-            this -> output_file.open(output_filename, std::fstream::app);
+        this -> output_file << this -> funct7_AND;
+        this -> output_file << parameter_register2;
+        this -> output_file << parameter_register1;
+        this -> output_file << this -> funct3_AND;
+        this -> output_file << destination_register;
+        this -> output_file << this -> opcode_R;
+        this -> output_file << std::endl;
 
-            this -> output_file << this -> funct7_AND;
-            this -> output_file << parameter_register2;
-            this -> output_file << parameter_register1;
-            this -> output_file << this -> funct3_AND;
-            this -> output_file << destination_register;
-            this -> output_file << this -> opcode_R;
-            this -> output_file << std::endl;
-
-            this -> output_file.close();
-        }
-
-        if (print_flag == true){
-
-            std::string output;
-
-            output.append(this -> funct7_AND);
-            output.append(parameter_register2);
-            output.append(parameter_register1);
-            output.append(this -> funct3_AND);
-            output.append(destination_register);
-            output.append(this -> opcode_R);
-
-            std::cout << output << std::endl;
-        }
+        this -> output_file.close();
     }
     public: void OR(std::string& string, bool print_flag){
 
-        R_instruction instruction = R_type_split(string);
+        R_instruction instruction = R_type_parse(string);
 
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        if (print_flag == false){
 
-            this -> output_file.open(output_filename, std::fstream::app);
+        this -> output_file.open(output_filename, std::fstream::app);
 
-            this -> output_file << this -> funct7_OR;
-            this -> output_file << parameter_register2;
-            this -> output_file << parameter_register1;
-            this -> output_file << this -> funct3_OR;
-            this -> output_file << destination_register;
-            this -> output_file << this -> opcode_R;
-            this -> output_file << std::endl;
+        this -> output_file << this -> funct7_OR;
+        this -> output_file << parameter_register2;
+        this -> output_file << parameter_register1;
+        this -> output_file << this -> funct3_OR;
+        this -> output_file << destination_register;
+        this -> output_file << this -> opcode_R;
+        this -> output_file << std::endl;
 
-            this -> output_file.close();
-        }
-
-        if (print_flag == true){
-
-            std::string output;
-
-            output.append(this -> funct7_OR);
-            output.append(parameter_register2);
-            output.append(parameter_register1);
-            output.append(this -> funct3_OR);
-            output.append(destination_register);
-            output.append(this -> opcode_R);
-
-            std::cout << output << std::endl;
-        }
+        this -> output_file.close();
+        
     }
     public: void XOR(std::string& string, bool print_flag){
 
-        R_instruction instruction = R_type_split(string);
+        R_instruction instruction = R_type_parse(string);
 
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        if (print_flag == false){
 
-            this -> output_file.open(output_filename, std::fstream::app);
+        this -> output_file.open(output_filename, std::fstream::app);
 
-            this -> output_file << this -> funct7_XOR;
-            this -> output_file << parameter_register2;
-            this -> output_file << parameter_register1;
-            this -> output_file << this -> funct3_XOR;
-            this -> output_file << destination_register;
-            this -> output_file << this -> opcode_R;
-            this -> output_file << std::endl;
+        this -> output_file << this -> funct7_XOR;
+        this -> output_file << parameter_register2;
+        this -> output_file << parameter_register1;
+        this -> output_file << this -> funct3_XOR;
+        this -> output_file << destination_register;
+        this -> output_file << this -> opcode_R;
+        this -> output_file << std::endl;
 
-            this -> output_file.close();
-        }
-
-        if (print_flag == true){
-
-            std::string output;
-
-            output.append(this -> funct7_XOR);
-            output.append(parameter_register2);
-            output.append(parameter_register1);
-            output.append(this -> funct3_XOR);
-            output.append(destination_register);
-            output.append(this -> opcode_R);
-
-            std::cout << output << std::endl;
-        }
+        this -> output_file.close();
     }
     public: void SLL(std::string& string, bool print_flag){
 
-        R_instruction instruction = R_type_split(string);
+        R_instruction instruction = R_type_parse(string);
 
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        if (print_flag == false){
 
-            this -> output_file.open(output_filename, std::fstream::app);
+        this -> output_file.open(output_filename, std::fstream::app);
 
-            this -> output_file << this -> funct7_SLL;
-            this -> output_file << parameter_register2;
-            this -> output_file << parameter_register1;
-            this -> output_file << this -> funct3_SLL;
-            this -> output_file << destination_register;
-            this -> output_file << this -> opcode_R;
-            this -> output_file << std::endl;
+        this -> output_file << this -> funct7_SLL;
+        this -> output_file << parameter_register2;
+        this -> output_file << parameter_register1;
+        this -> output_file << this -> funct3_SLL;
+        this -> output_file << destination_register;
+        this -> output_file << this -> opcode_R;
+        this -> output_file << std::endl;
 
-            this -> output_file.close();
-        }
-
-        if (print_flag == true){
-
-            std::string output;
-
-            output.append(this -> funct7_SLL);
-            output.append(parameter_register2);
-            output.append(parameter_register1);
-            output.append(this -> funct3_SLL);
-            output.append(destination_register);
-            output.append(this -> opcode_R);
-
-            std::cout << output << std::endl;
-        }
+        this -> output_file.close();
+        
     }
     public: void SRL(std::string& string, bool print_flag){
 
-        R_instruction instruction = R_type_split(string);
+        R_instruction instruction = R_type_parse(string);
 
         std::string destination_register = register_to_binary(instruction.destination_register);
         std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
         std::string parameter_register2 = register_to_binary(instruction.parameter_register2);
 
-        if (print_flag == false){
 
-            this -> output_file.open(output_filename, std::fstream::app);
+        this -> output_file.open(output_filename, std::fstream::app);
 
-            this -> output_file << this -> funct7_SRL;
-            this -> output_file << parameter_register2;
-            this -> output_file << parameter_register1;
-            this -> output_file << this -> funct3_SRL;
-            this -> output_file << destination_register;
-            this -> output_file << this -> opcode_R;
-            this -> output_file << std::endl;
+        this -> output_file << this -> funct7_SRL;
+        this -> output_file << parameter_register2;
+        this -> output_file << parameter_register1;
+        this -> output_file << this -> funct3_SRL;
+        this -> output_file << destination_register;
+        this -> output_file << this -> opcode_R;
+        this -> output_file << std::endl;
 
-            this -> output_file.close();
-        }
-
-        if (print_flag == true){
-
-            std::string output;
-
-            output.append(this -> funct7_SRL);
-            output.append(parameter_register2);
-            output.append(parameter_register1);
-            output.append(this -> funct3_SRL);
-            output.append(destination_register);
-            output.append(this -> opcode_R);
-
-            std::cout << output << std::endl;
-        }
+        this -> output_file.close();
     }
 };

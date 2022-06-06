@@ -9,9 +9,10 @@
 #include <bitset>
 #include <regex>
 
-class Conversion_methods {
+class Convert_methods {
     protected: std::string register_to_binary(std::string& reg);
     protected: std::string immediate_to_binary(std::string& number);
 };
 
 #endif /* conversion_methods */
+

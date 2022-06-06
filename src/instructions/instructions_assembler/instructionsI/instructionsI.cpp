@@ -4,7 +4,10 @@
 #include <cstddef>
 #include <boost/convert.hpp>
 #include <bitset>
-#include "../../instruction_structrues/type_I.hpp"
+#include "../../instructions_structures/type_I.hpp"
+#include "../../../convert_methods/convert_methods.hpp"
+#include "../../../instruction_parser/instruction_parser.hpp"
+
 
 class I_assembler: public Convert_methods, public Instruction_parser {
 
@@ -35,7 +38,7 @@ class I_assembler: public Convert_methods, public Instruction_parser {
 
     public: void ADDI(std::string& string, bool print_flag){
 
-        I_instruction instruction = I_type_split(string);
+        I_instruction instruction = I_type_parse(string);
 
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
@@ -70,7 +73,7 @@ class I_assembler: public Convert_methods, public Instruction_parser {
     }
     public: void ANDI(std::string& string, bool print_flag){
 
-        I_instruction instruction = I_type_split(string);
+        I_instruction instruction = I_type_parse(string);
 
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
@@ -105,7 +108,7 @@ class I_assembler: public Convert_methods, public Instruction_parser {
     }
     public: void ORI(std::string& string, bool print_flag){
 
-        I_instruction instruction = I_type_split(string);
+        I_instruction instruction = I_type_parse(string);
 
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
@@ -140,7 +143,7 @@ class I_assembler: public Convert_methods, public Instruction_parser {
     }
     public: void XORI(std::string& string, bool print_flag){
 
-        I_instruction instruction = I_type_split(string);
+        I_instruction instruction = I_type_parse(string);
 
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
@@ -175,7 +178,7 @@ class I_assembler: public Convert_methods, public Instruction_parser {
     }
     public: void SLLI(std::string& string, bool print_flag){
 
-        I_instruction instruction = I_type_split(string);
+        I_instruction instruction = I_type_parse(string);
 
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
@@ -210,7 +213,7 @@ class I_assembler: public Convert_methods, public Instruction_parser {
     }
     public: void SRLI(std::string& string, bool print_flag){
 
-        I_instruction instruction = I_type_split(string);
+        I_instruction instruction = I_type_parse(string);
 
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);

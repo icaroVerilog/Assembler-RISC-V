@@ -1,6 +1,6 @@
-#include "conversion_methods.hpp"
+#include "convert_methods.hpp"
 
-std::string Conversion_methods::register_to_binary(std::string& reg){
+std::string Convert_methods::register_to_binary(std::string& reg){
 
     try {
         
@@ -30,7 +30,7 @@ std::string Conversion_methods::register_to_binary(std::string& reg){
     }   
 }
 
-std::string Conversion_methods::immediate_to_binary(std::string& immediate){
+std::string Convert_methods::immediate_to_binary(std::string& immediate){
 
     /* Caso se trate de um valor haxadecimal */
     if (immediate.substr(0, 2) == "0x"){
