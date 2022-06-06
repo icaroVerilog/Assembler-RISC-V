@@ -7,7 +7,7 @@
 #include "../convert_methods/convert_methods.hpp"
 #include "../instruction_parser/instruction_parser.hpp"
 
-class S_assembler: public Convert_methods {
+class S_assembler: public Convert_methods, Instruction_parser {
 
     private: std::string opcode_I_load;
     private: std::string output_filename;

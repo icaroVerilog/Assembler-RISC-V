@@ -7,7 +7,7 @@
 #include "../convert_methods/convert_methods.hpp"
 #include "../instruction_parser/instruction_parser.hpp"
 
-class R_assembler: public Convert_methods {
+class R_assembler: public Convert_methods, Instruction_parser {
 
     private: std::fstream output_file;
     private: std::string opcode_R;

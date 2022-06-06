@@ -1,0 +1,12 @@
+#include <string>
+
+typedef struct R_instruction R_instruction;
+
+struct R_instruction {
+
+    std::string operation;
+    std::string destination_register;
+    std::string parameter_register1;
+    std::string parameter_register2;
+
+};

@@ -9,6 +9,11 @@
 #include <bitset>
 #include <regex>
 
+#include "../instructions/instructions_structures/type_I.hpp"
+#include "../instructions/instructions_structures/type_L.hpp"
+#include "../instructions/instructions_structures/type_P.hpp"
+#include "../instructions/instructions_structures/type_R.hpp"
+
 class Instruction_parser {
     protected: I_instruction I_type_parse (std::string& instruction);
     protected: L_instruction L_type_parse (std::string& instruction);

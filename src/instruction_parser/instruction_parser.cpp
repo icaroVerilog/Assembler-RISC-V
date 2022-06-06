@@ -1,3 +1,5 @@
+#include "instruction_parser.hpp"
+
 I_instruction Instruction_parser::I_type_parse (std::string& instruction){
 
     std::size_t found1 = instruction.find_first_of(" ");

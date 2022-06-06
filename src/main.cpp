@@ -2,10 +2,10 @@
 #include <fstream>
 #include <string>
 #include <cstddef>
-#include "instructions/instructionsI/instructionsI.cpp"
-#include "instructions/instructionsR/instructionsR.cpp"
-#include "instructions/instructionsP/instructionsP.cpp"
-#include "instructions/instructionsI/instructionsI_load.cpp"
+#include "instructions/instructions_assembler/instructionsI/instructionsI.cpp"
+#include "instructions/instructions_assembler/instructionsR/instructionsR.cpp"
+#include "instructions/instructions_assembler/instructionsP/instructionsP.cpp"
+#include "instructions/instructions_assembler/instructionsI/instructionsI_load.cpp"
 #include "accumulators/instruction_ACML.cpp"
 
 // RVI 64bits
@@ -162,89 +162,91 @@ int main(int argc, char *argv[]){
 
     while (accumulator -> get_instruction(&instruction)){
 
+        std::cout << instruction << std::endl;
+
         /* ::::::::::::::::::::: I FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        if (instruction.substr(0, 4).compare("addi") == 0){
-            assembler_I -> ADDI(instruction, print_flag);
-        }
+        // if (instruction.substr(0, 4).compare("addi") == 0){
+        //     assembler_I -> ADDI(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 4).compare("ori") == 0){
-            assembler_I -> ORI(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 4).compare("ori") == 0){
+        //     assembler_I -> ORI(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 4).compare("andi") == 0){
-            assembler_I -> ANDI(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 4).compare("andi") == 0){
+        //     assembler_I -> ANDI(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 4).compare("xori") == 0){
-            assembler_I -> XORI(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 4).compare("xori") == 0){
+        //     assembler_I -> XORI(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 4).compare("alli") == 0){
-            assembler_I -> SLLI(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 4).compare("alli") == 0){
+        //     assembler_I -> SLLI(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 4).compare("srli") == 0){
-            assembler_I -> SRLI(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 4).compare("srli") == 0){
+        //     assembler_I -> SRLI(instruction, print_flag);
+        // }
 
-        /* ::::::::::::::::::::: R FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+        // /* ::::::::::::::::::::: R FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        else if (instruction.substr(0, 3).compare("add") == 0){
-            assembler_R -> ADD(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 3).compare("add") == 0){
+        //     assembler_R -> ADD(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 3).compare("sub") == 0){
-            assembler_R -> SUB(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 3).compare("sub") == 0){
+        //     assembler_R -> SUB(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 3).compare("and") == 0){
-            assembler_R -> AND(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 3).compare("and") == 0){
+        //     assembler_R -> AND(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 3).compare("or") == 0){
-            assembler_R -> OR(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 3).compare("or") == 0){
+        //     assembler_R -> OR(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 3).compare("xor") == 0){
-            assembler_R -> XOR(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 3).compare("xor") == 0){
+        //     assembler_R -> XOR(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 3).compare("sll") == 0){
-            assembler_R -> SLL(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 3).compare("sll") == 0){
+        //     assembler_R -> SLL(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 3).compare("srl") == 0){
-            assembler_R -> SRL(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 3).compare("srl") == 0){
+        //     assembler_R -> SRL(instruction, print_flag);
+        // }
 
-        /* ::::::::::::::::::::: L FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+        // /* ::::::::::::::::::::: L FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        else if (instruction.substr(0, 2).compare("lb") == 0){
-            assembler_L -> LB(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 2).compare("lb") == 0){
+        //     assembler_L -> LB(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 2).compare("lh") == 0){
-            assembler_L -> LH(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 2).compare("lh") == 0){
+        //     assembler_L -> LH(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 2).compare("lw") == 0){
-            assembler_L -> LW(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 2).compare("lw") == 0){
+        //     assembler_L -> LW(instruction, print_flag);
+        // }
 
-        else if (instruction.substr(0, 2).compare("ld") == 0){
-            assembler_L -> LD(instruction, print_flag);
-        }
+        // else if (instruction.substr(0, 2).compare("ld") == 0){
+        //     assembler_L -> LD(instruction, print_flag);
+        // }
 
-        /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+        // /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        else if (instruction.find("mv") == 0){
-            assembler_P -> MV(instruction, print_flag);
-        }
+        // else if (instruction.find("mv") == 0){
+        //     assembler_P -> MV(instruction, print_flag);
+        // }
 
-        else if (instruction.find("li") == 0){
-            assembler_P -> LI(instruction, print_flag);
-        }
+        // else if (instruction.find("li") == 0){
+        //     assembler_P -> LI(instruction, print_flag);
+        // }
 
     }
     return 0;

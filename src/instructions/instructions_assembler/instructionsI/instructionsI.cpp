@@ -4,10 +4,9 @@
 #include <cstddef>
 #include <boost/convert.hpp>
 #include <bitset>
-#include "../convert_methods/convert_methods.hpp"
-#include "../instruction_parser/instruction_parser.hpp"
+#include "../../instruction_structrues/type_I.hpp"
 
-class I_assembler: public Convert_methods {
+class I_assembler: public Convert_methods, public Instruction_parser {
 
     private: std::string opcode_I;
     private: std::fstream output_file;

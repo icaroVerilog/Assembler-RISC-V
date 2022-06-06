@@ -9,7 +9,7 @@
 
 /* P instruction means Pseudo instruction */
 
-class P_assembler: public Convert_methods {
+class P_assembler: public Convert_methods, Instruction_parser {
 
     private: std::string opcode_I; /* for ADDI */
     private: std::fstream output_file;
