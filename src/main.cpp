@@ -2,60 +2,16 @@
 #include <fstream>
 #include <string>
 #include <cstddef>
+
 #include "instructions/instructions_assembler/instructionsI/instructionsI.cpp"
 #include "instructions/instructions_assembler/instructionsR/instructionsR.cpp"
 // #include "instructions/instructions_assembler/instructionsP/instructionsP.cpp"
 // #include "instructions/instructions_assembler/instructionsI/instructionsI_load.cpp"
 #include "accumulator/instruction_ACML.cpp"
+#include "auxiliar_methods/auxiliar_methods.hpp"
+#include "auxiliar_methods/input_methods/input_methods.hpp"
 
 // RVI 64bits
-
-bool remove_space(std::string& string){
-
-    int counter = 0;
-
-    for (int index = 0; index < string.size(); index++){
-        
-        if (string[index] == (char) 32){
-            counter++;
-        }
-
-        if (string[index] != (char) 32){
-            break;
-        }
-    }
-    string.erase(0, counter);
-
-    return true;
-}
-
-bool is_empty(std::string file_line){
-
-    if (file_line.size() == 0){
-        return true;
-    }
-
-    for (int index = 0; index < file_line.size(); index++){
-
-        /* (char) 32 representa o caractere espaço na tabela ASCII */
-        if (file_line[index] != (char) 32){
-            return false;
-        }
-    }
-
-    return true;
-}
-
-bool find_label(std::string file_line){
-
-    if (file_line[file_line.size() - 1] == ':'){
-        return true;
-    }
-
-    else {
-        return false;
-    }
-}
 
 int error_message(){
 
@@ -113,7 +69,6 @@ int main(int argc, char *argv[]){
 
             print_flag = true;
         }
-
         else {
             error_message();
             throw std::runtime_error("assembler error: invalid parameters");
@@ -127,19 +82,20 @@ int main(int argc, char *argv[]){
     }
 
     /* code block responsible for opening the input file  */
-    try {
-        file.open("../" + input_filename, std::fstream::in);
+    // try {
+    //     file.open("../" + input_filename, std::fstream::in);
 
-        if (file.is_open() == 0){
-            throw std::runtime_error("assembler error: cannot open the file");
-        }
-    }
-    catch(const std::runtime_error &error){
-        std::cerr << error.what() << std::endl;
+    //     if (file.is_open() == 0){
+    //         throw std::runtime_error("assembler error: cannot open the file");
+    //     }
+    // }
+    // catch(const std::runtime_error &error){
+    //     std::cerr << error.what() << std::endl;
 
-        return 0;
-    }
+    //     return 0;
+    // }
 
+    Auxiliar_methods *auxiliar_methods = new Auxiliar_methods();
 
     R_assembler *assembler_R = new R_assembler(filepath);
     I_assembler *assembler_I = new I_assembler(filepath);
@@ -149,12 +105,20 @@ int main(int argc, char *argv[]){
     Instruction_accumulator *accumulator = new Instruction_accumulator();
 
 
+    Input_methods *input_methods = new Input_methods();
+
+    file = input_methods -> open_input_file(input_filename);
+
+
+
+
+
 
 
     while (getline(file, file_line)){
 
         /* caso a string for vazia */
-        if (is_empty(file_line)){
+        if (auxiliar_methods -> is_empty(file_line)){
             continue;
         }
 
@@ -170,23 +134,18 @@ int main(int argc, char *argv[]){
         if (instruction.substr(0, 4).compare("addi") == 0){
             assembler_I -> ADDI(instruction, print_flag);
         }
-
         else if (instruction.substr(0, 4).compare("ori") == 0){
             assembler_I -> ORI(instruction, print_flag);
         }
-
         else if (instruction.substr(0, 4).compare("andi") == 0){
             assembler_I -> ANDI(instruction, print_flag);
         }
-
         else if (instruction.substr(0, 4).compare("xori") == 0){
             assembler_I -> XORI(instruction, print_flag);
         }
-
         else if (instruction.substr(0, 4).compare("alli") == 0){
             assembler_I -> SLLI(instruction, print_flag);
         }
-
         else if (instruction.substr(0, 4).compare("srli") == 0){
             assembler_I -> SRLI(instruction, print_flag);
         }
@@ -196,31 +155,24 @@ int main(int argc, char *argv[]){
         else if (instruction.substr(0, 3).compare("add") == 0){
             assembler_R -> ADD(instruction, print_flag);
         }
-
         else if (instruction.substr(0, 3).compare("sub") == 0){
             assembler_R -> SUB(instruction, print_flag);
         }
-
         else if (instruction.substr(0, 3).compare("and") == 0){
             assembler_R -> AND(instruction, print_flag);
         }
-
         else if (instruction.substr(0, 3).compare("or") == 0){
             assembler_R -> OR(instruction, print_flag);
         }
-
         else if (instruction.substr(0, 3).compare("xor") == 0){
             assembler_R -> XOR(instruction, print_flag);
         }
-
         else if (instruction.substr(0, 3).compare("sll") == 0){
             assembler_R -> SLL(instruction, print_flag);
         }
-
         else if (instruction.substr(0, 3).compare("srl") == 0){
             assembler_R -> SRL(instruction, print_flag);
         }
-
         /* ::::::::::::::::::::: L FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
         // else if (instruction.substr(0, 2).compare("lb") == 0){

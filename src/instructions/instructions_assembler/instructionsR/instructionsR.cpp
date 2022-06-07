@@ -75,6 +75,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
 
         this -> output_file.close();
     }
+
     public: void SUB(std::string& string, bool print_flag){
 
         R_instruction instruction = R_type_parse(string);
@@ -95,6 +96,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
 
         this -> output_file.close();
     }
+
     public: void AND(std::string& string, bool print_flag){
 
         R_instruction instruction = R_type_parse(string);
@@ -115,6 +117,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
 
         this -> output_file.close();
     }
+
     public: void OR(std::string& string, bool print_flag){
 
         R_instruction instruction = R_type_parse(string);
@@ -137,6 +140,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         this -> output_file.close();
         
     }
+
     public: void XOR(std::string& string, bool print_flag){
 
         R_instruction instruction = R_type_parse(string);
@@ -158,6 +162,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
 
         this -> output_file.close();
     }
+
     public: void SLL(std::string& string, bool print_flag){
 
         R_instruction instruction = R_type_parse(string);
@@ -180,6 +185,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         this -> output_file.close();
         
     }
+
     public: void SRL(std::string& string, bool print_flag){
 
         R_instruction instruction = R_type_parse(string);
