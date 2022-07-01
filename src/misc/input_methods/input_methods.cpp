@@ -19,3 +19,7 @@ std::fstream Input_methods::open_input_file(std::string filename){
         return file;
     }
 }
+
+// int Input_methods::handle_program_parameters() {
+    
+// }

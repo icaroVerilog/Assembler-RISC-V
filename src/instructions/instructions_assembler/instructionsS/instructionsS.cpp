@@ -4,8 +4,9 @@
 #include <cstddef>
 #include <boost/convert.hpp>
 #include <bitset>
-#include "../convert_methods/convert_methods.hpp"
-#include "../instruction_parser/instruction_parser.hpp"
+// #include "../../instructions_structures/type_S.hpp"
+#include "../../../convert_methods/convert_methods.hpp"
+#include "../../../instruction_parser/instruction_parser.hpp"
 
 class S_assembler: public Convert_methods, Instruction_parser {
 

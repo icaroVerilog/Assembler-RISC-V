@@ -54,7 +54,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         this -> funct3_SRL.assign("101");
     }
 
-    public: void ADD(std::string& string, bool print_flag){
+    public: void ADD(std::string& string){
 
         R_instruction instruction = R_type_parse(string);
 
@@ -76,7 +76,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         this -> output_file.close();
     }
 
-    public: void SUB(std::string& string, bool print_flag){
+    public: void SUB(std::string& string){
 
         R_instruction instruction = R_type_parse(string);
 
@@ -97,7 +97,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         this -> output_file.close();
     }
 
-    public: void AND(std::string& string, bool print_flag){
+    public: void AND(std::string& string){
 
         R_instruction instruction = R_type_parse(string);
 
@@ -118,7 +118,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         this -> output_file.close();
     }
 
-    public: void OR(std::string& string, bool print_flag){
+    public: void OR(std::string& string){
 
         R_instruction instruction = R_type_parse(string);
 
@@ -141,7 +141,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         
     }
 
-    public: void XOR(std::string& string, bool print_flag){
+    public: void XOR(std::string& string){
 
         R_instruction instruction = R_type_parse(string);
 
@@ -163,7 +163,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         this -> output_file.close();
     }
 
-    public: void SLL(std::string& string, bool print_flag){
+    public: void SLL(std::string& string){
 
         R_instruction instruction = R_type_parse(string);
 
@@ -183,10 +183,9 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         this -> output_file << std::endl;
 
         this -> output_file.close();
-        
     }
 
-    public: void SRL(std::string& string, bool print_flag){
+    public: void SRL(std::string& string){
 
         R_instruction instruction = R_type_parse(string);
 
