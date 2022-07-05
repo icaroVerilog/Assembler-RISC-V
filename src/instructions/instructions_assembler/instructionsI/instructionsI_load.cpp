@@ -6,7 +6,7 @@
 #include <bitset>
 #include "../../instructions_structures/type_L.hpp"
 #include "../../../convert_methods/convert_methods.hpp"
-#include "../../../instruction_parser/instruction_parser.hpp"
+#include "../../instruction_parser/instruction_parser.hpp"
 #include "../../../accumulator/instruction_ACML.hpp"
 
 class L_assembler: public Convert_methods, Instruction_parser {

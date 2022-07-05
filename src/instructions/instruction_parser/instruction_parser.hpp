@@ -1,5 +1,5 @@
-#ifndef instruction_parser
-#define instruction_parser
+#ifndef INSTRUCTION_PARSER_HEADER
+#define INSTRUCTION_PARSER_HEADER
 
 #include <iostream>
 #include <fstream>
@@ -9,10 +9,10 @@
 #include <bitset>
 #include <regex>
 
-#include "../instructions/instructions_structures/type_I.hpp"
-#include "../instructions/instructions_structures/type_L.hpp"
-#include "../instructions/instructions_structures/type_P.hpp"
-#include "../instructions/instructions_structures/type_R.hpp"
+#include "../instructions_structures/type_I.hpp"
+#include "../instructions_structures/type_L.hpp"
+#include "../instructions_structures/type_P.hpp"
+#include "../instructions_structures/type_R.hpp"
 
 class Instruction_parser {
     protected: I_instruction I_type_parse (std::string& instruction);
@@ -21,4 +21,4 @@ class Instruction_parser {
     protected: P_instruction P_type_parse (std::string& instruction);
 };
 
-#endif /* instruction_parser */
+#endif /* INSTRUCTION_PARSER_HEADER */

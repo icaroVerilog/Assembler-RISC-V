@@ -1,6 +1,6 @@
 #include <string>
-#ifndef type_L
-#define type_L
+#ifndef TYPE_L
+#define TYPE_L
 
 typedef struct L_instruction L_instruction;
 
