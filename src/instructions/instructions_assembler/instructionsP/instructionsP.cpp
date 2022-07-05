@@ -7,6 +7,7 @@
 #include "../../instructions_structures/type_P.hpp"
 #include "../../../convert_methods/convert_methods.hpp"
 #include "../../../instruction_parser/instruction_parser.hpp"
+#include "../../../accumulator/instruction_ACML.hpp"
 
 /* P instruction means Pseudo instruction */
 
@@ -29,7 +30,7 @@ class P_assembler: public Convert_methods, Instruction_parser {
         this -> zero_immediate.assign("0");
 
     }
-    public: void LI(std::string& string){
+    public: void LI(std::string& string, Instruction_accumulator *accumulator){
         
         P_instruction instruction = P_type_parse(string);
 
@@ -50,7 +51,7 @@ class P_assembler: public Convert_methods, Instruction_parser {
         this -> output_file.close();
 
     }
-    public: void MV(std::string& string){
+    public: void MV(std::string& string, Instruction_accumulator *accumulator){
 
         P_instruction instruction = P_type_parse(string);
 

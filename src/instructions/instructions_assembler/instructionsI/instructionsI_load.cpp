@@ -7,6 +7,7 @@
 #include "../../instructions_structures/type_L.hpp"
 #include "../../../convert_methods/convert_methods.hpp"
 #include "../../../instruction_parser/instruction_parser.hpp"
+#include "../../../accumulator/instruction_ACML.hpp"
 
 class L_assembler: public Convert_methods, Instruction_parser {
 
@@ -31,7 +32,7 @@ class L_assembler: public Convert_methods, Instruction_parser {
         this -> funct3_LD.assign("011");
     }
 
-    public: void LB(std::string& string){
+    public: void LB(std::string& string, Instruction_accumulator *accumulator){
         
         L_instruction instruction = L_type_parse(string);
 
@@ -52,7 +53,7 @@ class L_assembler: public Convert_methods, Instruction_parser {
 
     }
 
-    public: void LH(std::string& string){
+    public: void LH(std::string& string, Instruction_accumulator *accumulator){
         
         L_instruction instruction = L_type_parse(string);
 
@@ -72,7 +73,7 @@ class L_assembler: public Convert_methods, Instruction_parser {
         this -> output_file.close();
     }
     
-    public: void LW(std::string& string){
+    public: void LW(std::string& string, Instruction_accumulator *accumulator){
         
         L_instruction instruction = L_type_parse(string);
 
@@ -92,7 +93,7 @@ class L_assembler: public Convert_methods, Instruction_parser {
         this -> output_file.close();
     }
 
-    public: void LD(std::string& string){
+    public: void LD(std::string& string, Instruction_accumulator *accumulator){
         
         L_instruction instruction = L_type_parse(string);
 
