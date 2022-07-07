@@ -40,17 +40,15 @@ class L_assembler: public Convert_methods, Instruction_parser {
         std::string parameter_register1 = register_to_binary(instruction.pointer_register);
         std::string binary_immediate = immediate_to_binary(instruction.jump_immediate);
 
-        this -> output_file.open(output_filename, std::fstream::app);
+        std::string assembled_binary = l_binary_to_string(
+            binary_immediate,
+            parameter_register1,
+            this -> funct3_LB,
+            destination_register,
+            this -> opcode_I_load
+        );
 
-        this -> output_file << binary_immediate;
-        this -> output_file << parameter_register1;
-        this -> output_file << this -> funct3_LB;
-        this -> output_file << destination_register;
-        this -> output_file << this -> opcode_I_load;
-        this -> output_file << std::endl;
-
-        this -> output_file.close();
-
+        accumulator -> set_instruction(assembled_binary);
     }
 
     public: void LH(std::string& string, Instruction_accumulator *accumulator){
@@ -61,16 +59,15 @@ class L_assembler: public Convert_methods, Instruction_parser {
         std::string parameter_register1 = register_to_binary(instruction.pointer_register);
         std::string binary_immediate = immediate_to_binary(instruction.jump_immediate);
 
-        this -> output_file.open(output_filename, std::fstream::app);
+        std::string assembled_binary = l_binary_to_string(
+            binary_immediate,
+            parameter_register1,
+            this -> funct3_LH,
+            destination_register,
+            this -> opcode_I_load
+        );
 
-        this -> output_file << binary_immediate;
-        this -> output_file << parameter_register1;
-        this -> output_file << this -> funct3_LH;
-        this -> output_file << destination_register;
-        this -> output_file << this -> opcode_I_load;
-        this -> output_file << std::endl;
-
-        this -> output_file.close();
+        accumulator -> set_instruction(assembled_binary);
     }
     
     public: void LW(std::string& string, Instruction_accumulator *accumulator){
@@ -81,16 +78,15 @@ class L_assembler: public Convert_methods, Instruction_parser {
         std::string parameter_register1 = register_to_binary(instruction.pointer_register);
         std::string binary_immediate = immediate_to_binary(instruction.jump_immediate);
 
-        this -> output_file.open(output_filename, std::fstream::app);
+        std::string assembled_binary = l_binary_to_string(
+            binary_immediate,
+            parameter_register1,
+            this -> funct3_LW,
+            destination_register,
+            this -> opcode_I_load
+        );
 
-        this -> output_file << binary_immediate;
-        this -> output_file << parameter_register1;
-        this -> output_file << this -> funct3_LW;
-        this -> output_file << destination_register;
-        this -> output_file << this -> opcode_I_load;
-        this -> output_file << std::endl;
-
-        this -> output_file.close();
+        accumulator -> set_instruction(assembled_binary);
     }
 
     public: void LD(std::string& string, Instruction_accumulator *accumulator){
@@ -101,16 +97,14 @@ class L_assembler: public Convert_methods, Instruction_parser {
         std::string parameter_register1 = register_to_binary(instruction.pointer_register);
         std::string binary_immediate = immediate_to_binary(instruction.jump_immediate);
 
+        std::string assembled_binary = l_binary_to_string(
+            binary_immediate,
+            parameter_register1,
+            this -> funct3_LD,
+            destination_register,
+            this -> opcode_I_load
+        );
 
-        this -> output_file.open(output_filename, std::fstream::app);
-
-        this -> output_file << binary_immediate;
-        this -> output_file << parameter_register1;
-        this -> output_file << this -> funct3_LD;
-        this -> output_file << destination_register;
-        this -> output_file << this -> opcode_I_load;
-        this -> output_file << std::endl;
-
-        this -> output_file.close();
+        accumulator -> set_instruction(assembled_binary);
     }
 };

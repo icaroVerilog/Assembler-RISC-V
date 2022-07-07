@@ -165,3 +165,16 @@ std::string Convert_methods::i_binary_to_string(std::string immediate, std::stri
 
     return assembled_binary;
 }
+
+std::string Convert_methods::l_binary_to_string(std::string immediate, std::string reg1, std::string funct3, std::string dest_reg, std::string opcode){
+    
+    std::string assembled_binary;
+
+    assembled_binary.append(immediate);
+    assembled_binary.append(reg1);
+    assembled_binary.append(funct3);
+    assembled_binary.append(dest_reg);
+    assembled_binary.append(opcode);
+
+    return assembled_binary;
+}

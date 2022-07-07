@@ -156,27 +156,27 @@ int main(int argc, char *argv[]){
         
         /* ::::::::::::::::::::: L FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        // else if (instruction.substr(0, 2).compare("lb") == 0){
-        //     assembler_L -> LB(instruction, output_accumulator);
-        // }
-        // else if (instruction.substr(0, 2).compare("lh") == 0){
-        //     assembler_L -> LH(instruction, output_accumulator);
-        // }
-        // else if (instruction.substr(0, 2).compare("lw") == 0){
-        //     assembler_L -> LW(instruction, output_accumulator);
-        // }
-        // else if (instruction.substr(0, 2).compare("ld") == 0){
-        //     assembler_L -> LD(instruction, output_accumulator);
-        // }
+        else if (instruction.substr(0, 2).compare("lb") == 0){
+            assembler_L -> LB(instruction, output_accumulator);
+        }
+        else if (instruction.substr(0, 2).compare("lh") == 0){
+            assembler_L -> LH(instruction, output_accumulator);
+        }
+        else if (instruction.substr(0, 2).compare("lw") == 0){
+            assembler_L -> LW(instruction, output_accumulator);
+        }
+        else if (instruction.substr(0, 2).compare("ld") == 0){
+            assembler_L -> LD(instruction, output_accumulator);
+        }
 
         /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        // else if (instruction.substr(0, 2).compare("mv") == 0){
-        //     assembler_P -> MV(instruction, output_accumulator);
-        // }
-        // else if (instruction.substr(0, 2).compare("li") == 0){
-        //     assembler_P -> LI(instruction, output_accumulator);
-        // }
+        else if (instruction.substr(0, 2).compare("mv") == 0){
+            assembler_P -> MV(instruction, output_accumulator);
+        }
+        else if (instruction.substr(0, 2).compare("li") == 0){
+            assembler_P -> LI(instruction, output_accumulator);
+        }
 
     }
 

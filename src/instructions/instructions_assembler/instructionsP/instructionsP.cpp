@@ -38,19 +38,17 @@ class P_assembler: public Convert_methods, Instruction_parser {
         std::string parameter_register = register_to_binary(this -> zero_register);
         std::string binary_immediate = immediate_to_binary(instruction.parameter);
 
-   
-        this -> output_file.open(output_filename, std::fstream::app);
-
-        this -> output_file << binary_immediate;
-        this -> output_file << parameter_register;
-        this -> output_file << this -> funct3_ADDI;
-        this -> output_file << destination_register;
-        this -> output_file << this -> opcode_I;
-        this -> output_file << std::endl;
-
-        this -> output_file.close();
-
+        std::string assembled_binary = i_binary_to_string(
+            binary_immediate,
+            parameter_register,
+            this -> funct3_ADDI,
+            destination_register,
+            this -> opcode_I
+        );
+        
+        accumulator -> set_instruction(assembled_binary);
     }
+
     public: void MV(std::string& string, Instruction_accumulator *accumulator){
 
         P_instruction instruction = P_type_parse(string);
@@ -59,15 +57,14 @@ class P_assembler: public Convert_methods, Instruction_parser {
         std::string parameter_register = register_to_binary(instruction.parameter);
         std::string binary_immediate = immediate_to_binary(this -> zero_immediate);
 
-        this -> output_file.open(output_filename, std::fstream::app);
+        std::string assembled_binary = i_binary_to_string(
+            binary_immediate,
+            parameter_register,
+            this -> funct3_ADDI,
+            destination_register,
+            this -> opcode_I
+        );
 
-        this -> output_file << binary_immediate;
-        this -> output_file << parameter_register;
-        this -> output_file << this -> funct3_ADDI;
-        this -> output_file << destination_register;
-        this -> output_file << this -> opcode_I;
-        this -> output_file << std::endl;
-
-        this -> output_file.close();
+        accumulator -> set_instruction(assembled_binary);
     }
 };
