@@ -177,7 +177,6 @@ int main(int argc, char *argv[]){
         else if (instruction.substr(0, 2).compare("li") == 0){
             assembler_P -> LI(instruction, output_accumulator);
         }
-
     }
 
     file_controller -> write(output_accumulator, "a.txt");
