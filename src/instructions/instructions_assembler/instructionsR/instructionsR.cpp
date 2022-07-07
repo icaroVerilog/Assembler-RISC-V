@@ -5,7 +5,7 @@
 #include <boost/convert.hpp>
 #include <bitset>
 #include "../../instructions_structures/type_R.hpp"
-#include "../../../convert_methods/convert_methods.hpp"
+#include "../../convert_methods/convert_methods.hpp"
 #include "../../instruction_parser/instruction_parser.hpp"
 #include "../../../accumulator/instruction_ACML.hpp"
 
@@ -33,9 +33,8 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         std::string funct3_SLL;
         std::string funct3_SRL;
 
-    public: R_assembler(std::string& output_filename){
+    public: R_assembler(){
 
-        this -> output_filename = output_filename;
         this -> opcode_R.assign("0110011");
         
         this -> funct7_ADD.assign("0000000");
@@ -73,7 +72,6 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
 
     public: void SUB(std::string& string, Instruction_accumulator* accumulator){
@@ -94,7 +92,6 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
 
     public: void AND(std::string& string, Instruction_accumulator* accumulator){
@@ -115,9 +112,6 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
-        this -> output_file.open(output_filename, std::fstream::app);
-
     }
 
     public: void OR(std::string& string, Instruction_accumulator* accumulator){
@@ -138,7 +132,6 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-        
     }
 
     public: void XOR(std::string& string, Instruction_accumulator* accumulator){
@@ -159,7 +152,6 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
 
     public: void SLL(std::string& string, Instruction_accumulator* accumulator){
@@ -180,7 +172,6 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
 
     public: void SRL(std::string& string, Instruction_accumulator* accumulator){
@@ -201,6 +192,5 @@ class R_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
 };

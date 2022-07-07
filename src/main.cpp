@@ -10,6 +10,7 @@
 #include "accumulator/instruction_ACML.cpp"
 #include "misc/auxiliar_methods/auxiliar_methods.hpp"
 #include "misc/input_methods/input_methods.hpp"
+#include "file/file_controller.hpp"
 
 // RVI 64bits
 
@@ -79,8 +80,8 @@ int main(int argc, char *argv[]){
         return 0;
     }
 
-    R_assembler *assembler_R = new R_assembler(filepath);
-    I_assembler *assembler_I = new I_assembler(filepath);
+    R_assembler *assembler_R = new R_assembler();
+    I_assembler *assembler_I = new I_assembler();
     L_assembler *assembler_L = new L_assembler(filepath);
     P_assembler *assembler_P = new P_assembler(filepath);
 
@@ -89,6 +90,7 @@ int main(int argc, char *argv[]){
     Auxiliar_methods         *auxiliar_methods   = new Auxiliar_methods();
     Input_methods            *input_methods      = new Input_methods();
 
+    File_controller *file_controller = new File_controller();
 
 
     file = input_methods -> open_input_file(input_filename);
@@ -177,5 +179,7 @@ int main(int argc, char *argv[]){
         // }
 
     }
+
+    file_controller -> write(output_accumulator, "a.txt");
     return 0;
 }

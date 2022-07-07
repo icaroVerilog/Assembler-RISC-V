@@ -5,7 +5,7 @@
 #include <boost/convert.hpp>
 #include <bitset>
 #include "../../instructions_structures/type_I.hpp"
-#include "../../../convert_methods/convert_methods.hpp"
+#include "../../convert_methods/convert_methods.hpp"
 #include "../../instruction_parser/instruction_parser.hpp"
 #include "../../../accumulator/instruction_ACML.hpp"
 
@@ -14,7 +14,6 @@ class I_assembler: public Convert_methods, public Instruction_parser {
     private: std::string opcode_I;
     private: std::fstream output_file;
     private: std::string output_filename;
-    private: std::string assembled_binary;
 
     private:
         std::string funct3_ADDI;
@@ -24,9 +23,8 @@ class I_assembler: public Convert_methods, public Instruction_parser {
         std::string funct3_SLLI;
         std::string funct3_SRLI;
 
-    public: I_assembler(std::string& output_filename){
+    public: I_assembler(){
 
-        this -> output_filename = output_filename;
         this -> opcode_I.assign("0010011");
 
         this -> funct3_ADDI.assign("000");
@@ -54,8 +52,8 @@ class I_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
+
     public: void ANDI(std::string& string, Instruction_accumulator* accumulator){
 
         I_instruction instruction = I_type_parse(string);
@@ -73,11 +71,10 @@ class I_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
+
     public: void ORI(std::string& string, Instruction_accumulator* accumulator){
 
-        assembled_binary.clear();
         I_instruction instruction = I_type_parse(string);
 
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
@@ -93,11 +90,10 @@ class I_assembler: public Convert_methods, public Instruction_parser {
         );
         
         accumulator -> set_instruction(assembled_binary);
-
     }
+
     public: void XORI(std::string& string, Instruction_accumulator* accumulator){
 
-        assembled_binary.clear();
         I_instruction instruction = I_type_parse(string);
 
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
@@ -113,11 +109,10 @@ class I_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
+
     public: void SLLI(std::string& string, Instruction_accumulator* accumulator){
 
-        assembled_binary.clear();
         I_instruction instruction = I_type_parse(string);
 
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
@@ -133,11 +128,10 @@ class I_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
+
     public: void SRLI(std::string& string, Instruction_accumulator* accumulator){
 
-        assembled_binary.clear();
         I_instruction instruction = I_type_parse(string);
 
         std::string binary_immediate = immediate_to_binary(instruction.immediate);
@@ -153,6 +147,5 @@ class I_assembler: public Convert_methods, public Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-        
     }
 };
