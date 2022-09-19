@@ -9,6 +9,9 @@
 #include "instructions/instructions_assembler/instructionsI/instructionsI_load.cpp"
 #include "accumulator/instruction_ACML.cpp"
 #include "misc/auxiliar_methods/auxiliar_methods.hpp"
+
+#include "input_output/file_controller/file_controller.hpp"
+
 #include "misc/input_methods/input_methods.hpp"
 #include "file/file_controller.hpp"
 
@@ -38,7 +41,7 @@ int main(int argc, char *argv[]){
     std::string file_line;
     std::string filepath;
 
-    std::fstream file;
+    std::fstream input_file;
 
     try {
         if (argc == 4){
@@ -88,15 +91,12 @@ int main(int argc, char *argv[]){
     Instruction_accumulator  *input_accumulator  = new Instruction_accumulator();
     Instruction_accumulator  *output_accumulator = new Instruction_accumulator();
     Auxiliar_methods         *auxiliar_methods   = new Auxiliar_methods();
-    Input_methods            *input_methods      = new Input_methods();
+    File_controller          *file_controller    = new File_controller();
 
-    File_controller *file_controller = new File_controller();
-
-
-    file = input_methods -> open_input_file(input_filename);
+    int read_file_result = file_controller -> read(&input_file, input_filename)
 
 
-    while (getline(file, file_line)){
+    while (getline(input_file, file_line)){
 
         /* caso a string for vazia */
         if (auxiliar_methods -> is_empty(file_line)){
