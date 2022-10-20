@@ -147,3 +147,36 @@ P_instruction Instruction_parser::P_type_parse (std::string& instruction){
         std::exit(0);
     }
 }
+
+S_instruction Instruction_parser::S_type_parse (std::string& instruction){
+
+    std::regex S_format_regex("([x][0-9]{1,2})[,]([0-9]{1,3})[(]([x][0-9]{1,2})[)]");
+
+    try {
+    
+        std::size_t found1 = instruction.find_first_of(" ");
+        std::string operation = instruction.substr(0,found1);
+        std::string string2 = instruction.substr(found1 + 1);
+
+        string2.erase(remove_if(string2.begin(), string2.end(), isspace), string2.end());
+
+        std::smatch regex_result;
+
+        /* verifica por meio da RegEx se a instrução está no formato certo */
+        if (std::regex_match(string2, regex_result, S_format_regex) == false){
+            throw std::runtime_error("assembler error: invalid load struction format");
+        }    
+
+        S_instruction new_instruction;
+
+        new_instruction.data_register = regex_result[1];
+        new_instruction.immediate = regex_result[2];
+        new_instruction.base_memory_address_register = regex_result[3];
+
+        return new_instruction;
+    }
+    catch (const std::invalid_argument& error){
+        std::cerr << error.what() << std::endl;
+        std::exit(0);
+    }
+}

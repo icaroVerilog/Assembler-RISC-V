@@ -33,9 +33,9 @@ int File_controller::read(std::fstream *file, std::string filename){
             throw std::runtime_error("assembler error: invalid input file");
         }
 
-        file.open("../" + filename, std::fstream::in);
+        file -> open("../" + filename, std::fstream::in);
 
-        if (file.is_open() == 0){
+        if (file -> is_open() == 0){
             throw std::runtime_error("assembler error: cannot open the file");
         }
 

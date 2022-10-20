@@ -6,14 +6,15 @@
 #include "instructions/instructions_assembler/instructionsI/instructionsI.cpp"
 #include "instructions/instructions_assembler/instructionsR/instructionsR.cpp"
 #include "instructions/instructions_assembler/instructionsP/instructionsP.cpp"
+#include "instructions/instructions_assembler/instructionsS/instructionsS.cpp"
 #include "instructions/instructions_assembler/instructionsI/instructionsI_load.cpp"
 #include "accumulator/instruction_ACML.cpp"
 #include "misc/auxiliar_methods/auxiliar_methods.hpp"
 
 #include "input_output/file_controller/file_controller.hpp"
 
-#include "misc/input_methods/input_methods.hpp"
-#include "file/file_controller.hpp"
+// #include "misc/input_methods/input_methods.hpp"
+// #include "file/file_controller.hpp"
 
 // RVI 64bits
 
@@ -85,6 +86,7 @@ int main(int argc, char *argv[]){
 
     R_assembler *assembler_R = new R_assembler();
     I_assembler *assembler_I = new I_assembler();
+    S_assembler *assembler_S = new S_assembler();
     L_assembler *assembler_L = new L_assembler(filepath);
     P_assembler *assembler_P = new P_assembler(filepath);
 
@@ -93,7 +95,7 @@ int main(int argc, char *argv[]){
     Auxiliar_methods         *auxiliar_methods   = new Auxiliar_methods();
     File_controller          *file_controller    = new File_controller();
 
-    int read_file_result = file_controller -> read(&input_file, input_filename)
+    int read_file_result = file_controller -> read(&input_file, input_filename);
 
 
     while (getline(input_file, file_line)){
@@ -108,7 +110,7 @@ int main(int argc, char *argv[]){
     std::string instruction;
 
     while (input_accumulator -> get_instruction(&instruction)){
-
+        
         /* ::::::::::::::::::::: I FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
         if (instruction.substr(0, 4).compare("addi") == 0){
@@ -176,6 +178,14 @@ int main(int argc, char *argv[]){
         }
         else if (instruction.substr(0, 2).compare("li") == 0){
             assembler_P -> LI(instruction, output_accumulator);
+        }
+
+        else if (instruction.substr(0, 2).compare("sb") == 0){
+            assembler_S -> SB(instruction, output_accumulator);
+        }
+
+        else {
+            std::cout << "deu ruim" << std::endl;
         }
     }
 
