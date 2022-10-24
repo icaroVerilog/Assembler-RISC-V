@@ -14,6 +14,7 @@
 #include "../instructions_structures/type_P.hpp"
 #include "../instructions_structures/type_R.hpp"
 #include "../instructions_structures/type_S.hpp"
+#include "../instructions_structures/type_B.hpp"
 
 class Instruction_parser {
     protected: I_instruction I_type_parse (std::string& instruction);
@@ -21,6 +22,7 @@ class Instruction_parser {
     protected: R_instruction R_type_parse (std::string& instruction);
     protected: P_instruction P_type_parse (std::string& instruction);
     protected: S_instruction S_type_parse (std::string& instruction);
+    protected: B_instruction B_type_parse (std::string& instruction);
 };
 
 #endif /* INSTRUCTION_PARSER_HEADER */

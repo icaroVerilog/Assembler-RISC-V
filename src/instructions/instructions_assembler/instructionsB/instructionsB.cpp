@@ -27,10 +27,10 @@ class I_assembler: public Convert_methods, public Instruction_parser {
 
         this -> opcode_B.assign("1100011");
 
-        this ->  funct3_BEQ.assign("000");
-        this ->  funct3_BNE.assign("001");
-        this ->  funct3_BLT.assign("100");
-        this ->  funct3_BGE.assign("101");
+        this -> funct3_BEQ.assign("000");
+        this -> funct3_BNE.assign("001");
+        this -> funct3_BLT.assign("100");
+        this -> funct3_BGE.assign("101");
         this -> funct3_BLTU.assign("110");
         this -> funct3_BGEU.assign("111");        
     }

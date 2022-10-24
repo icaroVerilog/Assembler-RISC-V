@@ -181,23 +181,6 @@ std::string Convert_methods::l_binary_to_string(std::string immediate, std::stri
 
 std::string Convert_methods::s_binary_to_string(std::string immediate, std::string source_reg2, std::string funct3, std::string source_reg1, std::string opcode){
 
-    std::cout << "imediato completo: " << immediate << std::endl;
-    std::cout << "imediato: " << immediate.substr(0, 7) << std::endl;
-    std::cout << "rs2: " << source_reg2 << std::endl;
-    std::cout << "rs1: " << source_reg1 << std::endl;
-    std::cout << "funct3: " << funct3 << std::endl;
-    std::cout << "imediato2: " << immediate.substr(7, 5) << std::endl;
-    std::cout << "opcode: " << opcode << std::endl;
-
-    // std::cout << immediate.substr(0, 7);
-    // std::cout << source_reg2;
-    // std::cout << source_reg1;
-    // std::cout << funct3;
-    // std::cout << immediate.substr(7, 5);
-    // std::cout << opcode << std::endl;
-    
-    
-
     std::string assembled_binary;
 
     assembled_binary.append(immediate.substr(0, 7));
@@ -207,6 +190,12 @@ std::string Convert_methods::s_binary_to_string(std::string immediate, std::stri
     assembled_binary.append(immediate.substr(7, 5));
     assembled_binary.append(opcode);
 
-
     return assembled_binary;
+}
+
+std::string Convert_methods::b_binary_to_string(std::string immediate, std::string source_reg2, std::string source_reg1, std::string funct3, std::string opcode){
+
+    std::string assembled_binary;
+
+    return assembled_binary;    
 }

@@ -1,5 +1,5 @@
-#ifndef conversion_methods
-#define conversion_methods
+#ifndef CONVERT_METHODS_HEADER
+#define CONVERT_METHODS_HEADER
 
 #include <iostream>
 #include <fstream>
@@ -16,7 +16,8 @@ class Convert_methods {
     protected: std::string i_binary_to_string(std::string immediate, std::string reg1, std::string funct3, std::string dest_reg, std::string opcode);
     protected: std::string l_binary_to_string(std::string immediate, std::string reg1, std::string funct3, std::string dest_reg, std::string opcode);
     protected: std::string s_binary_to_string(std::string immediate, std::string source_reg2, std::string funct3, std::string source_reg1, std::string opcode);
+    protected: std::string b_binary_to_string(std::string immediate, std::string source_reg2, std::string source_reg1, std::string funct3, std::string opcode);
 };
 
-#endif /* conversion_methods */
+#endif /* CONVERT_METHODS_HEADER */
 

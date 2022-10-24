@@ -180,3 +180,11 @@ S_instruction Instruction_parser::S_type_parse (std::string& instruction){
         std::exit(0);
     }
 }
+
+B_instruction Instruction_parser::B_type_parse(std::string& instruction){
+    
+    B_instruction new_instruction;
+
+
+    return new_instruction;
+}
