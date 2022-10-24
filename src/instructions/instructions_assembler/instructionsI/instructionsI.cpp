@@ -4,7 +4,7 @@
 #include <cstddef>
 #include <boost/convert.hpp>
 #include <bitset>
-#include "../../instructions_structures/type_I.hpp"
+#include "../../instructions_structures/type_B.hpp"
 #include "../../convert_methods/convert_methods.hpp"
 #include "../../instruction_parser/instruction_parser.hpp"
 #include "../../../accumulator/instruction_ACML.hpp"

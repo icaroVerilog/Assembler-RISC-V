@@ -86,7 +86,7 @@ class R_assembler: public Convert_methods, public Instruction_parser {
             this -> funct7_SUB, 
             parameter_register1, 
             parameter_register2, 
-            this -> funct3_SUB, 
+            this -> funct3_SUB,
             destination_register, 
             opcode_R
         );

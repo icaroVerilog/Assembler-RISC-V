@@ -68,7 +68,6 @@ class S_assembler: public Convert_methods, Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
 
     public: void SW(std::string& string, Instruction_accumulator* accumulator){
@@ -88,7 +87,6 @@ class S_assembler: public Convert_methods, Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
 
     public: void SD(std::string& string, Instruction_accumulator* accumulator){
@@ -108,6 +106,5 @@ class S_assembler: public Convert_methods, Instruction_parser {
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
 };

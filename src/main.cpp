@@ -171,6 +171,21 @@ int main(int argc, char *argv[]){
             assembler_L -> LD(instruction, output_accumulator);
         }
 
+        /* ::::::::::::::::::::: S FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
+        else if (instruction.substr(0, 2).compare("sb") == 0){
+            assembler_S -> SB(instruction, output_accumulator);
+        }
+        else if (instruction.substr(0, 2).compare("sh") == 0){
+            assembler_S -> SH(instruction, output_accumulator);
+        }
+        else if (instruction.substr(0, 2).compare("sw") == 0){
+            assembler_S -> SW(instruction, output_accumulator);
+        }
+        else if (instruction.substr(0, 2).compare("sd") == 0){
+            assembler_S -> SD(instruction, output_accumulator);
+        }
+
         /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
         else if (instruction.substr(0, 2).compare("mv") == 0){
@@ -178,10 +193,6 @@ int main(int argc, char *argv[]){
         }
         else if (instruction.substr(0, 2).compare("li") == 0){
             assembler_P -> LI(instruction, output_accumulator);
-        }
-
-        else if (instruction.substr(0, 2).compare("sb") == 0){
-            assembler_S -> SB(instruction, output_accumulator);
         }
 
         else {
