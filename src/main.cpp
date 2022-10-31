@@ -13,6 +13,8 @@
 
 #include "input_output/file_controller/file_controller.hpp"
 
+#include "input_output/parameter_reader/parameter_reader.cpp"
+
 // #include "misc/input_methods/input_methods.hpp"
 // #include "file/file_controller.hpp"
 
@@ -33,56 +35,13 @@ int error_message(){
 
 int main(int argc, char *argv[]){
 
-    bool print_flag;
-
-    std::string input_filename;
-    std::string open_parameter;
-    std::string output_filename;
-
     std::string file_line;
     std::string filepath;
 
     std::fstream input_file;
 
-    try {
-        if (argc == 4){
 
-            input_filename = argv[1];
-            open_parameter = argv[2];
-            output_filename = argv[3];
-
-            if (input_filename.find(".asm", input_filename.size() - 4) == -1){
-                throw std::runtime_error("assembler error: invalid input file");
-            }
-
-            if (open_parameter != "-o" && open_parameter != "--output"){
-                throw std::runtime_error("assembler error: invalid parameters");
-            }
-
-            filepath = "../" + output_filename;
-            print_flag = false;
-        }
-        else if (argc == 2){
-
-            input_filename = argv[1];
-
-            if (input_filename.find(".asm", input_filename.size() - 4) == -1){
-                throw std::runtime_error("assembler error: invalid input file");
-            }
-
-            print_flag = true;
-        }
-        else {
-            error_message();
-            throw std::runtime_error("assembler error: invalid parameters");
-        }
-    }
-    catch(const std::runtime_error &error){
-        error_message();
-        std::cerr << error.what() << std::endl;
-
-        return 0;
-    }
+    Parameter_reader *parameter_reader = new Parameter_reader();
 
     R_assembler *assembler_R = new R_assembler();
     I_assembler *assembler_I = new I_assembler();
@@ -95,111 +54,123 @@ int main(int argc, char *argv[]){
     Auxiliar_methods         *auxiliar_methods   = new Auxiliar_methods();
     File_controller          *file_controller    = new File_controller();
 
-    int read_file_result = file_controller -> read(&input_file, input_filename);
 
+    try {
 
-    while (getline(input_file, file_line)){
+        type_parameter parameter_values = parameter_reader -> read(argc, argv);
 
-        /* caso a string for vazia */
-        if (auxiliar_methods -> is_empty(file_line)){
-            continue;
+        int read_file_result = file_controller -> read(&input_file, parameter_values.input_file);
+
+        if (read_file_result == 0){
+            /* lançar erro */
         }
-        input_accumulator -> set_instruction(file_line);
+
+        while (getline(input_file, file_line)){
+
+            /* caso a string for vazia */
+            if (auxiliar_methods -> is_empty(file_line)){
+                continue;
+            }
+            input_accumulator -> set_instruction(file_line);
+        }
+
+        std::string current_instruction;
+
+        while (input_accumulator -> get_instruction(&current_instruction)){
+            
+            /* ::::::::::::::::::::: I FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
+            if (current_instruction.substr(0, 4).compare("addi") == 0){
+                assembler_I -> ADDI(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("ori") == 0){
+                assembler_I -> ORI(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("andi") == 0){
+                assembler_I -> ANDI(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("xori") == 0){
+                assembler_I -> XORI(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("slli") == 0){
+                assembler_I -> SLLI(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("srli") == 0){
+                assembler_I -> SRLI(current_instruction, output_accumulator);
+            }
+
+            /* ::::::::::::::::::::: R FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
+            else if (current_instruction.substr(0, 3).compare("add") == 0){
+                assembler_R -> ADD(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("sub") == 0){
+                assembler_R -> SUB(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("and") == 0){
+                assembler_R -> AND(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("or") == 0){
+                assembler_R -> OR(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("xor") == 0){
+                assembler_R -> XOR(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("sll") == 0){
+                assembler_R -> SLL(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("srl") == 0){
+                assembler_R -> SRL(current_instruction, output_accumulator);
+            }
+            
+            /* ::::::::::::::::::::: L FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
+            else if (current_instruction.substr(0, 2).compare("lb") == 0){
+                assembler_L -> LB(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("lh") == 0){
+                assembler_L -> LH(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("lw") == 0){
+                assembler_L -> LW(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("ld") == 0){
+                assembler_L -> LD(current_instruction, output_accumulator);
+            }
+
+            /* ::::::::::::::::::::: S FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
+            else if (current_instruction.substr(0, 2).compare("sb") == 0){
+                assembler_S -> SB(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("sh") == 0){
+                assembler_S -> SH(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("sw") == 0){
+                assembler_S -> SW(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("sd") == 0){
+                assembler_S -> SD(current_instruction, output_accumulator);
+            }
+
+            /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+
+            else if (current_instruction.substr(0, 2).compare("mv") == 0){
+                assembler_P -> MV(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("li") == 0){
+                assembler_P -> LI(current_instruction, output_accumulator);
+            }
+            else {
+                std::cout << "deu ruim" << std::endl;
+            }
+        }
+
+        file_controller -> write(output_accumulator, "a.txt");
+        return 0;
+
     }
-
-    std::string instruction;
-
-    while (input_accumulator -> get_instruction(&instruction)){
-        
-        /* ::::::::::::::::::::: I FORMAT INSTRUCTIONS ::::::::::::::::::::: */
-
-        if (instruction.substr(0, 4).compare("addi") == 0){
-            assembler_I -> ADDI(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 4).compare("ori") == 0){
-            assembler_I -> ORI(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 4).compare("andi") == 0){
-            assembler_I -> ANDI(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 4).compare("xori") == 0){
-            assembler_I -> XORI(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 4).compare("slli") == 0){
-            assembler_I -> SLLI(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 4).compare("srli") == 0){
-            assembler_I -> SRLI(instruction, output_accumulator);
-        }
-
-        /* ::::::::::::::::::::: R FORMAT INSTRUCTIONS ::::::::::::::::::::: */
-
-        else if (instruction.substr(0, 3).compare("add") == 0){
-            assembler_R -> ADD(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 3).compare("sub") == 0){
-            assembler_R -> SUB(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 3).compare("and") == 0){
-            assembler_R -> AND(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 3).compare("or") == 0){
-            assembler_R -> OR(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 3).compare("xor") == 0){
-            assembler_R -> XOR(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 3).compare("sll") == 0){
-            assembler_R -> SLL(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 3).compare("srl") == 0){
-            assembler_R -> SRL(instruction, output_accumulator);
-        }
-        
-        /* ::::::::::::::::::::: L FORMAT INSTRUCTIONS ::::::::::::::::::::: */
-
-        else if (instruction.substr(0, 2).compare("lb") == 0){
-            assembler_L -> LB(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 2).compare("lh") == 0){
-            assembler_L -> LH(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 2).compare("lw") == 0){
-            assembler_L -> LW(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 2).compare("ld") == 0){
-            assembler_L -> LD(instruction, output_accumulator);
-        }
-
-        /* ::::::::::::::::::::: S FORMAT INSTRUCTIONS ::::::::::::::::::::: */
-
-        else if (instruction.substr(0, 2).compare("sb") == 0){
-            assembler_S -> SB(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 2).compare("sh") == 0){
-            assembler_S -> SH(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 2).compare("sw") == 0){
-            assembler_S -> SW(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 2).compare("sd") == 0){
-            assembler_S -> SD(instruction, output_accumulator);
-        }
-
-        /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
-
-        else if (instruction.substr(0, 2).compare("mv") == 0){
-            assembler_P -> MV(instruction, output_accumulator);
-        }
-        else if (instruction.substr(0, 2).compare("li") == 0){
-            assembler_P -> LI(instruction, output_accumulator);
-        }
-
-        else {
-            std::cout << "deu ruim" << std::endl;
-        }
+    catch(const std::exception& e) {
+        std::cerr << e.what() << '\n';
     }
-
-    file_controller -> write(output_accumulator, "a.txt");
-    return 0;
 }
