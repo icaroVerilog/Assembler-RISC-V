@@ -7,13 +7,15 @@ R = src/instructions/instructions_assembler/instructionsR/instructionsR.cpp
 I = src/instructions/instructions_assembler/instructionsI/instructionsI.cpp
 L = src/instructions/instructions_assembler/instructionsI/instructionsI_load.cpp
 
+ACCUMULATOR = src/accumulator/instruction_ACML.cpp
+
 FILE_CONTROLLER = src/file/file_controller.cpp
 
 # FILES2 = src/accumulators/instruction_ACML.cpp src/accumulators/label_ACML.cpp
 
 
 compile: ${FILES}
-	${CC} ${FILES} ${S} ${P} ${R} ${I} ${L} -o compiled/assembler
+	${CC} ${FILES} ${S} ${P} ${R} ${I} ${L}  -o compiled/assembler
 
 run: 
 	./compiled/assembler example.asm -o teste.txt

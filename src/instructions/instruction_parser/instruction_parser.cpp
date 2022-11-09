@@ -35,7 +35,7 @@ L_instruction Instruction_parser::L_type_parse (std::string& instruction){
     std::regex L_format_regex("([x][0-9]{1,2})[,]([0-9]{1,3})[(]([x][0-9]{1,2})[)]");
 
     try {
-
+        
         std::size_t found1 = instruction.find_first_of(" ");
         std::string operation = instruction.substr(0,found1);
         std::string string2 = instruction.substr(found1 + 1);
