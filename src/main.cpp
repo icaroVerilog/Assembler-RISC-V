@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <cstddef>
-
 #include "instructions/instructions_assembler/instructionsI/instructionsI.cpp"
 #include "instructions/instructions_assembler/instructionsR/instructionsR.cpp"
 #include "instructions/instructions_assembler/instructionsP/instructionsP.cpp"
@@ -10,28 +9,11 @@
 #include "instructions/instructions_assembler/instructionsI/instructionsI_load.cpp"
 #include "accumulator/instruction_ACML.cpp"
 #include "misc/auxiliar_methods/auxiliar_methods.hpp"
-
 #include "input_output/file_controller/file_controller.hpp"
-
 #include "input_output/parameter_reader/parameter_reader.cpp"
 
-// #include "misc/input_methods/input_methods.hpp"
-// #include "file/file_controller.hpp"
 
 // RVI 64bits
-
-int error_message(){
-
-    std::cout << std::endl;
-    std::cout << "Parameters must be follow this format:" << std::endl;
-    std::cout << "filename.asm output_param filename or filename.asm output_param filename" << std::endl;
-    std::cout << std::endl;
-    std::cout << "suported params:" << std::endl;
-    std::cout << "output: --output, -o" << std::endl;
-    std::cout << std::endl;
-
-    return 0;
-}
 
 int main(int argc, char *argv[]){
 
@@ -46,8 +28,8 @@ int main(int argc, char *argv[]){
     R_assembler *assembler_R = new R_assembler();
     I_assembler *assembler_I = new I_assembler();
     S_assembler *assembler_S = new S_assembler();
-    L_assembler *assembler_L = new L_assembler(filepath);
-    P_assembler *assembler_P = new P_assembler(filepath);
+    L_assembler *assembler_L = new L_assembler();
+    P_assembler *assembler_P = new P_assembler();
 
     Instruction_accumulator  *input_accumulator  = new Instruction_accumulator();
     Instruction_accumulator  *output_accumulator = new Instruction_accumulator();

@@ -14,16 +14,13 @@
 class P_assembler: public Convert_methods, Instruction_parser {
 
     private: std::string opcode_I; /* for ADDI */
-    private: std::fstream output_file;
-    private: std::string output_filename;
     private: std::string zero_register;
     private: std::string zero_immediate;
 
     private: std::string funct3_ADDI;
 
-    public: P_assembler(std::string& output_filename){
+    public: P_assembler(){
 
-        this -> output_filename = output_filename;
         this -> opcode_I.assign("0010011");
         this -> funct3_ADDI.assign("000");
         this -> zero_register = "x1";

@@ -1,7 +1,6 @@
 
 #define DEFAULT_OUT_FILENAME "out.o"
 
-
 typedef struct type_parameter type_parameter;
 
 struct type_parameter {
@@ -23,7 +22,7 @@ class Parameter_reader {
         type_parameter parameter;
 
         try {
-
+        
             if (argc == 1){
                 throw std::runtime_error("mensagem 1");
             }

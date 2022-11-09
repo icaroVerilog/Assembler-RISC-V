@@ -11,9 +11,7 @@
 
 class I_assembler: public Convert_methods, public Instruction_parser {
 
-    private: std::string  opcode_B;
-    private: std::fstream output_file;
-    private: std::string  output_filename;
+    private: std::string opcode_B;
 
     private:
         std::string funct3_BEQ;

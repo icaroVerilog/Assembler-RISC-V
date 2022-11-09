@@ -12,8 +12,6 @@
 class R_assembler: public Convert_methods, public Instruction_parser {
 
     private: std::string opcode_R;
-    private: std::fstream output_file;
-    private: std::string output_filename;
     private: std::string assembled_binary;
 
     private:

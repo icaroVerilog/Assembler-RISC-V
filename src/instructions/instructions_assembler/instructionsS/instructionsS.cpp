@@ -12,8 +12,6 @@
 class S_assembler: public Convert_methods, Instruction_parser {
 
     private: std::string opcode_S;
-    private: std::string output_filename;
-    private: std::fstream output_file;
 
     private:
         std::string funct3_SB;
@@ -23,7 +21,6 @@ class S_assembler: public Convert_methods, Instruction_parser {
 
     public: S_assembler(){
 
-        this -> output_filename = output_filename;
         this -> opcode_S.assign("0100011");
 
         this -> funct3_SB.assign("000");

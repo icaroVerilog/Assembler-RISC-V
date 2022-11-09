@@ -12,8 +12,6 @@
 class L_assembler: public Convert_methods, Instruction_parser {
 
     private: std::string opcode_I_load;
-    private: std::string output_filename;
-    private: std::fstream output_file;
 
     private:
         std::string funct3_LB;
@@ -21,9 +19,8 @@ class L_assembler: public Convert_methods, Instruction_parser {
         std::string funct3_LW;
         std::string funct3_LD;
 
-    public: L_assembler(std::string& output_filename){
+    public: L_assembler(){
 
-        this -> output_filename = output_filename;
         this -> opcode_I_load.assign("0000011");
 
         this -> funct3_LB.assign("000");
