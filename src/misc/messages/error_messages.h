@@ -10,4 +10,4 @@ const std::string INVALID_HEX_IMMEDIATE  = "assembler error: invalid hexadecimal
 const std::string INVALID_BIN_IMMEDIATE  = "assembler error: invalid binary value in immediate field";
 const std::string INVALID_DEC_IMMEDIATE  = "assembler error: invalid decimal value in immediate field";
 
-const std::string INVELID_INPUT_FILENAME = "parameter error: invalid input filename";
+const std::string INVALID_INPUT_FILENAME = "parameter error: invalid input filename";

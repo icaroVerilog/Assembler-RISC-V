@@ -1,4 +1,5 @@
 #include <string>
+#include <boost/convert.hpp>
 
 class Auxiliar_methods {
     public: bool remove_space(std::string& string);

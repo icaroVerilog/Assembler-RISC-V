@@ -11,7 +11,6 @@
 #include "misc/auxiliar_methods/auxiliar_methods.hpp"
 #include "input_output/file_controller/file_controller.hpp"
 #include "input_output/parameter_reader/parameter_reader.cpp"
-#include "label_identifier/label_identifier.cpp"
 
 
 // RVI 64bits
@@ -35,7 +34,6 @@ int main(int argc, char *argv[]){
     Instruction_accumulator  *output_accumulator = new Instruction_accumulator();
     Auxiliar_methods         *auxiliar_methods   = new Auxiliar_methods();
     File_controller          *file_controller    = new File_controller();
-    Label_identifier         *label_identifier   = new Label_identifier();
 
 
     try {
@@ -56,102 +54,102 @@ int main(int argc, char *argv[]){
                 continue;
             }
 
-            // Label_identifier -> find_label(file_line);   Verificar
-
+            auxiliar_methods  -> remove_space(file_line);
             input_accumulator -> set_instruction(file_line);
         }
 
-        // std::string current_instruction;
+        std::string current_instruction;
 
-        // while (input_accumulator -> get_instruction(&current_instruction)){
+        while (input_accumulator -> get_instruction(&current_instruction)){
             
-        //     /* ::::::::::::::::::::: I FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+            /* ::::::::::::::::::::: I FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        //     if (current_instruction.substr(0, 4).compare("addi") == 0){
-        //         assembler_I -> ADDI(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 4).compare("ori") == 0){
-        //         assembler_I -> ORI(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 4).compare("andi") == 0){
-        //         assembler_I -> ANDI(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 4).compare("xori") == 0){
-        //         assembler_I -> XORI(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 4).compare("slli") == 0){
-        //         assembler_I -> SLLI(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 4).compare("srli") == 0){
-        //         assembler_I -> SRLI(current_instruction, output_accumulator);
-        //     }
+            if (current_instruction.substr(0, 4).compare("addi") == 0){
+                puts("entrou");
+                assembler_I -> ADDI(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("ori") == 0){
+                assembler_I -> ORI(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("andi") == 0){
+                assembler_I -> ANDI(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("xori") == 0){
+                assembler_I -> XORI(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("slli") == 0){
+                assembler_I -> SLLI(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("srli") == 0){
+                assembler_I -> SRLI(current_instruction, output_accumulator);
+            }
 
-        //     /* ::::::::::::::::::::: R FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+            /* ::::::::::::::::::::: R FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        //     else if (current_instruction.substr(0, 3).compare("add") == 0){
-        //         assembler_R -> ADD(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 3).compare("sub") == 0){
-        //         assembler_R -> SUB(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 3).compare("and") == 0){
-        //         assembler_R -> AND(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 3).compare("or") == 0){
-        //         assembler_R -> OR(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 3).compare("xor") == 0){
-        //         assembler_R -> XOR(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 3).compare("sll") == 0){
-        //         assembler_R -> SLL(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 3).compare("srl") == 0){
-        //         assembler_R -> SRL(current_instruction, output_accumulator);
-        //     }
+            else if (current_instruction.substr(0, 3).compare("add") == 0){
+                assembler_R -> ADD(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("sub") == 0){
+                assembler_R -> SUB(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("and") == 0){
+                assembler_R -> AND(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("or") == 0){
+                assembler_R -> OR(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("xor") == 0){
+                assembler_R -> XOR(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("sll") == 0){
+                assembler_R -> SLL(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("srl") == 0){
+                assembler_R -> SRL(current_instruction, output_accumulator);
+            }
             
-        //     /* ::::::::::::::::::::: L FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+            /* ::::::::::::::::::::: L FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        //     else if (current_instruction.substr(0, 2).compare("lb") == 0){
-        //         assembler_L -> LB(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 2).compare("lh") == 0){
-        //         assembler_L -> LH(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 2).compare("lw") == 0){
-        //         assembler_L -> LW(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 2).compare("ld") == 0){
-        //         assembler_L -> LD(current_instruction, output_accumulator);
-        //     }
+            else if (current_instruction.substr(0, 2).compare("lb") == 0){
+                assembler_L -> LB(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("lh") == 0){
+                assembler_L -> LH(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("lw") == 0){
+                assembler_L -> LW(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("ld") == 0){
+                assembler_L -> LD(current_instruction, output_accumulator);
+            }
 
-        //     /* ::::::::::::::::::::: S FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+            /* ::::::::::::::::::::: S FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        //     else if (current_instruction.substr(0, 2).compare("sb") == 0){
-        //         assembler_S -> SB(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 2).compare("sh") == 0){
-        //         assembler_S -> SH(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 2).compare("sw") == 0){
-        //         assembler_S -> SW(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 2).compare("sd") == 0){
-        //         assembler_S -> SD(current_instruction, output_accumulator);
-        //     }
+            else if (current_instruction.substr(0, 2).compare("sb") == 0){
+                assembler_S -> SB(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("sh") == 0){
+                assembler_S -> SH(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("sw") == 0){
+                assembler_S -> SW(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("sd") == 0){
+                assembler_S -> SD(current_instruction, output_accumulator);
+            }
 
-        //     /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
+            /* ::::::::::::::::::::: P FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
-        //     else if (current_instruction.substr(0, 2).compare("mv") == 0){
-        //         assembler_P -> MV(current_instruction, output_accumulator);
-        //     }
-        //     else if (current_instruction.substr(0, 2).compare("li") == 0){
-        //         assembler_P -> LI(current_instruction, output_accumulator);
-        //     }
-        //     else {
-        //         std::cout << "deu ruim" << std::endl;
-        //     }
-        // }
+            else if (current_instruction.substr(0, 2).compare("mv") == 0){
+                assembler_P -> MV(current_instruction, output_accumulator);
+            }
+            else if (current_instruction.substr(0, 2).compare("li") == 0){
+                assembler_P -> LI(current_instruction, output_accumulator);
+            }
+            else {
+                std::cout << "deu ruim" << std::endl;
+            }
+        }
 
         file_controller -> write(output_accumulator, "a.txt");
         return 0;
