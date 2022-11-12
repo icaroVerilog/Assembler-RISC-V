@@ -17,6 +17,8 @@
 
 int main(int argc, char *argv[]){
 
+    int register_counter = 0;
+
     std::string file_line;
     std::string filepath;
 
@@ -53,6 +55,8 @@ int main(int argc, char *argv[]){
             if (auxiliar_methods -> is_empty(file_line)){
                 continue;
             }
+
+            register_counter++;
 
             auxiliar_methods  -> remove_space(file_line);
             input_accumulator -> set_instruction(file_line);

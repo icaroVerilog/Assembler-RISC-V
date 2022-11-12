@@ -22,6 +22,8 @@ int File_controller::write(Instruction_accumulator *accumulator, std::string fil
     }
 
     output_file.close();
+
+    return 1;
 }
 
 int File_controller::read(std::fstream *file, std::string filename){
@@ -45,4 +47,6 @@ int File_controller::read(std::fstream *file, std::string filename){
         std::cerr << e.what() << '\n';
         return 0;
     }
+
+    return 1;
 }

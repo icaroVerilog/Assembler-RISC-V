@@ -19,8 +19,7 @@ I_instruction Instruction_parser::I_type_parse (std::string& instruction){
         new_instruction.immediate = regex_result[3];        
 
         return new_instruction;
-        }
-
+    }
     catch (const std::invalid_argument& error){
         std::cerr << error.what() << std::endl;
         std::exit(0);
@@ -47,7 +46,6 @@ R_instruction Instruction_parser::R_type_parse (std::string& instruction){
 
         return new_instruction;
     }
-
     catch (const std::invalid_argument& error){
         std::cerr << error.what() << std::endl;
         std::exit(0);
@@ -74,7 +72,6 @@ L_instruction Instruction_parser::L_type_parse (std::string& instruction){
 
         return new_instruction;
     }
-
     catch (const std::invalid_argument& error){
         std::cerr << error.what() << std::endl;
         std::exit(0);
@@ -107,7 +104,6 @@ P_instruction Instruction_parser::P_type_parse (std::string& instruction){
    
         return new_instruction;
     }
-
     catch (const std::invalid_argument& error){
         std::cerr << error.what() << std::endl;
         std::exit(0);
@@ -134,7 +130,6 @@ S_instruction Instruction_parser::S_type_parse (std::string& instruction){
 
         return new_instruction;
     }
-
     catch (const std::invalid_argument& error){
         std::cerr << error.what() << std::endl;
         std::exit(0);
