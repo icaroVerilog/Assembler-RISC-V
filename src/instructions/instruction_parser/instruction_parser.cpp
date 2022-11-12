@@ -78,7 +78,6 @@ L_instruction Instruction_parser::L_type_parse (std::string& instruction){
     }
 }
 
-
 P_instruction Instruction_parser::P_type_parse (std::string& instruction){
 
     try {

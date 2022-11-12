@@ -8,6 +8,7 @@
 #include "../../convert_methods/convert_methods.hpp"
 #include "../../instruction_parser/instruction_parser.hpp"
 #include "../../../accumulator/instruction_ACML.hpp"
+#include "../../../label_accumulator/label_accumulator.cpp"
 
 class I_assembler: public Convert_methods, public Instruction_parser {
 
@@ -33,27 +34,31 @@ class I_assembler: public Convert_methods, public Instruction_parser {
         this -> funct3_BGEU.assign("111");        
     }
 
-    public: void BEQ(std::string& string, Instruction_accumulator* accumulator){
+    private: convert_label(std::string label, Label_accumulator* label_accumulator){
 
     }
 
-    public: void BNE(std::string& string, Instruction_accumulator* accumulator){
+    public: void BEQ(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
 
     }
 
-    public: void BLT(std::string& string, Instruction_accumulator* accumulator){
+    public: void BNE(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
 
     }
 
-    public: void BGE(std::string& string, Instruction_accumulator* accumulator){
+    public: void BLT(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
 
     }
 
-    public: void BLTU(std::string& string, Instruction_accumulator* accumulator){
+    public: void BGE(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
+
+    }
+
+    public: void BLTU(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
 
     }
     
-    public: void BGEU(std::string& string, Instruction_accumulator* accumulator){
+    public: void BGEU(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
 
     }
 };

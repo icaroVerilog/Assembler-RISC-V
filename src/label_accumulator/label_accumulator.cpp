@@ -12,16 +12,17 @@ struct label_properties {
 
 typedef struct label_properties label_properties;
 
-class Label_identifier {
+class Label_accumulator {
 
     private: std::regex label_regex;
     private: std::vector<label_properties> label_vector;
     
-    Label_identifier(){
+    Label_accumulator(){
         this -> label_regex.assing("([A-Z]{1,10}|[a-z]{1,10})[:]");
     }
 
-    private: bool find_label(std::string file_line, int instruction_counter){
+
+    public: bool find_label(std::string file_line, int instruction_counter){
         
         std::smatch regex_result;
 
