@@ -11,6 +11,7 @@
 #include "misc/auxiliar_methods/auxiliar_methods.hpp"
 #include "input_output/file_controller/file_controller.hpp"
 #include "input_output/parameter_reader/parameter_reader.cpp"
+#include "label_identifier/label_identifier.cpp"
 
 
 // RVI 64bits
@@ -36,6 +37,7 @@ int main(int argc, char *argv[]){
     Instruction_accumulator  *output_accumulator = new Instruction_accumulator();
     Auxiliar_methods         *auxiliar_methods   = new Auxiliar_methods();
     File_controller          *file_controller    = new File_controller();
+    Label_identifier         *label_identifier   = new Label_identifier();
 
 
     try {
@@ -56,7 +58,12 @@ int main(int argc, char *argv[]){
                 continue;
             }
 
-            register_counter++;
+            
+            bool label_founded = label_identifier -> find_label(file_line, register_counter);
+
+            if (label_founded == false){
+                register_counter++;
+            }
 
             auxiliar_methods  -> remove_space(file_line);
             input_accumulator -> set_instruction(file_line);
