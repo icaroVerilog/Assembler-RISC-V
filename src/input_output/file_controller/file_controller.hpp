@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "../../accumulator/instruction_ACML.hpp"
+#include "../../accumulator/instruction_accumulator.hpp"
 
 class File_controller {
     public: File_controller();

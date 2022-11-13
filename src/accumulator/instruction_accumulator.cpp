@@ -1,4 +1,4 @@
-#include "./instruction_ACML.hpp"
+#include "./instruction_accumulator.hpp"
 
 
 Instruction_accumulator::Instruction_accumulator() {
@@ -15,9 +15,9 @@ int Instruction_accumulator::get_instruction(std::string *instruction){
         Percorre todo o vector retornando o valor armazenado a cada chamada da função
         Caso chegue no final, volta para o inicio
     */
-    if (counter != instructions_vector.size()){
+    if (counter != this -> instructions_vector.size()){
 
-        current_instruction = instructions_vector.at(this -> counter);
+        current_instruction = this -> instructions_vector.at(this -> counter);
         this -> counter++;
 
         /* envia as instruções para o parametro passdo por refência*/
@@ -30,10 +30,4 @@ int Instruction_accumulator::get_instruction(std::string *instruction){
         this -> counter = 0;
         return 0;
     }
-}
-
-int Instruction_accumulator::size(){
-    
-    int size = instructions_vector.size();
-    return size;
 }

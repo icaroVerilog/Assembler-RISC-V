@@ -13,7 +13,6 @@ class Instruction_accumulator {
     public: Instruction_accumulator();
     public: void set_instruction(std::string& instruction);
     public: int get_instruction(std::string *instruction);
-    public: int size();
 };
 
 #endif

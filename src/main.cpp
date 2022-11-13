@@ -7,11 +7,10 @@
 #include "instructions/instructions_assembler/instructionsP/instructionsP.cpp"
 #include "instructions/instructions_assembler/instructionsS/instructionsS.cpp"
 #include "instructions/instructions_assembler/instructionsI/instructionsI_load.cpp"
-#include "accumulator/instruction_ACML.cpp"
+#include "accumulator/instruction_accumulator.hpp"
 #include "misc/auxiliar_methods/auxiliar_methods.hpp"
 #include "input_output/file_controller/file_controller.hpp"
 #include "input_output/parameter_reader/parameter_reader.cpp"
-#include "label_accumulator/label_accumulator.cpp"
 
 
 // RVI 64bits
@@ -37,7 +36,7 @@ int main(int argc, char *argv[]){
     Instruction_accumulator  *output_accumulator = new Instruction_accumulator();
     Auxiliar_methods         *auxiliar_methods   = new Auxiliar_methods();
     File_controller          *file_controller    = new File_controller();
-    Label_accumulator        *label_accumulator  = new Label_accumulator();
+    // Label_accumulator        *label_accumulator  = new Label_accumulator();
 
 
     try {
@@ -59,11 +58,11 @@ int main(int argc, char *argv[]){
             }
 
             
-            bool label_founded = label_accumulator -> find_label(file_line, register_counter);
+            // bool label_founded = label_accumulator -> find_label(file_line, register_counter);
 
-            if (label_founded == false){
-                register_counter++;
-            }
+            // if (label_founded == false){
+            //     register_counter++;
+            // }
 
             auxiliar_methods  -> remove_space(file_line);
             input_accumulator -> set_instruction(file_line);

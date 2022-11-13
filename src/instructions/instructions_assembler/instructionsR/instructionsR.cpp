@@ -7,7 +7,7 @@
 #include "../../instructions_structures/type_R.hpp"
 #include "../../convert_methods/convert_methods.hpp"
 #include "../../instruction_parser/instruction_parser.hpp"
-#include "../../../accumulator/instruction_ACML.hpp"
+#include "../../../accumulator/instruction_accumulator.hpp"
 
 class R_assembler: public Convert_methods, public Instruction_parser {
 

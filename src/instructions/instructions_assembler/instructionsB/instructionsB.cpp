@@ -7,8 +7,8 @@
 #include "../../instructions_structures/type_I.hpp"
 #include "../../convert_methods/convert_methods.hpp"
 #include "../../instruction_parser/instruction_parser.hpp"
-#include "../../../accumulator/instruction_ACML.hpp"
-#include "../../../label_accumulator/label_accumulator.cpp"
+#include "../../../accumulator/instruction_accumulator.hpp"
+#include "../../../accumulator/label_accumulator.hpp"
 
 class I_assembler: public Convert_methods, public Instruction_parser {
 
@@ -34,8 +34,10 @@ class I_assembler: public Convert_methods, public Instruction_parser {
         this -> funct3_BGEU.assign("111");        
     }
 
-    private: convert_label(std::string label, Label_accumulator* label_accumulator){
+    /* Find the label literal and convert to program counter address */
+    private: std::string label_to_address(std::string label, Label_accumulator* label_accumulator){
 
+        
     }
 
     public: void BEQ(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
