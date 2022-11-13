@@ -139,6 +139,13 @@ std::string Convert_methods::immediate_to_binary(std::string& immediate){
     }
 }
 
+std::string Convert_methods::label_address_to_binary(int address){
+
+    std::string binary_string = std::bitset<13>(address).to_string();
+
+    return binary_string;
+}
+
 std::string Convert_methods::r_binary_to_string(std::string funct7, std::string reg1, std::string reg2, std::string funct3, std::string dest_reg, std::string opcode){
     
     std::string assembled_binary;
@@ -193,9 +200,18 @@ std::string Convert_methods::s_binary_to_string(std::string immediate, std::stri
     return assembled_binary;
 }
 
-std::string Convert_methods::b_binary_to_string(std::string immediate, std::string source_reg2, std::string source_reg1, std::string funct3, std::string opcode){
+std::string Convert_methods::b_binary_to_string(std::string label_address, std::string source_reg2, std::string source_reg1, std::string funct3, std::string opcode){
 
     std::string assembled_binary;
+
+    assembled_binary.append(label_address.substr(0, 1));
+    assembled_binary.append(label_address.substr(2, 6));
+    assembled_binary.append(source_reg2);
+    assembled_binary.append(source_reg1);
+    assembled_binary.append(funct3);
+    assembled_binary.append(label_address.substr(8, 4));
+    assembled_binary.append(label_address.substr(1, 1));
+    assembled_binary.append(opcode);
 
     return assembled_binary;    
 }

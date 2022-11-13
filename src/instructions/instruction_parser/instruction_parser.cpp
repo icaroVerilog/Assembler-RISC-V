@@ -137,6 +137,29 @@ S_instruction Instruction_parser::S_type_parse (std::string& instruction){
 
 B_instruction Instruction_parser::B_type_parse(std::string& instruction){
     
+    std::regex B_format_regex("[a-z]{3,4}([x][0-9]{1,2})[,]([x][0-9]{1,2})[,]([a-z]{1,20})");
+    std::smatch regex_result;
+
+    try {
+        /* verifica por meio da RegEx se a instrução está no formato certo */
+        if (std::regex_match(instruction, regex_result, B_format_regex) == false){
+            throw std::runtime_error("assembler error: invalid type S struction format");
+        } 
+
+        B_instruction new_instruction;
+
+        new_instruction.source_register1 = regex_result[1];
+        new_instruction.source_register2 = regex_result[2];
+        new_instruction.label_name = regex_result[3];
+
+        return new_instruction;
+
+    }
+    catch(const std::exception& e){
+        std::cerr << e.what() << '\n';
+    }
+    
+
     B_instruction new_instruction;
 
 

@@ -1,6 +1,7 @@
 CC = g++
 FILES = src/main.cpp src/instructions/convert_methods/convert_methods.cpp src/instructions/instruction_parser/instruction_parser.cpp src/misc/auxiliar_methods/auxiliar_methods.cpp src/input_output/file_controller/file_controller.cpp
 
+B = stc/instructions/instructions_assembler/instructionsB/instructionsB.cpp
 S = src/instructions/instructions_assembler/instructionsS/instructionsS.cpp
 P = src/instructions/instructions_assembler/instructionsP/instructionsP.cpp
 R = src/instructions/instructions_assembler/instructionsR/instructionsR.cpp

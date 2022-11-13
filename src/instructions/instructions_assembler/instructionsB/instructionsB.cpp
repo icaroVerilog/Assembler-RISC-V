@@ -10,9 +10,9 @@
 #include "../../../accumulator/instruction_accumulator.hpp"
 #include "../../../accumulator/label_accumulator.hpp"
 
-class I_assembler: public Convert_methods, public Instruction_parser {
+class B_assembler: public Convert_methods, public Instruction_parser {
 
-    private: std::string opcode_B;
+    private: std::string opcode;
 
     private:
         std::string funct3_BEQ;
@@ -24,7 +24,7 @@ class I_assembler: public Convert_methods, public Instruction_parser {
 
     public: B_assembler(){
 
-        this -> opcode_B.assign("1100011");
+        this -> opcode.assign("1100011");
 
         this -> funct3_BEQ.assign("000");
         this -> funct3_BNE.assign("001");
@@ -35,12 +35,38 @@ class I_assembler: public Convert_methods, public Instruction_parser {
     }
 
     /* Find the label literal and convert to program counter address */
-    private: std::string label_to_address(std::string label, Label_accumulator* label_accumulator){
+    private: int label_to_address(std::string label, Label_accumulator* label_accumulator){
 
+        label_properties label_props;
+
+        while (label_accumulator -> get_label(&label_props)){
+
+            if (label_props.label_name == label){
+                return label_props.first_instruction_address;
+            }
+        }
         
+        /* lançar execção */
+
     }
 
-    public: void BEQ(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
+    public: void BEQ(std::string &string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
+        
+        B_instruction instruction = B_type_parse(string);
+
+        std::string source_register1 = register_to_binary(instruction.source_register1);
+        std::string source_register2 = register_to_binary(instruction.source_register2);
+        std::string label_address = label_address_to_binary(this -> label_to_address(instruction.label_name, label_accumulator));
+
+        std::string assembled_binary = b_binary_to_string(
+            label_address,
+            source_register2,
+            source_register1,
+            this -> funct3_BEQ,
+            this -> opcode
+        );
+
+        accumulator -> set_instruction(assembled_binary);
 
     }
 
