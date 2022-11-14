@@ -1,4 +1,5 @@
 #include "file_controller.hpp"
+#include "../../misc/messages/error_messages.hpp"
 
 File_controller::File_controller(){
     
@@ -26,27 +27,25 @@ int File_controller::write(Instruction_accumulator *accumulator, std::string fil
     return 1;
 }
 
-int File_controller::read(std::fstream *file, std::string filename){
-
-    // std::fstream file;
+void File_controller::read(std::fstream *file, std::string filename){
 
     try {
         if (filename.find(".asm", filename.size() - 4) == -1){
-            throw std::runtime_error("assembler error: invalid input file");
+            throw std::invalid_argument(error_messages::INVALID_INPUT_FILE_FORMAT);
         }
 
         file -> open("../" + filename, std::fstream::in);
 
         if (file -> is_open() == 0){
-            throw std::runtime_error("assembler error: cannot open the file");
+            throw std::runtime_error(error_messages::OPEN_INPUT_FILE_ERROR);
         }
-
-        return 1;
     }
-    catch(const std::exception& e){
-        std::cerr << e.what() << '\n';
-        return 0;
+    catch (const std::invalid_argument& error){
+        std::cerr << error.what() << std::endl;
+        std::exit(0);
     }
-
-    return 1;
+    catch (const std::runtime_error& error){
+        std::cerr << error.what() << std::endl;
+        std::exit(0);
+    }
 }

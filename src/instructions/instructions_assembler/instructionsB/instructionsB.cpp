@@ -12,7 +12,7 @@
 
 class B_assembler: public Convert_methods, public Instruction_parser {
 
-    private: std::string opcode;
+    private: std::string opcode_B;
 
     private:
         std::string funct3_BEQ;
@@ -24,7 +24,7 @@ class B_assembler: public Convert_methods, public Instruction_parser {
 
     public: B_assembler(){
 
-        this -> opcode.assign("1100011");
+        this -> opcode_B.assign("1100011");
 
         this -> funct3_BEQ.assign("000");
         this -> funct3_BNE.assign("001");
@@ -63,30 +63,104 @@ class B_assembler: public Convert_methods, public Instruction_parser {
             source_register2,
             source_register1,
             this -> funct3_BEQ,
-            this -> opcode
+            this -> opcode_B
         );
 
         accumulator -> set_instruction(assembled_binary);
-
     }
 
     public: void BNE(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
 
+        B_instruction instruction = B_type_parse(string);
+
+        std::string source_register1 = register_to_binary(instruction.source_register1);
+        std::string source_register2 = register_to_binary(instruction.source_register2);
+        std::string label_address = label_address_to_binary(this -> label_to_address(instruction.label_name, label_accumulator));
+
+        std::string assembled_binary = b_binary_to_string(
+            label_address,
+            source_register2,
+            source_register1,
+            this -> funct3_BNE,
+            this -> opcode_B
+        );
+
+        accumulator -> set_instruction(assembled_binary);
     }
 
     public: void BLT(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
 
+        B_instruction instruction = B_type_parse(string);
+
+        std::string source_register1 = register_to_binary(instruction.source_register1);
+        std::string source_register2 = register_to_binary(instruction.source_register2);
+        std::string label_address = label_address_to_binary(this -> label_to_address(instruction.label_name, label_accumulator));
+
+        std::string assembled_binary = b_binary_to_string(
+            label_address,
+            source_register2,
+            source_register1,
+            this -> funct3_BLT,
+            this -> opcode_B
+        );
+
+        accumulator -> set_instruction(assembled_binary);
     }
 
     public: void BGE(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
+        
+        B_instruction instruction = B_type_parse(string);
 
+        std::string source_register1 = register_to_binary(instruction.source_register1);
+        std::string source_register2 = register_to_binary(instruction.source_register2);
+        std::string label_address = label_address_to_binary(this -> label_to_address(instruction.label_name, label_accumulator));
+
+        std::string assembled_binary = b_binary_to_string(
+            label_address,
+            source_register2,
+            source_register1,
+            this -> funct3_BGE,
+            this -> opcode_B
+        );
+
+        accumulator -> set_instruction(assembled_binary);
     }
 
     public: void BLTU(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
 
+        B_instruction instruction = B_type_parse(string);
+
+        std::string source_register1 = register_to_binary(instruction.source_register1);
+        std::string source_register2 = register_to_binary(instruction.source_register2);
+        std::string label_address = label_address_to_binary(this -> label_to_address(instruction.label_name, label_accumulator));
+
+        std::string assembled_binary = b_binary_to_string(
+            label_address,
+            source_register2,
+            source_register1,
+            this -> funct3_BLTU,
+            this -> opcode_B
+        );
+
+        accumulator -> set_instruction(assembled_binary);
     }
     
     public: void BGEU(std::string& string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
 
+        B_instruction instruction = B_type_parse(string);
+
+        std::string source_register1 = register_to_binary(instruction.source_register1);
+        std::string source_register2 = register_to_binary(instruction.source_register2);
+        std::string label_address = label_address_to_binary(this -> label_to_address(instruction.label_name, label_accumulator));
+
+        std::string assembled_binary = b_binary_to_string(
+            label_address,
+            source_register2,
+            source_register1,
+            this -> funct3_BGEU,
+            this -> opcode_B
+        );
+
+        accumulator -> set_instruction(assembled_binary);
     }
 };

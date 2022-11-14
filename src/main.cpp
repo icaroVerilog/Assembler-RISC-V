@@ -8,23 +8,42 @@
 #include "instructions/instructions_assembler/instructionsP/instructionsP.cpp"
 #include "instructions/instructions_assembler/instructionsS/instructionsS.cpp"
 #include "instructions/instructions_assembler/instructionsI/instructionsI_load.cpp"
+
 #include "accumulator/instruction_accumulator.hpp"
 #include "accumulator/label_accumulator.hpp"
 #include "misc/auxiliar_methods/auxiliar_methods.hpp"
 #include "input_output/file_controller/file_controller.hpp"
 #include "input_output/parameter_reader/parameter_reader.cpp"
 
+#include "misc/messages/error_messages.hpp"
 
 // RVI 64bits
 
 int main(int argc, char *argv[]){
 
+    /*
+    
+        ┬  ┬┌─┐┬─┐┬┌─┐┌┐ ┬  ┌─┐  ┌─┐┌┐┌┌┬┐  ┌─┐┌─┐┌┐┌┌─┐┌┬┐┌─┐┌┐┌┌┬┐┌─┐  ┌┬┐┌─┐┌─┐┬  ┌─┐┬─┐┌─┐┌┬┐┬┌─┐┌┐┌┌─┐
+        └┐┌┘├─┤├┬┘│├─┤├┴┐│  ├┤   ├─┤│││ ││  │  │ ││││└─┐ │ ├─┤│││ │ └─┐   ││├┤ │  │  ├─┤├┬┘├─┤ │ ││ ││││└─┐
+         └┘ ┴ ┴┴└─┴┴ ┴└─┘┴─┘└─┘  ┴ ┴┘└┘─┴┘  └─┘└─┘┘└┘└─┘ ┴ ┴ ┴┘└┘ ┴ └─┘  ─┴┘└─┘└─┘┴─┘┴ ┴┴└─┴ ┴ ┴ ┴└─┘┘└┘└─┘
+
+    */
+
     int register_counter = 0;
 
     std::string file_line;
     std::string filepath;
+    std::string current_instruction;
 
     std::fstream input_file;
+
+    /*
+    
+        ┌─┐┬  ┌─┐┌─┐┌─┐  ┬┌┐┌┌─┐┌┬┐┌─┐┌┐┌┌┬┐┬┌─┐┌┬┐┬┌─┐┌┐┌┌─┐
+        │  │  ├─┤└─┐└─┐  ││││└─┐ │ ├─┤│││ │ │├─┤ │ ││ ││││└─┐
+        └─┘┴─┘┴ ┴└─┘└─┘  ┴┘└┘└─┘ ┴ ┴ ┴┘└┘ ┴ ┴┴ ┴ ┴ ┴└─┘┘└┘└─┘
+
+    */
 
     Parameter_reader *parameter_reader = new Parameter_reader();
 
@@ -42,22 +61,23 @@ int main(int argc, char *argv[]){
     Label_accumulator        *label_accumulator  = new Label_accumulator();
 
 
+    /*
+    
+        ┌─┐┬  ┌─┐┌─┐┬─┐┬┌┬┐┬ ┬┌┬┐  ┬  ┌─┐┌─┐┬┌─┐
+        ├─┤│  │ ┬│ │├┬┘│ │ ├─┤│││  │  │ ││ ┬││  
+        ┴ ┴┴─┘└─┘└─┘┴└─┴ ┴ ┴ ┴┴ ┴  ┴─┘└─┘└─┘┴└─┘
+
+    */
+
+
     try {
 
         // type_parameter parameter_values = parameter_reader -> read(argc, argv);
         // int read_file_result = file_controller -> read(&input_file, parameter_values.input_file);
 
-        int read_file_result = file_controller -> read(&input_file, "example.asm");
+        file_controller -> read(&input_file, "example.asm");
 
-        if (read_file_result == 0){
-            /* lançar erro */
-        }
-
-        
-        
         while (getline(input_file, file_line)){
-
-            // std::cout << file_line << std::endl;
 
             /* caso a string for vazia */
             if (auxiliar_methods -> is_empty(file_line)){
@@ -74,18 +94,14 @@ int main(int argc, char *argv[]){
             }
         }
 
-        std::string current_instruction;
-
         while (input_accumulator -> get_instruction(&current_instruction)){
-
-            std::cout << "intrução: " << current_instruction << std::endl;
 
             /* ::::::::::::::::::::: I FORMAT INSTRUCTIONS ::::::::::::::::::::: */
 
             if (current_instruction.substr(0, 4).compare("addi") == 0){
                 assembler_I -> ADDI(current_instruction, output_accumulator);
             }
-            else if (current_instruction.substr(0, 4).compare("ori") == 0){
+            else if (current_instruction.substr(0, 3).compare("ori") == 0){
                 assembler_I -> ORI(current_instruction, output_accumulator);
             }
             else if (current_instruction.substr(0, 4).compare("andi") == 0){
@@ -169,9 +185,24 @@ int main(int argc, char *argv[]){
             else if (current_instruction.substr(0, 3).compare("beq") == 0){
                 assembler_B -> BEQ(current_instruction, output_accumulator, label_accumulator);
             }
+            else if (current_instruction.substr(0, 3).compare("bne") == 0){
+                assembler_B -> BNE(current_instruction, output_accumulator, label_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("blt") == 0){
+                assembler_B -> BLT(current_instruction, output_accumulator, label_accumulator);
+            }
+            else if (current_instruction.substr(0, 3).compare("bge") == 0){
+                assembler_B -> BGE(current_instruction, output_accumulator, label_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("bltu") == 0){
+                assembler_B -> BLTU(current_instruction, output_accumulator, label_accumulator);
+            }
+            else if (current_instruction.substr(0, 4).compare("bgeu") == 0){
+                assembler_B -> BGEU(current_instruction, output_accumulator, label_accumulator);
+            }
 
             else {
-                std::cout << "deu ruim" << std::endl;
+                throw std::invalid_argument(error_messages::INVALID_INSTRUCTION);
             }
         }
 
@@ -179,7 +210,8 @@ int main(int argc, char *argv[]){
         return 0;
 
     }
-    catch(const std::exception& e) {
-        std::cerr << e.what() << '\n';
+    catch (const std::invalid_argument& error){
+        std::cerr << error.what() << std::endl;
+        std::exit(0);
     }
 }
