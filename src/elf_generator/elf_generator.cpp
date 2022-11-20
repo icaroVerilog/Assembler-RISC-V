@@ -1,4 +1,4 @@
-#include "accumulator/instruction_ACML.hpp"
+#include "elf_generator.hpp"
 
 class ELF_generator {
     private: std::fstream output_file;
