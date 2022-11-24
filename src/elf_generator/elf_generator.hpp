@@ -2,27 +2,24 @@
 #include "inttypes.h"
 #include "elfcommon.h"
 
+/* e_ident values */
 
-#define EIPAD_BIT_SIZE 56;
+#define ELFMAG0             0x7F;
+#define ELFMAG1             0x45;
+#define ELFMAG2             0x4C;
+#define ELFMAG3             0x46;
 
-struct {
-    uint8_t   EI_MAG0                   = 0x7f;
-    uint8_t   EI_MAG1                   = 0x45;
-    uint8_t   EI_MAG2                   = 0x4c;
-    uint8_t   EI_MAG3                   = 0x46;
-    uint8_t   EI_CLASS                  = 0x02;
-    uint8_t   EI_DATA                   = 0x01;
-    uint8_t   EI_VERSION                = 0x01;
-    uint8_t   EI_OSABI                  = 0x03;
-    uint8_t   EI_ABIVERSION             = 0x08;
-    uint64_t  EI_PAD: EIPAD_BIT_SIZE    = 0x00;
-} e_ident;
+#define ELFCLASS32          0x01;
+#define ELFCLASS64          0x02;
+
+#define ELFDATA2LSB         0x01;  /* little endian */
+#define ELFDATA2MSB         0x02;  /* big endian */
 
 struct {
-    Elf64_I         e_ident;
-    Elf64_Half      e_type      = 0x02;
-    Elf64_Half      e_machine   = 0xf3;
-    Elf64_Word      e_version   = 0x01;
+    uint8_t         e_ident[16];
+    Elf64_Half      e_type;
+    Elf64_Half      e_machine;
+    Elf64_Word      e_version;
     Elf64_Addr      e_entry;
     Elf64_Off       e_phoff;
     Elf64_Off       e_shoff;
