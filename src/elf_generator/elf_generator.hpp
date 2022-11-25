@@ -18,12 +18,28 @@ typedef struct Elf64_Ehdr Elf64_Ehdr;
 #define ELFMAG2             0x4C;   /* L */
 #define ELFMAG3             0x46;   /* F */
 
+/* EI_CLASS */
 #define ELFCLASS32          0x01;
 #define ELFCLASS64          0x02;
-
+/* EI_DATA */
 #define ELFDATA2LSB         0x01;  /* little endian */
 #define ELFDATA2MSB         0x02;  /* big endian */
-
+/* EI_VERSION */
+#define EV_CURRENT          0x01;
+/* EI_OSABI */
+#define ELFOSABI_NONE       0x00;
+#define ELFOSABI_HPUX       0x01; 
+#define ELFOSABI_NETBSD     0x02; 
+#define ELFOSABI_LINUX      0x03; 
+#define ELFOSABI_SOLARIS    0x06; 
+#define ELFOSABI_AIX        0x07; 
+#define ELFOSABI_IRIX       0x08; 
+#define ELFOSABI_FREEBSD    0x09; 
+#define ELFOSABI_TRU64      0x10; 
+#define ELFOSABI_MODESTO    0x11; 
+#define ELFOSABI_OPENBSD    0x12; 
+#define ELFOSABI_OPENVMS    0x13; 
+#define ELFOSABI_NSK        0x14; 
 
 
 
