@@ -1,23 +1,10 @@
 #include "elf_generator.hpp"
 
-class ELF_generator {
-    private: std::fstream output_file;
+
+ELF_generator::ELF_generator(std::string filename){
+
+}
+
+int ELF_generator::write_elf_header(){
     
-    public: ELF_generator(std::string filename){
-       try {
-            this -> output_file.open(filename, std::fstream::app);
-        }
-        catch(const std::exception& e) {
-            std::cerr << e.what() << '\n';
-        } 
-    }
-
-    private: int write_header(){
-
-    }
-
-    public: int write_ELF(){
-
-    }
-
 }
