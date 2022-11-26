@@ -10,13 +10,11 @@ L = src/instructions/instructions_assembler/instructionsI/instructionsI_load.cpp
 
 ACCUMULATORS = src/accumulator/instruction_accumulator.cpp src/accumulator/label_accumulator.cpp
 
-FILE_CONTROLLER = src/file/file_controller.cpp
-
-# FILES2 = src/accumulators/instruction_ACML.cpp src/accumulators/label_ACML.cpp
+ELF_GENERATOR = src/elf_generator/elf_generator.cpp src/elf_generator/riscv_elf/riscv_elf.cpp
 
 
 compile: ${FILES}
-	${CC} ${FILES} ${S} ${P} ${R} ${I} ${L} ${ACCUMULATORS} -o compiled/assembler
+	${CC} ${FILES} ${S} ${P} ${R} ${I} ${L} ${ACCUMULATORS} ${ELF_GENERATOR} -o compiled/assembler
 
 run: 
 	./compiled/assembler example.asm -o teste.txt

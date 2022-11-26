@@ -9,6 +9,7 @@
 #include "../../instruction_parser/instruction_parser.hpp"
 #include "../../../accumulator/instruction_accumulator.hpp"
 #include "../../../accumulator/label_accumulator.hpp"
+#include "../../../misc/messages/error_messages.hpp"
 
 class B_assembler: public Convert_methods, public Instruction_parser {
 
@@ -37,17 +38,23 @@ class B_assembler: public Convert_methods, public Instruction_parser {
     /* Find the label literal and convert to program counter address */
     private: int label_to_address(std::string label, Label_accumulator* label_accumulator){
 
-        label_properties label_props;
+        try {
+            label_properties label_props;
 
-        while (label_accumulator -> get_label(&label_props)){
+            while (label_accumulator -> get_label(&label_props)){
 
-            if (label_props.label_name == label){
-                return label_props.first_instruction_address;
+                if (label_props.label_name == label){
+                    return label_props.first_instruction_address;
+                }
             }
-        }
-        
-        /* lançar execção */
 
+            /* refatorar erro */
+            throw std::runtime_error(error_messages::INVALID_LABEL_ERROR);
+
+        }
+        catch(const std::exception& e) {
+            std::exit(0);
+        }
     }
 
     public: void BEQ(std::string &string, Instruction_accumulator* accumulator, Label_accumulator* label_accumulator){
