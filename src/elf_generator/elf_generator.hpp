@@ -1,3 +1,6 @@
+#ifndef ELF_GENERATOR_HEADER
+#define ELF_GENERATOR_HEADER
+
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -6,8 +9,6 @@
 #include "elf_parameters.hpp"
 #include "riscv_elf/riscv_elf.hpp"
 
-#ifndef ELF_GENERATOR_HEADER
-#define ELF_GENERATOR_HEADER
 class ELF_generator: public Riscv_elf {
 
     private: FILE *output_file;

@@ -1,9 +1,9 @@
+#ifndef INSTRUCTION_ACCUMULATOR_HEADER
+#define INSTRUCTION_ACCUMULATOR_HEADER
+
 #include <string>
 #include <cstddef>
 #include <vector>
-
-#ifndef INSTRUCTION_ACCUMULATOR_HEADER
-#define INSTRUCTION_ACCUMULATOR_HEADER
 
 class Instruction_accumulator {
     private: std::vector<std::string> instructions_vector;

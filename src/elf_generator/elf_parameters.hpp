@@ -1,8 +1,7 @@
-#include "inttypes.h"
-
 #ifndef ELF_PARAMETERS_HEADER
 #define ELF_PARAMETERS_HEADER
 
+#include "inttypes.h"
 
 typedef uint8_t  Elf64_Byte;
 typedef uint16_t Elf64_Half;

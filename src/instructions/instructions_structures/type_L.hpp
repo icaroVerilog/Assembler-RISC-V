@@ -1,6 +1,7 @@
-#include <string>
 #ifndef TYPE_L
 #define TYPE_L
+
+#include <string>
 
 typedef struct L_instruction L_instruction;
 

@@ -1,9 +1,9 @@
+#ifndef LABEL_ACCUMULATOR_HEADER
+#define LABEL_ACCUMULATOR_HEADER
+
 #include <string>
 #include <regex>
 #include <vector>
-
-#ifndef LABEL_ACCUMULATOR_HEADER
-#define LABEL_ACCUMULATOR_HEADER
 
 #define INSTRUCTION_LEAP 4;
 

@@ -37,12 +37,10 @@ class I_assembler: public Convert_methods, public Instruction_parser {
 
         I_instruction instruction = I_type_parse(string);
 
-        std::string binary_immediate = immediate_to_binary(instruction.immediate);
-        puts("entrou");
+        std::string binary_immediate     = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
-        puts("entrou");
-        std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
-        puts("entrou");
+        std::string parameter_register1  = register_to_binary(instruction.parameter_register1);
+        
         std::string assembled_binary = i_binary_to_string(
             binary_immediate,
             parameter_register1,
@@ -58,9 +56,9 @@ class I_assembler: public Convert_methods, public Instruction_parser {
 
         I_instruction instruction = I_type_parse(string);
 
-        std::string binary_immediate = immediate_to_binary(instruction.immediate);
+        std::string binary_immediate     = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
-        std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
+        std::string parameter_register1  = register_to_binary(instruction.parameter_register1);
 
         std::string assembled_binary = i_binary_to_string(
             binary_immediate,
@@ -77,9 +75,9 @@ class I_assembler: public Convert_methods, public Instruction_parser {
 
         I_instruction instruction = I_type_parse(string);
 
-        std::string binary_immediate = immediate_to_binary(instruction.immediate);
+        std::string binary_immediate     = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
-        std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
+        std::string parameter_register1  = register_to_binary(instruction.parameter_register1);
 
         std::string assembled_binary = i_binary_to_string(
             binary_immediate,
@@ -96,9 +94,9 @@ class I_assembler: public Convert_methods, public Instruction_parser {
 
         I_instruction instruction = I_type_parse(string);
 
-        std::string binary_immediate = immediate_to_binary(instruction.immediate);
+        std::string binary_immediate     = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
-        std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
+        std::string parameter_register1  = register_to_binary(instruction.parameter_register1);
 
         std::string assembled_binary = i_binary_to_string(
             binary_immediate,
@@ -115,9 +113,9 @@ class I_assembler: public Convert_methods, public Instruction_parser {
 
         I_instruction instruction = I_type_parse(string);
 
-        std::string binary_immediate = immediate_to_binary(instruction.immediate);
+        std::string binary_immediate     = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
-        std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
+        std::string parameter_register1  = register_to_binary(instruction.parameter_register1);
 
         std::string assembled_binary = i_binary_to_string(
             binary_immediate,
@@ -134,9 +132,9 @@ class I_assembler: public Convert_methods, public Instruction_parser {
 
         I_instruction instruction = I_type_parse(string);
 
-        std::string binary_immediate = immediate_to_binary(instruction.immediate);
+        std::string binary_immediate     = immediate_to_binary(instruction.immediate);
         std::string destination_register = register_to_binary(instruction.destination_register);
-        std::string parameter_register1 = register_to_binary(instruction.parameter_register1);
+        std::string parameter_register1  = register_to_binary(instruction.parameter_register1);
 
         std::string assembled_binary = i_binary_to_string(
             binary_immediate,

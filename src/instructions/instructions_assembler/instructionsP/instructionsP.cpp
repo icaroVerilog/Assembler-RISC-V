@@ -23,7 +23,7 @@ class P_assembler: public Convert_methods, Instruction_parser {
 
         this -> opcode_I.assign("0010011");
         this -> funct3_ADDI.assign("000");
-        this -> zero_register = "x1";
+        this -> zero_register = "x0";
         this -> zero_immediate.assign("0");
 
     }
