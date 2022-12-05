@@ -3,10 +3,15 @@
 </h1>
 
 
-### RISC-V is a open source instruction set architecture (ISA), developed by the university of California. This project consists in the development of an assembler for the RISC-V RV32I ISA, made in c++, allows the conversion of the assembly language into machine language
+### RISC-V is a open source instruction set architecture (ISA), developed by the university of California. This project consists in the development of an assembler for the RISC-V 64 bits ISA, made in c++, allows the conversion of the assembly language into machine language
 
 <br>
 <br>
+
+## :man_technologist: Project roadmap
+
+This project aims create a fully funcional assembler, who assemble to RISCV, MIPS and ARM. Actually the project focuses 
+on riscv isa, but is not the only objective, we planning start the implementation of another ISA's mentioned above in the near future. Also, we plan implement several optmizations like branchless, multithreading and others kinds of pratices to improve the assembler performance
 
 ## General registers
 
@@ -290,6 +295,16 @@ The assembler are developed in c++ 14, using boost library. The assembler suppor
     <td align=center>ADDI, ANDI, ORI<br>XORI, SLLI, SRLI<br>LB, LH, LW<br></td>
     <td align=center>N/A</td>
     <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+    <td align=center>N/A</td>
+  </tr>
+  <tr>
+    <td align=center>DEV</td>
+    <td align=center>ADD, SUB, AND<br>OR, XOR, SLL, SRL<br></td>
+    <td align=center>ADDI, ANDI, ORI<br>XORI, SLLI, SRLI<br>LB, LH, LW, LD<br></td>
+    <td align=center>SB, SH, SW, SD</td>
+    <td align=center>BEQ, BNE, BLT, BGE, BLTU, BGEU</td>
     <td align=center>N/A</td>
     <td align=center>N/A</td>
     <td align=center>N/A</td>
