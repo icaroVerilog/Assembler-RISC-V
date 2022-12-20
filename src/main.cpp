@@ -2,12 +2,12 @@
 #include <fstream>
 #include <string>
 #include <cstddef>
-#include "instructions/instructions_assembler/instructionsI/instructionsI.cpp"
-#include "instructions/instructions_assembler/instructionsB/instructionsB.cpp"
-#include "instructions/instructions_assembler/instructionsR/instructionsR.cpp"
-#include "instructions/instructions_assembler/instructionsP/instructionsP.cpp"
-#include "instructions/instructions_assembler/instructionsS/instructionsS.cpp"
-#include "instructions/instructions_assembler/instructionsI/instructionsI_load.cpp"
+#include "instructions/riscv/instructions_assembler/instructionsI/instructionsI.cpp"
+#include "instructions/riscv/instructions_assembler/instructionsB/instructionsB.cpp"
+#include "instructions/riscv/instructions_assembler/instructionsR/instructionsR.cpp"
+#include "instructions/riscv/instructions_assembler/instructionsP/instructionsP.cpp"
+#include "instructions/riscv/instructions_assembler/instructionsS/instructionsS.cpp"
+#include "instructions/riscv/instructions_assembler/instructionsI/instructionsI_load.cpp"
 
 #include "accumulator/instruction_accumulator.hpp"
 #include "accumulator/label_accumulator.hpp"

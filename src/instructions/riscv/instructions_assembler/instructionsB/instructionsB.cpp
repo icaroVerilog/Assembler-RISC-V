@@ -7,9 +7,9 @@
 #include "../../instructions_structures/type_I.hpp"
 #include "../../convert_methods/convert_methods.hpp"
 #include "../../instruction_parser/instruction_parser.hpp"
-#include "../../../accumulator/instruction_accumulator.hpp"
-#include "../../../accumulator/label_accumulator.hpp"
-#include "../../../misc/messages/error_messages.hpp"
+#include "../../../../accumulator/instruction_accumulator.hpp"
+#include "../../../../accumulator/label_accumulator.hpp"
+#include "../../../../misc/messages/error_messages.hpp"
 
 class B_assembler: public Convert_methods, public Instruction_parser {
 
