@@ -21,4 +21,3 @@ class Convert_methods {
 };
 
 #endif /* CONVERT_METHODS_HEADER */
-
