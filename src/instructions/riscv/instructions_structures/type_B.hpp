@@ -11,4 +11,4 @@ struct B_instruction {
     std::string label_name;
 };
 
-#endif 
+#endif /* TYPE_B */

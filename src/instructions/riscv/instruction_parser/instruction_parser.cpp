@@ -165,3 +165,29 @@ B_instruction Instruction_parser::B_type_parse(std::string& instruction){
 
     return new_instruction;
 }
+
+M_instruction Instruction_parser::M_type_parse (std::string& instruction){
+
+    std::regex M_format_regex("[a-z]{3,6}([x][0-9]{1,2})[,]([x][0-9]{1,2})[,]([x][0-9]{1,2})");
+    std::smatch regex_result;
+
+    try {
+
+        /* verifica por meio da RegEx se a instrução está no formato certo */
+        if (std::regex_match(instruction, regex_result, M_format_regex) == false){
+            throw std::runtime_error("assembler error: invalid type M struction format");
+        } 
+
+        M_instruction new_instruction;
+
+        new_instruction.destination_register = regex_result[1];
+        new_instruction.parameter_register1 = regex_result[2];
+        new_instruction.parameter_register2 = regex_result[3];        
+
+        return new_instruction;
+    }
+    catch (const std::invalid_argument& error){
+        std::cerr << error.what() << std::endl;
+        std::exit(0);
+    }
+}
