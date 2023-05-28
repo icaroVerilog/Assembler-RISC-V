@@ -12,9 +12,10 @@ ACCUMULATORS = src/accumulator/instruction_accumulator.cpp src/accumulator/label
 
 ELF_GENERATOR = src/elf_generator/elf_generator.cpp src/elf_generator/riscv_elf/riscv_elf.cpp
 
+RISCV = src/instructions/riscv/riscv_instruction_reader.cpp
 
 compile: ${FILES}
-	${CC} ${FILES} ${S} ${P} ${R} ${I} ${L} ${B} ${ACCUMULATORS} ${ELF_GENERATOR} -o compiled/assembler
+	${CC} ${FILES} ${S} ${P} ${R} ${I} ${L} ${B} ${RISCV} ${ACCUMULATORS} ${ELF_GENERATOR} -o compiled/assembler
 
 run: 
 	./compiled/assembler example.asm -o teste.txt
