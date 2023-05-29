@@ -85,11 +85,8 @@ int main(int argc, char *argv[]){
                 input_accumulator -> set_instruction(file_line);
             }
         }
-
         
         RISCV -> execute(input_accumulator, output_accumulator, label_accumulator);
-
-
 
         file_controller -> write(output_accumulator, "a.txt");
         return 0;

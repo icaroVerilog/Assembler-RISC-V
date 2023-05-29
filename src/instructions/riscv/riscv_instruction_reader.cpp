@@ -150,8 +150,8 @@ void Riscv_instruction_reader::execute(
         else if (current_instruction.substr(0, 4).compare("remu") == 0){
             assembler_M -> REMU(current_instruction, output);
         }
-        else if (current_instruction.substr(0, 4).compare("mulw") == 0){
-            assembler_M -> MULW(current_instruction, output);
+        else if (current_instruction.substr(0, 4).compare("divw") == 0){
+            assembler_M -> DIVW(current_instruction, output);
         }
         else if (current_instruction.substr(0, 5).compare("divuw") == 0){
             assembler_M -> DIVUW(current_instruction, output);

@@ -12,8 +12,23 @@
 class ELF_generator: public Riscv_elf {
 
     private: FILE *output_file;
+    private: Elf64_Ehdr header;
     
-    public: ELF_generator(std::string filename);
+    public: ELF_generator(std::string filename, std::string architecture);
+
+    private: std::string generate_bss_section();
+    private: std::string generate_comment_section();
+    private: std::string generate_data_section();
+    private: std::string generate_debug_section();
+    private: std::string generate_dynamic_section();
+    private: std::string generate_hash_section();
+    private: std::string generate_line_section();
+    private: std::string generate_note_section();
+    private: std::string generate_rodata_section();
+    private: std::string generate_shstrtab_section();
+    private: std::string generate_strtab_section();
+    private: std::string generate_symtab_section();
+    private: std::string generate_text_section();
 
 };
 

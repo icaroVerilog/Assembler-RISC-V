@@ -9,7 +9,10 @@ typedef uint32_t Elf64_Word;
 typedef uint64_t Elf64_Off;
 typedef uint64_t Elf64_Addr;
 
+typedef uint64_t Elf64_Xword;
+
 typedef struct Elf64_Ehdr Elf64_Ehdr;
+typedef struct Elf64_Shdr Elf64_Shdr;
 
 
 /* e_ident values */
@@ -63,7 +66,7 @@ typedef struct Elf64_Ehdr Elf64_Ehdr;
 
 
 
-
+/* ELF HEADER STRUCT */
 
 struct Elf64_Ehdr {
     Elf64_Byte      e_ident[16];
@@ -81,6 +84,21 @@ struct Elf64_Ehdr {
     Elf64_Half      e_shnum;
     Elf64_Half      e_shstrndx;
 };
+
+/* SECTION HEADER STRUCT */
+struct Elf64_Shdr {
+    Elf64_Word  sh_name;
+    Elf64_Word  sh_type;
+    Elf64_Xword sh_flags;
+    Elf64_Addr  sh_addr;
+    Elf64_Off   sh_offset;
+    Elf64_Xword sh_size;
+    Elf64_Word  sh_link;
+    Elf64_Word  sh_info;
+    Elf64_Xword sh_addralign;
+    Elf64_Xword sh_entsize;
+};
+
 
 
 #endif /* ELF_PARAMETERS_HEADER */
