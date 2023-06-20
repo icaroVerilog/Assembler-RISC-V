@@ -1,5 +1,5 @@
 <h1 align=center>
-<img height="100em" src="[https://github.com/IcaroM-CdC/Assembler-RISC-V/blob/main/imgs/riscv.png?raw=true]([https://github.com/IcaroM-CdC/Assembler-RISC-V/blob/main/imgs/riscv.png](https://github.com/IcaroM-CdC/Assembler-RISC-V/blob/main/imgs/riscv.png?raw=true))" />
+<img height="100em" src="https://github.com/IcaroM-CdC/Assembler-RISC-V/blob/main/imgs/riscv.png" />
 </h1>
 
 
@@ -14,7 +14,7 @@ This project aims create a fully funcional assembler, who assemble to RISCV, MIP
 on riscv isa, but is not the only objective, we planning start the implementation of another ISA's mentioned above in the near future. Also, we plan implement several optmizations like branchless, multithreading and others kinds of pratices to improve the assembler performance
 
 <h1 align=center>
-<img height="650vh" width="100%" src="https://github.com/IcaroM-CdC/Assembler-RISC-V/blob/development/imgs/roadmap.png"/>
+<img height="650vh" width="100%" src="https://github.com/IcaroM-CdC/Assembler-RISC-V/blob/main/imgs/roadmap.png"/>
 </h1>
 
 ## General registers
