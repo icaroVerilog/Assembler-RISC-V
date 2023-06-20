@@ -1,5 +1,5 @@
 <h1 align=center>
-<img height="100em" src="https://github.com/IcaroM-CdC/Assembler-RISC-V/blob/stable/imgs/riscv.png" />
+<img height="100em" src="[https://github.com/IcaroM-CdC/Assembler-RISC-V/blob/stable/imgs/riscv.png](https://github.com/IcaroM-CdC/Assembler-RISC-V/blob/main/imgs/riscv.png)" />
 </h1>
 
 
